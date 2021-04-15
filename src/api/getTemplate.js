@@ -1,8 +1,4 @@
 export const workOrderTemplate = {
-
-};
-
-export const basis = {
 	"Header": [
 		{
 			"Type": "1",
@@ -109,4 +105,8 @@ export const basis = {
 			]
 		}
 	]
+};
+
+export const basisPlanItem = {
+
 };
