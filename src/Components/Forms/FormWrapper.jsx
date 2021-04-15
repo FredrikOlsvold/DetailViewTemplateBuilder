@@ -3,12 +3,18 @@ import React, { useState } from 'react'
 import FieldForm from './Field/FieldForm'
 import SectionForm from './Section/SectionForm'
 
-function FormWrapper() {
+function FormWrapper({setPreviewJson, previewJson}) {
 
     const [formList, setFormList] = useState([])
+    const [fieldFormDatas, setFieldFormDatas] = useState([])
+
 
     const onAddFieldClick = () => {
-        setFormList([...formList, <FieldForm />])
+        setFormList([...formList, <FieldForm setFieldFormDatas={setFieldFormDatas} fieldFormDatas={fieldFormDatas}/>])
+    }
+
+    const onPreviewJsonClick = () => {
+        setPreviewJson(fieldFormDatas)
     }
 
     return (
@@ -16,11 +22,12 @@ function FormWrapper() {
             <h1>Template Builder</h1>
             <FormControl>
                 {/* <SectionForm /> */}
-                <Button onClick={onAddFieldClick} >Add field</Button>
+                
                 {formList.map(f => {
                     return f
                 })}
-                
+                <Button onClick={onAddFieldClick} >Add field</Button>
+                <Button onClick={onPreviewJsonClick}>Preview Json</Button>
             </FormControl>
         </div>
     )
