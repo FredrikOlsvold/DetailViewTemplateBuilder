@@ -20,12 +20,22 @@ function SectionForm() {
 
   const [key, setKey] = useState("");
 
-  //const handleOptionsClicked = () => setEnabled(true);
+  const handleAddOptions = () => {
+    const values = [...enableOptions];
+    values.push([]);
+    setEnableOptions(values);
+  };
 
-  const handleOptionsClicked = () => {
-    setEnableOptions(
-      enableOptions.concat(<OptionsInputField key={enableOptions.length} />)
-    );
+  const handleRemoveOptions = (i) => {
+    const values = [...enableOptions];
+    values.splice(i, 1);
+    setEnableOptions(values);
+  };
+
+  const handleChangeOptions = (i, e) => {
+    const values = [...enableOptions];
+    values[i].value = e.target.value;
+    setEnableOptions(values);
   };
 
   useEffect(() => {}, []);
@@ -36,51 +46,51 @@ function SectionForm() {
 
   return (
     <>
-      {/* CHANGE TO ACCORDION */}
-      <div style={{ width: "50%" }}>
-        <Accordion>
-          <AccordionSummary expandIcon={<ExpandMore />}>
-            <Typography>Section</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <FormControl>
-              <Grid container spacing={3}>
-                {/* TYPE DROPDOWN */}
-                <Grid item xs={6}>
-                  <TextField
-                    id="select"
-                    select
-                    style={{ width: "100%" }}
-                    value={Type}
-                    label="Type"
-                    variant="outlined"
-                  >
-                    <MenuItem value="" />
-                    <MenuItem value={1}>Type 1</MenuItem>
-                    <MenuItem value={2}>Type 2</MenuItem>
-                    <MenuItem value={3}>Type 3</MenuItem>
-                  </TextField>
-                </Grid>
-
-                {/* OPTION BUTTON */}
-                <Grid item xs={6}>
-                  <Button
-                    variant="contained"
-                    color="default"
-                    startIcon={<Add />}
-                    onClick={handleOptionsClicked}
-                  >
-                    Options
-                  </Button>
-                </Grid>
-
-                {/* ENABLE OPTIONSINPUTFIELDS */}
-                {enableOptions}
+      <Accordion>
+        <AccordionSummary expandIcon={<ExpandMore />}>
+          <Typography>Section</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <FormControl>
+            <Grid container spacing={3}>
+              {/* TYPE DROPDOWN */}
+              <Grid item xs={6}>
+                <TextField
+                  id="select"
+                  select
+                  style={{ width: "100%" }}
+                  value={Type}
+                  label="Type"
+                  variant="outlined"
+                >
+                  <MenuItem value="" />
+                  <MenuItem value={1}>Type 1</MenuItem>
+                  <MenuItem value={2}>Type 2</MenuItem>
+                  <MenuItem value={3}>Type 3</MenuItem>
+                </TextField>
               </Grid>
-            </FormControl>
-          </AccordionDetails>
-        </Accordion>
-      </div>
+
+              {/* OPTION BUTTON */}
+              <Grid item xs={6}>
+                <Button
+                  type="button"
+                  variant="contained"
+                  color="default"
+                  startIcon={<Add />}
+                  onClick={handleAddOptions}
+                >
+                  Options
+                </Button>
+              </Grid>
+
+              {/* ENABLE OPTIONSINPUTFIELDS */}
+              {enableOptions.map((i) => (
+                <OptionsInputField removeOptions={handleRemoveOptions} />
+              ))}
+            </Grid>
+          </FormControl>
+        </AccordionDetails>
+      </Accordion>
     </>
   );
 }
