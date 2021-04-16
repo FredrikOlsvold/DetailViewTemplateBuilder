@@ -11,6 +11,7 @@ import { ExpandMore } from "@material-ui/icons";
 import React, { useState } from "react";
 import FieldForm from "./Field/FieldForm";
 import SectionForm from "./Section/SectionForm";
+import {TemplateMapping} from "./Mapping/TemplateMapping";
 
 function FormWrapper({ setPreviewJson, previewJson }) {
   const [formList, setFormList] = useState([]);

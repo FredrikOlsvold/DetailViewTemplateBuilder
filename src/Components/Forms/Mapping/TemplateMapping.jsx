@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Button, TextField, MenuItem } from '@material-ui/core'
+import { Button, TextField, MenuItem, Grid } from '@material-ui/core'
+import { Delete } from "@material-ui/icons";
+import SaveIcon from '@material-ui/icons/Save';
 import {scopeOptions, dataItemTypeOptions, sourceDataTypeOptions} from "../../../api/getData"
 
 const TemplateMapping = () => {
@@ -7,7 +9,7 @@ const TemplateMapping = () => {
     const [scope, setScope] = useState("");
     const [sourceDataType, setSourceDataType] = useState("");
     const [dataItemType, setDataItemType] = useState("");
-    const [templateName, setTemplateName] = useState("new_template_name");
+    const [templateName, setTemplateName] = useState("");
 
     const onMappingComplete = () => {
         console.log(`Scope: ${scope}`);
@@ -23,58 +25,83 @@ const TemplateMapping = () => {
 
 
     return(
-            <form>
-                <h3>Template Mapping</h3>
-                <div>
+            <>
+            <Grid container spacing={2}>
+                
+                <Grid item xs={4}>
                     <TextField
                         id="selectTemplateName"
-                        label="name"
+                        label="Name"
+                        variant="outlined"
                         onChange={onTemplateNameChanged}
-                        helperText="Please select a template name"
-                        defaultValue = "">                           
+                        value={templateName}
+                        style={{ width: "100%" }}>                           
                     </TextField>
+                    </Grid>
 
+                    <Grid item xs={4}>
                     <TextField
                         id="selectDataItemType"
                         select
-                        label="DataSourceType"
+                        label="DataItemType"
+                        variant="outlined"
+                        value={dataItemType}
                         onChange={onDataItemTypeChanged}
-                        helperText="Please select Data Item Type">
+                        style={{ width: "100%" }}>
                             {dataItemTypeOptions.map((dataItem) => (
-                                <MenuItem key={dataItem.key} value={dataItem.key}>{dataItem.value}</MenuItem>
+                                <MenuItem key={dataItem.key} value={dataItem.value}>{dataItem.value}</MenuItem>
                             ))}
                     </TextField>
-                </div>
+                    </Grid>  
+                </Grid>
 
-                <div>
+                <Grid container spacing={2}>
+                    <Grid item xs={4}>
                     <TextField
                         id="selectScope"
                         select
                         label="Scope"
+                        value={scope}
+                        variant="outlined"
                         onChange={onScopeChanged}
-                        helperText="Please select Scope">
+                        style={{ width: "100%" }}>
                             {scopeOptions.map((scope) => (
-                                <MenuItem key={scope.key} value={scope.key}>{scope.value}</MenuItem>
+                                <MenuItem key={scope.key} value={scope.value}>{scope.value}</MenuItem>
                             ))}
                     </TextField>
+                    </Grid>
 
-                    <TextField
+                    <Grid item xs={4}>
+                        <TextField
                         id="selectSourceDataType"
                         select
-                        label="DataSourceType"
+                        label="SourceDataType"
+                        value={sourceDataType}
+                        variant="outlined"
                         onChange={onSourceDataTypeChanged}
-                        helperText="Please select Data Source Type"
-                        defaultValue = "">
+                        style={{ width: "100%" }}>
                                 {sourceDataTypeOptions.map((sourceData) => (
-                                <MenuItem key={sourceData.key} value={sourceData.key}>{sourceData.value}</MenuItem>
+                                <MenuItem key={sourceData.key} value={sourceData.value}>{sourceData.value}</MenuItem>
                             ))}
                     </TextField>
-                </div>
+                    </Grid>
+                </Grid>
 
-                <div>
-                    <Button onClick={onMappingComplete}>SAVE</Button>
-                </div>
-            </form>
+
+
+
+            <Button
+            type="button" 
+            variant="contained"
+            onClick={onMappingComplete}
+            startIcon={<SaveIcon />}>SAVE</Button>
+
+            <Button
+            type="button"
+            variant="contained"
+            startIcon={<Delete />}>DELETE</Button>
+
+            </>
     )
 
 };
