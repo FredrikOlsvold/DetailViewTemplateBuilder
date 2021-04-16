@@ -9,26 +9,35 @@ import {
 } from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
 import React, { useState } from "react";
+import {
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+  useSetRecoilState,
+} from "recoil";
 import FieldForm from "./Field/FieldForm";
 import SectionForm from "./Section/SectionForm";
+import { fieldFormListState, fieldFormDatasState } from "../../App";
 
 function FormWrapper({ setPreviewJson, previewJson }) {
-  const [formList, setFormList] = useState([]);
-  const [fieldFormDatas, setFieldFormDatas] = useState([]);
+  const fieldFormData = useRecoilValue(fieldFormDatasState);
+  const formList = useRecoilValue(fieldFormListState);
+  const setFormList = useSetRecoilState(fieldFormListState);
+
+  //const [fieldFormDatas, setFieldFormDatas] = useState([]);
 
   const onAddFieldClick = () => {
     setFormList([
       ...formList,
-      <FieldForm
-        setFieldFormDatas={setFieldFormDatas}
-        fieldFormDatas={fieldFormDatas}
-      />,
+      {
+        key: formList.length.toString(),
+        value: <FieldForm key={formList.length.toString()} fieldId={formList.length.toString()} />
+      },
     ]);
   };
 
-  const onPreviewJsonClick = () => {
-    setPreviewJson(fieldFormDatas);
-  };
+  const onPreviewJsonClick = () => {};
 
   return (
     <div>
@@ -43,12 +52,11 @@ function FormWrapper({ setPreviewJson, previewJson }) {
             <Grid container spacing={3}>
               <SectionForm />
               {formList.map((f) => {
-                return f;
+                return f.value;
               })}
               <Button onClick={onAddFieldClick}>Add field</Button>
               <Button onClick={onPreviewJsonClick}>Preview Json</Button>
             </Grid>
-            
           </FormControl>
         </AccordionDetails>
       </Accordion>
@@ -58,6 +66,10 @@ function FormWrapper({ setPreviewJson, previewJson }) {
       {/* </FormControl> */}
     </div>
   );
+}
+
+function getKey() {
+  return 1;
 }
 
 export default FormWrapper;
