@@ -1,7 +1,12 @@
 import { TextField, Grid, Button } from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
 
-function OptionsInputField({ removeOptions }) {
+function OptionsInputField({
+  removeOptions,
+  handleKeyInput,
+  handleValueInput,
+  addOption,
+}) {
   return (
     <>
       <Grid item xs={4}>
@@ -10,6 +15,7 @@ function OptionsInputField({ removeOptions }) {
           label="Key"
           variant="outlined"
           style={{ width: "100%" }}
+          onChange={handleKeyInput}
         />
       </Grid>
       <Grid item xs={4}>
@@ -18,6 +24,7 @@ function OptionsInputField({ removeOptions }) {
           label="Value"
           variant="outlined"
           style={{ width: "100%" }}
+          onChange={handleValueInput}
         />
       </Grid>
       <Grid item xs={4}>

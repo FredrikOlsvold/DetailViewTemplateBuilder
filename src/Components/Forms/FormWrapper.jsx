@@ -33,8 +33,6 @@ function FormWrapper({ setPreviewJson, previewJson }) {
 
   return (
     <div>
-      <h1>Template Builder</h1>
-
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMore />}>
           <Typography>Section</Typography>
@@ -49,7 +47,6 @@ function FormWrapper({ setPreviewJson, previewJson }) {
               <Button onClick={onAddFieldClick}>Add field</Button>
               <Button onClick={onPreviewJsonClick}>Preview Json</Button>
             </Grid>
-            
           </FormControl>
         </AccordionDetails>
       </Accordion>
