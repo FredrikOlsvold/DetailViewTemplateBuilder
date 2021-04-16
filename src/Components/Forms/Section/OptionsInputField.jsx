@@ -1,21 +1,35 @@
-import { TextField, Grid } from "@material-ui/core";
+import { TextField, Grid, Button } from "@material-ui/core";
+import { Delete } from "@material-ui/icons";
 
-function OptionsInputField() {
+function OptionsInputField({ removeOptions }) {
   return (
     <>
-      <Grid item xs={6}>
+      <Grid item xs={4}>
         <TextField
           id="key"
           label="Key"
           variant="outlined"
           style={{ width: "100%" }}
-        ></TextField>
+        />
+      </Grid>
+      <Grid item xs={4}>
         <TextField
           id="value"
           label="Value"
           variant="outlined"
           style={{ width: "100%" }}
-        ></TextField>
+        />
+      </Grid>
+      <Grid item xs={4}>
+        <Button
+          type="button"
+          variant="contained"
+          color="default"
+          startIcon={<Delete />}
+          onClick={removeOptions}
+        >
+          Remove
+        </Button>
       </Grid>
     </>
   );
