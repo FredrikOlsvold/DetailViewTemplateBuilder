@@ -1,4 +1,13 @@
-import { Button, FormControl } from "@material-ui/core";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Button,
+  FormControl,
+  Grid,
+  Typography,
+} from "@material-ui/core";
+import { ExpandMore } from "@material-ui/icons";
 import React, { useState } from "react";
 import FieldForm from "./Field/FieldForm";
 import SectionForm from "./Section/SectionForm";
@@ -24,14 +33,28 @@ function FormWrapper({ setPreviewJson, previewJson }) {
   return (
     <div>
       <h1>Template Builder</h1>
-      {/* <FormControl> */}
-      <SectionForm />
 
-      {formList.map((f) => {
-        return f;
-      })}
-      <Button onClick={onAddFieldClick}>Add field</Button>
-      <Button onClick={onPreviewJsonClick}>Preview Json</Button>
+      <Accordion>
+        <AccordionSummary expandIcon={<ExpandMore />}>
+          <Typography>Section</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <FormControl>
+            <Grid container spacing={3}>
+              <SectionForm />
+              {formList.map((f) => {
+                return f;
+              })}
+              <Button onClick={onAddFieldClick}>Add field</Button>
+              <Button onClick={onPreviewJsonClick}>Preview Json</Button>
+            </Grid>
+            
+          </FormControl>
+        </AccordionDetails>
+      </Accordion>
+
+      {/* <FormControl> */}
+
       {/* </FormControl> */}
     </div>
   );

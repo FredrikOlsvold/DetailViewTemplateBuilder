@@ -46,51 +46,42 @@ function SectionForm() {
 
   return (
     <>
-      <Accordion>
-        <AccordionSummary expandIcon={<ExpandMore />}>
-          <Typography>Section</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <FormControl>
-            <Grid container spacing={3}>
-              {/* TYPE DROPDOWN */}
-              <Grid item xs={6}>
-                <TextField
-                  id="select"
-                  select
-                  style={{ width: "100%" }}
-                  value={Type}
-                  label="Type"
-                  variant="outlined"
-                >
-                  <MenuItem value="" />
-                  <MenuItem value={1}>Type 1</MenuItem>
-                  <MenuItem value={2}>Type 2</MenuItem>
-                  <MenuItem value={3}>Type 3</MenuItem>
-                </TextField>
-              </Grid>
+      
+        {/* TYPE DROPDOWN */}
+        <Grid item xs={6}>
+          <TextField
+            id="select"
+            select
+            style={{ width: "100%" }}
+            value={Type}
+            label="Type"
+            variant="outlined"
+          >
+            <MenuItem value="" />
+            <MenuItem value={1}>Type 1</MenuItem>
+            <MenuItem value={2}>Type 2</MenuItem>
+            <MenuItem value={3}>Type 3</MenuItem>
+          </TextField>
+        </Grid>
 
-              {/* OPTION BUTTON */}
-              <Grid item xs={6}>
-                <Button
-                  type="button"
-                  variant="contained"
-                  color="default"
-                  startIcon={<Add />}
-                  onClick={handleAddOptions}
-                >
-                  Options
-                </Button>
-              </Grid>
+        {/* OPTION BUTTON */}
+        <Grid item xs={6}>
+          <Button
+            type="button"
+            variant="contained"
+            color="default"
+            startIcon={<Add />}
+            onClick={handleAddOptions}
+          >
+            Options
+          </Button>
+        </Grid>
 
-              {/* ENABLE OPTIONSINPUTFIELDS */}
-              {enableOptions.map((i) => (
-                <OptionsInputField removeOptions={handleRemoveOptions} />
-              ))}
-            </Grid>
-          </FormControl>
-        </AccordionDetails>
-      </Accordion>
+        {/* ENABLE OPTIONSINPUTFIELDS */}
+        {enableOptions.map((i) => (
+          <OptionsInputField removeOptions={handleRemoveOptions} />
+        ))}
+      
     </>
   );
 }
