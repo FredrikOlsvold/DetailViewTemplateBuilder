@@ -54,7 +54,6 @@ function SectionForm() {
           Options
         </Button>
       </Grid>
-      <pre>{JSON.stringify(type)}</pre>
       {/* ENABLE OPTIONSINPUTFIELDS */}
       {enableOptions.map((input, i) => (
         <OptionsInputField
