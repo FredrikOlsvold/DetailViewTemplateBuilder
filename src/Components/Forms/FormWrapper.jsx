@@ -5,13 +5,15 @@ import {
   Button,
   FormControl,
   Grid,
+  Tab,
+  Tabs,
   Typography,
 } from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
 import React, { useState } from "react";
 import FieldForm from "./Field/FieldForm";
 import SectionForm from "./Section/SectionForm";
-import {TemplateMapping} from "./Mapping/TemplateMapping";
+import { TemplateMapping } from "./Mapping/TemplateMapping";
 
 function FormWrapper({ setPreviewJson, previewJson }) {
   const [formList, setFormList] = useState([]);
@@ -52,7 +54,8 @@ function FormWrapper({ setPreviewJson, previewJson }) {
       </Accordion>
 
       {/* <FormControl> */}
-
+      {childComponent}
+      <SectionForm childcomponent={childComponent} />
       {/* </FormControl> */}
     </div>
   );
