@@ -1,21 +1,29 @@
-import { useState } from 'react';
 import './App.css';
 import Menu from './Components/Appbar/Menu';
-import FormWrapper from './Components/Forms/FormWrapper';
+import Dashboard from "./Components/containers/Dashboard";
+import {atom} from "recoil";
+import ShowAll from "./Components/RecoilTest/ShowAll";
 
+
+  //Atom that stores all fields in a list. Global state
+  export const fieldListAtom = atom({
+    key: "fieldListAtom",
+    default: [],
+  });
+
+  //Atom that stores chosen templates in a list. Global state
+  export const chosenTemplateAtom = atom({
+    key: "chosenTemplateAtom",
+    default: "",
+  });
 
 function App() {
-
-    const [previewJson, setPreviewJson] = useState([])
 
   return (
     <div className="App">
       <Menu/>
-      <FormWrapper setPreviewJson={setPreviewJson} previewJson={previewJson}/>
-
-      {/* This is just a placeholder */}
-        
-      <pre>{JSON.stringify(previewJson)}</pre>
+      <Dashboard/>
+      <ShowAll/>
     </div>
   );
 }

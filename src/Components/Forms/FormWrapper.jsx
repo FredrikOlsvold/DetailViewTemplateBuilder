@@ -12,10 +12,12 @@ import React, { useState } from "react";
 import FieldForm from "./Field/FieldForm";
 import SectionForm from "./Section/SectionForm";
 import {TemplateMapping} from "./Mapping/TemplateMapping";
+import ListAllTemplates from "./ViewAllTemplates/ListAllTemplates"
 
 function FormWrapper({ setPreviewJson, previewJson }) {
   const [formList, setFormList] = useState([]);
   const [fieldFormDatas, setFieldFormDatas] = useState([]);
+
 
   const onAddFieldClick = () => {
     setFormList([
@@ -29,6 +31,7 @@ function FormWrapper({ setPreviewJson, previewJson }) {
 
   const onPreviewJsonClick = () => {
     setPreviewJson(fieldFormDatas);
+    console.log(JSON.stringify({12:"hello", 13:"bybye"}));
   };
 
   return (

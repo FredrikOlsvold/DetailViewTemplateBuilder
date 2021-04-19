@@ -14,16 +14,16 @@ function FieldForm({ setFieldFormDatas, fieldFormDatas }) {
     setFieldLabel(e.target.value);
   };
 
-  useEffect(() => {
-    setFormData({
-      type: selectedType,
-      label: fieldLabel,
-    });
-  }, [selectedType, fieldLabel]);
+  // useEffect(() => {
+  //   setFormData({
+  //     type: selectedType,
+  //     label: fieldLabel,
+  //   });
+  // }, [selectedType, fieldLabel]);
 
-  useEffect(() => {
-    setFieldFormDatas([...fieldFormDatas, formData]);
-  }, [formData]);
+  // useEffect(() => {
+  //   setFieldFormDatas([...fieldFormDatas, formData]);
+  // }, [formData]);
 
   return (
     <>

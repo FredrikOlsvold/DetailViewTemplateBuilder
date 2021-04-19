@@ -143,3 +143,12 @@ export const sourceDataTypeOptions = [
         value: "Direct-Planning",
     },
 ];
+
+export const allTemplates = [
+    "WorkOrder_ESP",
+    "Operation_ESP",
+    "Request_ESP",
+    "WordOrder_ENG",
+    "Operation_ENG",
+    "Request_ENG"
+];
