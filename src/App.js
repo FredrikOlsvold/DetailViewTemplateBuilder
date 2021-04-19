@@ -15,7 +15,7 @@ function App() {
 
       {/* This is just a placeholder */}
         
-      <pre>{JSON.stringify(previewJson)}</pre>
+      <pre>{JSON.stringify(previewJson, null, 2)}</pre>
     </div>
   );
 }

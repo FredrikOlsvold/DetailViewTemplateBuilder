@@ -54,8 +54,7 @@ function FormWrapper({ setPreviewJson, previewJson }) {
       </Accordion>
 
       {/* <FormControl> */}
-      {childComponent}
-      <SectionForm childcomponent={childComponent} />
+
       {/* </FormControl> */}
     </div>
   );
