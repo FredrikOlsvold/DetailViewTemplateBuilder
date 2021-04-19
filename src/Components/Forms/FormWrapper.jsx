@@ -9,10 +9,9 @@ import {
 } from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
 import React, { useState } from "react";
-import FieldForm from "./Field/FieldForm";
-import SectionForm from "./Section/SectionForm";
+import FieldForm from "./Section/Field/FieldForm";
 
-function FormWrapper({ wrapperType }) {
+function FormWrapper(props) {
   const [formList, setFormList] = useState([]);
   const [fieldFormDatas, setFieldFormDatas] = useState([]);
 
@@ -30,18 +29,16 @@ function FormWrapper({ wrapperType }) {
     <div>
       <Accordion>
         <AccordionSummary expandIcon={<ExpandMore />}>
-          <Typography>Section</Typography>
+          {props.section === "title" ? (
+            <Typography>Title</Typography>
+          ) : (
+            <Typography>Content</Typography>
+          )}
         </AccordionSummary>
         <AccordionDetails>
           <FormControl>
             <Grid container spacing={3}>
-              <SectionForm />
-              {formList.map((f) => {
-                return f;
-              })}
-              {wrapperType === "contentWrapper" && (
-                <Button onClick={onAddFieldClick}>Add field</Button>
-              )}
+              {props.children}
             </Grid>
           </FormControl>
         </AccordionDetails>

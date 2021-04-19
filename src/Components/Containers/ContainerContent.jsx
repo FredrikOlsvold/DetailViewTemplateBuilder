@@ -1,14 +1,24 @@
-import React from 'react'
+import React, { useState } from "react";
+import FieldForm from "../Forms/Section/Field/FieldForm";
+import FormWrapper from "../Forms/FormWrapper";
+import SectionForm from "../Forms/Section/SectionForm";
 
 export default function ContainerContent() {
-    return (
-        <div>
-            
-        </div>
-    )
+
+    
+  return (
+    <div>
+      <FormWrapper section="content">
+        <SectionForm containerType="content"/>
+      </FormWrapper>
+    </div>
+  );
 }
 
+{
+  /* < Create sections> */
+}
 
-       {/* < Create sections> */}
-
-       {/* < Render sections> */}
+{
+  /* < Render sections> */
+}

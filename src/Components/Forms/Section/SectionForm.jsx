@@ -1,14 +1,29 @@
 import { Button, Grid, MenuItem, TextField } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import {
+  fieldFormDataAtom,
+  fieldFormListAtom,
+} from "../../../store/atoms/Atoms";
+import { WindowTitleDataAtom } from "../../../store/atoms/WindowTitleAtom";
+import FieldForm from "./Field/FieldForm";
 import OptionsInputField from "./OptionsInputField";
 
-function SectionForm() {
+function SectionForm({ containerType }) {
+  const [windowTitleDataAtom, setWindowTitleDataAtom] = useRecoilState(
+    WindowTitleDataAtom
+  );
+
   const [type, setType] = useState();
   const [enableOptions, setEnableOptions] = useState([]);
 
   const [optionsKey, setOptionsKey] = useState([]);
   const [optionsValue, setOptionsValue] = useState("");
+
+  const [fieldFormData, setFieldFormData] = useRecoilState(fieldFormDataAtom);
+
+  const [fieldFormList, setFieldFormList] = useRecoilState(fieldFormListAtom);
 
   const handleAddOptions = () => {
     const values = [...enableOptions];
@@ -21,6 +36,14 @@ function SectionForm() {
     values.splice(i, 1);
     setEnableOptions(values);
     setOptionsKey(values);
+  };
+
+  const handleAddDataToAtomClick = () => {
+    setWindowTitleDataAtom([...windowTitleDataAtom, fieldFormData]);
+  };
+
+  const onAddFieldClick = () => {
+    setFieldFormList([...fieldFormList, <FieldForm />]);
   };
 
   return (
@@ -63,6 +86,17 @@ function SectionForm() {
           handleValueInput={(e) => setOptionsValue(e.target.value)}
         />
       ))}
+
+      {
+        //TODO: Map out all field forms in list when container is type content
+      }
+      {/* {containerType === "content" ? (
+        fieldFormList.map((form) => {return form})
+      ) : (
+        <FieldForm />
+      )} */}
+
+      <Button onClick={handleAddDataToAtomClick}>Save</Button>
     </>
   );
 }
