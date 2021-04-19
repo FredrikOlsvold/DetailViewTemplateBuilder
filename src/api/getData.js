@@ -90,3 +90,65 @@ export const mockBasisPlanItem = {
     "RescheduledInClient": false,
     "ExtendedInfo": null
 };
+
+export const scopeOptions = [
+    {
+        key: "TBR",
+        value: "TBR",
+    },
+    {
+        key: "Block 57",
+        value: "Block 57",
+    },
+    {
+        key: "U300",
+        value: "U300",
+    },
+];
+
+export const dataItemTypeOptions = [
+    {
+        key: "operation",
+        value: "1",
+    },
+    {
+        key: "workorder",
+        value: "4",
+    },
+    {
+        key: "productionindicators",
+        value: "5",
+    },
+    {
+        key: "basisplan",
+        value: "16",
+    },
+    {
+        key: "workpermit",
+        value: "32",
+    },
+];
+
+export const sourceDataTypeOptions = [
+    {
+        key: "maintananceplan",
+        value: "Maintanance Plan",
+    },
+    {
+        key: "basisplan",
+        value: "Basisplan",
+    },
+    {
+        key: "direct-planning",
+        value: "Direct-Planning",
+    },
+];
+
+export const allTemplates = [
+    "WorkOrder_ESP",
+    "Operation_ESP",
+    "Request_ESP",
+    "WordOrder_ENG",
+    "Operation_ENG",
+    "Request_ENG"
+];
