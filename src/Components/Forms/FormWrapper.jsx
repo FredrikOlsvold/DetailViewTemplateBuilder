@@ -11,9 +11,8 @@ import { ExpandMore } from "@material-ui/icons";
 import React, { useState } from "react";
 import FieldForm from "./Field/FieldForm";
 import SectionForm from "./Section/SectionForm";
-import {TemplateMapping} from "./Mapping/TemplateMapping";
 
-function FormWrapper({ setPreviewJson, previewJson }) {
+function FormWrapper({ wrapperType }) {
   const [formList, setFormList] = useState([]);
   const [fieldFormDatas, setFieldFormDatas] = useState([]);
 
@@ -25,10 +24,6 @@ function FormWrapper({ setPreviewJson, previewJson }) {
         fieldFormDatas={fieldFormDatas}
       />,
     ]);
-  };
-
-  const onPreviewJsonClick = () => {
-    setPreviewJson(fieldFormDatas);
   };
 
   return (
@@ -44,8 +39,9 @@ function FormWrapper({ setPreviewJson, previewJson }) {
               {formList.map((f) => {
                 return f;
               })}
-              <Button onClick={onAddFieldClick}>Add field</Button>
-              <Button onClick={onPreviewJsonClick}>Preview Json</Button>
+              {wrapperType === "contentWrapper" && (
+                <Button onClick={onAddFieldClick}>Add field</Button>
+              )}
             </Grid>
           </FormControl>
         </AccordionDetails>
