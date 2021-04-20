@@ -19,15 +19,13 @@ function App() {
 
   return (
     <div className="App">
-      <Menu/>
-
       <Grid container spacing={1}>
-          <Grid item xs={3}>
+          <Grid item xs={2}>
             <ListAllTemplates/>
           </Grid>
 
 
-          <Grid item xs={9}> 
+          <Grid item xs={10}> 
             <TemplateMapping/>     
             <Dashboard/>
             <ShowAll/>

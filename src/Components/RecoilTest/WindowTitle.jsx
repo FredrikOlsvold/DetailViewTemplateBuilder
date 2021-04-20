@@ -2,6 +2,7 @@ import SectionItemCreator from "../RecoilTest/SectionItemCreator";
 import SectionItem from "../RecoilTest/SectionItem";
 import { useRecoilValue } from "recoil";
 import { windowTitleAtom } from "../../Atoms/atoms";
+import { Grid, Typography } from "@material-ui/core";
 
 const Content = () => {
 
@@ -9,13 +10,21 @@ const Content = () => {
 
     return(
         <div>
-            <h3>Window Title</h3>
-            <SectionItemCreator wrapper={"title"}/>
-            <br></br>
-            <br></br>
-            {sectionList.map((section) => (
-                <SectionItem key={section.id} item={section} wrapper={"title"}/>
-            ))}
+            <Grid container spacing={2}>
+                <Grid item xs={6}>
+                    <SectionItemCreator wrapper={"title"}/>
+                </Grid>
+
+                <Grid item xs={6}>
+                    {sectionList.map((section) => (
+                    <SectionItem key={section.id} item={section} wrapper={"title"}/>
+                    ))}
+                </Grid>
+
+            </Grid>
+            
+
+            
         </div>
     )
 };

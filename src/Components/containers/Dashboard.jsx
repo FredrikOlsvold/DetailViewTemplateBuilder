@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import WindowTitle from "../RecoilTest/WindowTitle";
 import Content from "../RecoilTest/Content";
-import { Button } from "@material-ui/core";
+import { Button, Paper } from "@material-ui/core";
 
 
 const Dashboard = () => {
@@ -10,11 +10,14 @@ const Dashboard = () => {
 
     return(
         <>
-            <Button onClick={() => setDisplayWrapper("title")}>Window Title</Button>
-            <Button onClick={() => setDisplayWrapper("content")}>Content</Button>
+            <Paper style={{padding:"2em", margin:"1em"}}>
+                <Button style={displayWrapper === "title" ? {color: "#6200ee"} : {color: "#ccc"}} indicatorColor="primary" onClick={() => setDisplayWrapper("title")}>Window Title</Button>
+                <Button style={displayWrapper === "content" ? {color: "#6200ee"} : {color: "#ccc"}} onClick={() => setDisplayWrapper("content")}>Content</Button>
 
-            {displayWrapper === "title" && <WindowTitle/>}
-            {displayWrapper === "content" && <Content/>}
+                {displayWrapper === "title" && <WindowTitle/>}
+                {displayWrapper === "content" && <Content/>}   
+            </Paper>
+            
             
                           
         </>

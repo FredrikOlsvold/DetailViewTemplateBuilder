@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { TextField, Grid, Button } from "@material-ui/core";
 import SaveIcon from '@material-ui/icons/Save';
+import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 
 function OptionsCreator({setOptionList, item, optionList}) {
@@ -58,7 +59,7 @@ function removeItemAtIndex(arr, index) {
   return (
     <>
       <div>
-        <Grid container spacing={0}>
+        <Grid container spacing={2}>
         <Grid item xs={4}>
         <TextField
           disabled={disabledValue}
@@ -81,7 +82,8 @@ function removeItemAtIndex(arr, index) {
           onChange={onOptionValueChange}
         />
       </Grid>
-      <Grid item xs={1}>
+
+        <Grid item xs={2}>
         <Button
           type="button"
           variant="contained"
@@ -91,9 +93,20 @@ function removeItemAtIndex(arr, index) {
         >
           {disabledValue ? "Edit" : "Save"}
         </Button>
-        <Button onClick={removeItem}>DELETE</Button>
+        </Grid>
+
+        <Grid item xs={2}>
+          <Button 
+            type="button"
+            variant="contained"
+            color="default"
+            startIcon={<DeleteIcon/>}
+            onClick={removeItem}>DELETE</Button>
+        </Grid>
+
+
+
       </Grid>
-    </Grid>
       </div>
     
       

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {useSetRecoilState} from "recoil";
 import {windowTitleAtom, contentAtom} from "../../Atoms/atoms";
-import {Button, MenuItem, Paper, TextField, Typography} from "@material-ui/core";
+import {Button, Grid, MenuItem, Paper, Select, TextField, Typography} from "@material-ui/core";
 import SaveIcon from '@material-ui/icons/Save';
 import AddIcon from '@material-ui/icons/Add';
 import OptionsCreator from "../RecoilTest/OptionsCreator";
@@ -69,15 +69,20 @@ const SectionItemCreator = ({wrapper}) => {
 
     return(
         <>
-        <div>
-            <TextField label="id" variant="outlined" type="text" value={sectionId} onChange={onValueChange}/>
-            <TextField
-                style={{ width: "10%" }}
+        <div style={{padding:"2em"}}>
+        <Grid container spacing={2}>
+            <Grid item xs={3}>
+                <TextField label="id" variant="outlined" type="text" value={sectionId} onChange={onValueChange}/>
+            </Grid>
+
+            <Grid item xs={3}>
+               <TextField
                 id="select"
                 select
                 value={type}
                 label="Type"
                 variant="outlined"
+                style={{ width: "100%" }}
                 onChange={onTypeChange}
                 >
                 <MenuItem value="" />
@@ -89,30 +94,48 @@ const SectionItemCreator = ({wrapper}) => {
                 <MenuItem value={6}>Type 6</MenuItem>
                 <MenuItem value={7}>Type 7</MenuItem>
                 <MenuItem value={8}>Type 8</MenuItem>
-            </TextField>
-            <Button startIcon={<AddIcon />} variant="outlined" onClick={addFieldClicked}>ADD FIELD</Button>
-            <Button startIcon={<AddIcon />} variant="outlined" onClick={addOptionClicked}>ADD OPTION</Button>
-            <Button startIcon={<SaveIcon />} variant="outlined" onClick={addSection}>SAVE</Button>
+            </TextField> 
+            </Grid>
+
+
+        </Grid>
 
         </div>
+
+        <div style={{ padding: "2em" }}>
+            <Button style={{ marginRight: "1em" }} startIcon={<AddIcon />} variant="outlined" onClick={addFieldClicked}>ADD FIELD</Button>
+                <Button startIcon={<AddIcon />} variant="outlined" onClick={addOptionClicked}>ADD OPTION</Button>
+        </div>
+                
+        
         <div>
+            {optionList.length > 0 && 
             <Paper style={{ padding: "2em", margin:"1em" }}>
-                <Typography variant="h6">Options:</Typography>
+                <Typography>Options:</Typography>
                {optionList.map((option) => (
                     <OptionsCreator key={option.id} item={option} setOptionList={setOptionList} optionList={optionList}/>
                 ))} 
             </Paper>
+            }
+            
             
         </div>
 
         <div>
-        <Paper style={{ padding: "2em", margin:"1em" }}>
-            <Typography variant="h6">Fields:</Typography>
+            {fieldList.length > 0 &&
+            <Paper style={{ padding: "2em", margin:"1em" }}>
+            <Typography>Fields:</Typography>
             {fieldList.map((field) => (
             <FieldsCreator key={field.id} item={field} setFieldList={setFieldList} fieldList={fieldList}/>
             ))} 
         </Paper>
 
+            }
+
+        </div>
+
+        <div style={{ padding: "2em" }}>
+        <Button color="primary" startIcon={<SaveIcon />} variant="contained" onClick={addSection}>ADD SECTION</Button>
         </div>
             
         </>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Button, TextField, MenuItem, Grid } from '@material-ui/core'
-import { Delete } from "@material-ui/icons";
+import { Button, TextField, MenuItem, Grid, Paper, Accordion, AccordionSummary, Typography, AccordionDetails, AccordionActions } from '@material-ui/core'
+import { Delete, ExpandMore } from "@material-ui/icons";
 import SaveIcon from '@material-ui/icons/Save';
 import {scopeOptions, dataItemTypeOptions, sourceDataTypeOptions} from "../../../api/getData"
 
@@ -26,9 +26,12 @@ const TemplateMapping = () => {
 
     return(
             <>
-            <Grid container spacing={2}>
+            <Accordion style={{padding: "2em", margin:"1em"}} defaultExpanded>
+                <AccordionSummary expandIcon={<ExpandMore/>}><Typography>Name and Mapping</Typography></AccordionSummary>
+                <AccordionDetails>
+                <Grid container spacing={2}>
                 
-                <Grid item xs={4}>
+                <Grid item xs={3}>
                     <TextField
                         id="selectTemplateName"
                         label="Name"
@@ -39,7 +42,7 @@ const TemplateMapping = () => {
                     </TextField>
                     </Grid>
 
-                    <Grid item xs={4}>
+                    <Grid item xs={3}>
                     <TextField
                         id="selectDataItemType"
                         select
@@ -53,10 +56,9 @@ const TemplateMapping = () => {
                             ))}
                     </TextField>
                     </Grid>  
-                </Grid>
+                
 
-                <Grid container spacing={2}>
-                    <Grid item xs={4}>
+                    <Grid item xs={3}>
                     <TextField
                         id="selectScope"
                         select
@@ -71,7 +73,7 @@ const TemplateMapping = () => {
                     </TextField>
                     </Grid>
 
-                    <Grid item xs={4}>
+                    <Grid item xs={3}>
                         <TextField
                         id="selectSourceDataType"
                         select
@@ -84,22 +86,26 @@ const TemplateMapping = () => {
                                 <MenuItem key={sourceData.key} value={sourceData.value}>{sourceData.value}</MenuItem>
                             ))}
                     </TextField>
-                    </Grid>
                 </Grid>
+                </Grid>
+                </AccordionDetails>
+                <AccordionDetails>
+                    <AccordionActions>
+                    <Button
+                        type="button" 
+                        variant="contained"
+                        onClick={onMappingComplete}
+                        startIcon={<SaveIcon />}>SAVE</Button>
 
+                        <Button
+                        type="button"
+                        variant="contained"
+                        startIcon={<Delete />}>DELETE</Button> 
+                     </AccordionActions>
+                </AccordionDetails>
+            </Accordion>
+            
 
-
-
-            <Button
-            type="button" 
-            variant="contained"
-            onClick={onMappingComplete}
-            startIcon={<SaveIcon />}>SAVE</Button>
-
-            <Button
-            type="button"
-            variant="contained"
-            startIcon={<Delete />}>DELETE</Button>
 
             </>
     )

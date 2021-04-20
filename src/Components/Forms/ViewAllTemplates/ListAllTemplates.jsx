@@ -32,8 +32,10 @@ const ListAllTemplates = () => {
             </ListItem>
 
             {templateList.map((templateName) => (
-                <ListItem>
-                    <Button onClick={onTemplateClicked}
+                <ListItem >
+                    <Button 
+                    style={{minWidth: "200px", textAlign:"left"}}
+                    onClick={onTemplateClicked}
                     variant="outlined"
                     startIcon={<EditIcon />}
                     >{templateName}</Button>

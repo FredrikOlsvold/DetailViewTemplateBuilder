@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { TextField, Grid, Button, Paper } from "@material-ui/core";
 import SaveIcon from '@material-ui/icons/Save';
 import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 function FieldsCreator({setFieldList, fieldList, item}) {
 
@@ -69,8 +70,8 @@ function removeItemAtIndex(arr, index) {
 
   return (
     <>
-    <Grid container spacing={1}>
-        <Grid item xs={2}>
+    <Grid container spacing={2}>
+        <Grid item xs={3}>
         <TextField
           id="fieldid"
           disabled={disabledValue}
@@ -81,7 +82,7 @@ function removeItemAtIndex(arr, index) {
           onChange={onFieldIdChange}
         />
       </Grid>
-      <Grid item xs={2}>
+      <Grid item xs={3}>
         <TextField
           id="fieldtype"
           disabled={disabledValue}
@@ -92,7 +93,7 @@ function removeItemAtIndex(arr, index) {
           onChange={onFieldTypeChange}
         />
       </Grid>
-      <Grid item xs={2}>
+      <Grid item xs={3}>
         <TextField
           id="fieldvalue"
           disabled={disabledValue}
@@ -103,7 +104,7 @@ function removeItemAtIndex(arr, index) {
           onChange={onFieldValueChange}
         />
       </Grid>
-      <Grid item xs={2}>
+      <Grid item xs={3}>
         <TextField
           id="fieldformat"
           disabled={disabledValue}
@@ -114,19 +115,33 @@ function removeItemAtIndex(arr, index) {
           onChange={onFieldFormatChange}
         />
       </Grid>
-      <Grid item xs={1}>
+
+        <Grid item xs={2}>
         <Button
           type="button"
           variant="contained"
           color="default"
+          size="small"
           startIcon={disabledValue ? <EditIcon /> : <SaveIcon/>}
           onClick={updateFields}
+          style={{ marginBottom: "2em" }}
         >
           {disabledValue ? "Edit" : "Save"}
         </Button>
-        <Button onClick={removeItem}>DELETE</Button>
+        </Grid>
+
+      <Grid item xs={2}>
+        <Button 
+          type="button"
+          size="small"
+          variant="contained"
+          color="default"
+          startIcon={<DeleteIcon/>}
+          onClick={removeItem}
+          style={{ marginBottom: "2em" }}
+          >DELETE</Button>
       </Grid>
-    </Grid>
+      </Grid>
     </>
   );
 }
