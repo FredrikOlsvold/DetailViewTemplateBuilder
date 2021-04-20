@@ -5,6 +5,7 @@ import {atom} from "recoil";
 import ShowAll from "./Components/RecoilTest/ShowAll";
 import { Grid } from "@material-ui/core";
 import ListAllTemplates from './Components/Forms/ViewAllTemplates/ListAllTemplates';
+import TemplateMapping from "../src/Components/Forms/Mapping/TemplateMapping";
 
 
   //Atom that stores all fields in a list. Global state
@@ -26,7 +27,8 @@ function App() {
           </Grid>
 
 
-          <Grid item xs={9}>      
+          <Grid item xs={9}> 
+            <TemplateMapping/>     
             <Dashboard/>
             <ShowAll/>
           </Grid>

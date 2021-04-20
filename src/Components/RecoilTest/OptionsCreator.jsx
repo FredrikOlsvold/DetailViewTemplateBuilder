@@ -1,41 +1,67 @@
 import React, { useState } from "react";
 import { TextField, Grid, Button } from "@material-ui/core";
 import SaveIcon from '@material-ui/icons/Save';
-import AddIcon from '@material-ui/icons/Add';
+import EditIcon from '@material-ui/icons/Edit';
 
-function OptionsCreator({setOptionList, optionList}) {
+function OptionsCreator({setOptionList, item, optionList}) {
 
-    const [optionKey, setOptionKey] = useState("");
-    const [optionValue, setOptionValue] = useState("");
+    const [optionKey, setOptionKey] = useState(item.text.key);
+    const [optionValue, setOptionValue] = useState(item.text.value);
+    const [disabledValue, setDisabledValue] = useState(false);
+    const index = optionList.findIndex((optionItem) => optionItem === item);
 
     const onOptionKeyChange =({target: {value}}) => {setOptionKey(value);};
     const onOptionValueChange =({target: {value}}) => {setOptionValue(value);};
 
-    const addOptions = () => {
-        // setOptionList(...optionList, 
-        //     {
-        //         id: getUniqueId(), 
-        //         text: {key:optionKey, value:optionValue},
-        //         );
+    // const addOptions = () => {
+    //     setOptionList([...optionList, 
+    //         {
+    //             id: getUniqueId(),
+    //             text: {
+    //                 key:optionKey, 
+    //                 value:optionValue,
+    //             },
+    //         }]);
+    //     setDisabledValue(true);
+    // };
 
-        setOptionList([...optionList, 
-            {
-                id: getUniqueId(),
-                text: {
-                    key:optionKey, 
-                    value:optionValue,
-                },
-            }]);
 
-        setOptionKey("");
-        setOptionValue("");
-    };
+    const updateOptions = () => {
+      const newOptionList = replaceItemAtIndex(optionList, index, {
+          ...item,
+          text: {
+              key:optionKey,
+              value: optionValue,
+          },
+      });
+
+      setOptionList(newOptionList);
+      setDisabledValue(!disabledValue);
+  };
+
+//Copied directly from recoil
+function removeItemAtIndex(arr, index) {
+  return [...arr.slice(0, index), ...arr.slice(index + 1)];
+  };
+
+  function replaceItemAtIndex(arr, index, newValue) {
+    return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
+};
+
+  const removeItem = () => {
+    const newOptionList = removeItemAtIndex(optionList, index);
+    setOptionList(newOptionList);
+
+  };
+
 
   return (
     <>
-    <Grid container spacing={0}>
+      <div>
+        <Grid container spacing={0}>
         <Grid item xs={4}>
         <TextField
+          disabled={disabledValue}
           id="optionskey"
           label="Key"
           value={optionKey}
@@ -46,6 +72,7 @@ function OptionsCreator({setOptionList, optionList}) {
       </Grid>
       <Grid item xs={4}>
         <TextField
+        disabled={disabledValue}
           id="optionsvalue"
           label="Value"
           value={optionValue}
@@ -59,13 +86,16 @@ function OptionsCreator({setOptionList, optionList}) {
           type="button"
           variant="contained"
           color="default"
-          startIcon={<AddIcon />}
-          onClick={addOptions}
+          startIcon={disabledValue ? <EditIcon /> : <SaveIcon/>}
+          onClick={updateOptions}
         >
-          OPTION
+          {disabledValue ? "Edit" : "Save"}
         </Button>
+        <Button onClick={removeItem}>DELETE</Button>
       </Grid>
     </Grid>
+      </div>
+    
       
     </>
   );

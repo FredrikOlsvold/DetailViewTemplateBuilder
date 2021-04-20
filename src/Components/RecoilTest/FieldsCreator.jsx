@@ -1,13 +1,16 @@
 import React, { useState } from "react";
-import { TextField, Grid, Button } from "@material-ui/core";
-import AddIcon from '@material-ui/icons/Add';
+import { TextField, Grid, Button, Paper } from "@material-ui/core";
+import SaveIcon from '@material-ui/icons/Save';
+import EditIcon from '@material-ui/icons/Edit';
 
-function FieldsCreator({setFieldList, fieldList}) {
+function FieldsCreator({setFieldList, fieldList, item}) {
 
-    const [fieldId, setFieldId] = useState("");
-    const [fieldType, setFieldType] = useState("");
-    const [fieldValue, setFieldValue] = useState("");
-    const [fieldFormat, setFieldFormat] = useState("");
+    const [fieldId, setFieldId] = useState(item.text.id);
+    const [fieldType, setFieldType] = useState(item.text.type);
+    const [fieldValue, setFieldValue] = useState(item.text.value);
+    const [fieldFormat, setFieldFormat] = useState(item.text.format);
+    const index = fieldList.findIndex((fieldItem) => fieldItem === item);
+    const [disabledValue, setDisabledValue] = useState(false);
 
     const onFieldIdChange =({target: {value}}) => {setFieldId(value);};
     const onFieldTypeChange =({target: {value}}) => {setFieldType(value);};
@@ -34,12 +37,43 @@ function FieldsCreator({setFieldList, fieldList}) {
         setFieldFormat("");
     };
 
+    const updateFields = () => {
+      const newFieldList = replaceItemAtIndex(fieldList, index, {
+        ...item,
+        text: {
+            id:fieldId,
+            type: fieldType,
+            value: fieldValue,
+            format: fieldFormat,
+        },
+    });
+
+      setFieldList(newFieldList);
+      setDisabledValue(!disabledValue);
+    };
+
+    const removeItem = () => {
+      const newFieldList = removeItemAtIndex(fieldList, index);
+      setFieldList(newFieldList);
+  
+    };
+
+    //Copied directly from recoil
+function removeItemAtIndex(arr, index) {
+  return [...arr.slice(0, index), ...arr.slice(index + 1)];
+  };
+
+  function replaceItemAtIndex(arr, index, newValue) {
+    return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
+};
+
   return (
     <>
     <Grid container spacing={1}>
         <Grid item xs={2}>
         <TextField
           id="fieldid"
+          disabled={disabledValue}
           label="id"
           value={fieldId}
           variant="outlined"
@@ -50,6 +84,7 @@ function FieldsCreator({setFieldList, fieldList}) {
       <Grid item xs={2}>
         <TextField
           id="fieldtype"
+          disabled={disabledValue}
           label="type"
           value={fieldType}
           variant="outlined"
@@ -60,6 +95,7 @@ function FieldsCreator({setFieldList, fieldList}) {
       <Grid item xs={2}>
         <TextField
           id="fieldvalue"
+          disabled={disabledValue}
           label="Value"
           value={fieldValue}
           variant="outlined"
@@ -70,6 +106,7 @@ function FieldsCreator({setFieldList, fieldList}) {
       <Grid item xs={2}>
         <TextField
           id="fieldformat"
+          disabled={disabledValue}
           label="format"
           value={fieldFormat}
           variant="outlined"
@@ -82,14 +119,14 @@ function FieldsCreator({setFieldList, fieldList}) {
           type="button"
           variant="contained"
           color="default"
-          startIcon={<AddIcon />}
-          onClick={addField}
+          startIcon={disabledValue ? <EditIcon /> : <SaveIcon/>}
+          onClick={updateFields}
         >
-          FIELD
+          {disabledValue ? "Edit" : "Save"}
         </Button>
+        <Button onClick={removeItem}>DELETE</Button>
       </Grid>
     </Grid>
-      
     </>
   );
 }

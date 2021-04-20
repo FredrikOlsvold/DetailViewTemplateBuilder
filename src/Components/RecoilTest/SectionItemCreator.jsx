@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {useSetRecoilState} from "recoil";
 import {windowTitleAtom, contentAtom} from "../../Atoms/atoms";
-import {Button, MenuItem, TextField} from "@material-ui/core";
+import {Button, MenuItem, Paper, TextField, Typography} from "@material-ui/core";
 import SaveIcon from '@material-ui/icons/Save';
 import AddIcon from '@material-ui/icons/Add';
 import OptionsCreator from "../RecoilTest/OptionsCreator";
@@ -14,10 +14,6 @@ const SectionItemCreator = ({wrapper}) => {
     const [type, setType] = useState("");
     const [optionList, setOptionList] = useState([]);
     const [fieldList, setFieldList] = useState([]);
-    const [optionCount, setOptionCount] = useState([]);
-    const [fieldCount, setFieldCount] = useState([]);
-
-
 
 
     const addSection = () => {
@@ -33,28 +29,43 @@ const SectionItemCreator = ({wrapper}) => {
                 },
             },
         ]);
-        console.log(optionList);
         setSectionId("");
         setType("");
         setOptionList([]);
-        setOptionCount([]);
-        setFieldCount([]);
+        setFieldList([]);
+    }
+
+
+    const addOptionClicked = () => {
+        setOptionList((oldOptionList) => [
+            ...oldOptionList,
+            {
+                id: getUniqueId(),
+                text: {
+                    key: "",
+                    value: "",
+                },
+            },
+        ]);
     }
 
     const addFieldClicked = () => {
-        setFieldCount([...fieldCount, <FieldsCreator setFieldList={setFieldList} fieldList={fieldList}/>])
-    };
-
-    const addOptionClicked = () => {
-        setOptionCount([...optionCount, <OptionsCreator setOptionList={setOptionList} optionList={optionList}/>])
+        setFieldList((oldFieldList) => [
+            ...oldFieldList,
+            {
+                id: getUniqueId(),
+                text: {
+                    id: "",
+                    type: "",
+                    value: "",
+                    format: "",
+                },
+            },
+        ]);
     }
-
 
     const onValueChange =({target: {value}}) => {setSectionId(value);};
     const onTypeChange =({target: {value}}) => {setType(value);};
-
-
-
 
     return(
         <>
@@ -85,15 +96,23 @@ const SectionItemCreator = ({wrapper}) => {
 
         </div>
         <div>
-            {optionCount.map((option, index) => (
-                <OptionsCreator key={index} setOptionList={setOptionList} optionList={optionList}/>
-            ))}
+            <Paper style={{ padding: "2em", margin:"1em" }}>
+                <Typography variant="h6">Options:</Typography>
+               {optionList.map((option) => (
+                    <OptionsCreator key={option.id} item={option} setOptionList={setOptionList} optionList={optionList}/>
+                ))} 
+            </Paper>
+            
         </div>
 
         <div>
-        {fieldCount.map((field, index) => (
-                <FieldsCreator key={index} setFieldList={setFieldList} fieldList={fieldList}/>
-            ))}
+        <Paper style={{ padding: "2em", margin:"1em" }}>
+            <Typography variant="h6">Fields:</Typography>
+            {fieldList.map((field) => (
+            <FieldsCreator key={field.id} item={field} setFieldList={setFieldList} fieldList={fieldList}/>
+            ))} 
+        </Paper>
+
         </div>
             
         </>
