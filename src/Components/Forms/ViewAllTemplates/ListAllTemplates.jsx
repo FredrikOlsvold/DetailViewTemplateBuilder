@@ -21,7 +21,6 @@ const ListAllTemplates = () => {
 
     return(
         <>
-        <Grid item xs={3}>
         <h3>Detail View Templates</h3>
         <List>
             <ListItem>
@@ -40,8 +39,6 @@ const ListAllTemplates = () => {
                     >{templateName}</Button>
                 </ListItem>))} 
         </List>
-
-        </Grid>
 
         </>
     );

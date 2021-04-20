@@ -1,22 +1,22 @@
-import React from "react";
-import {fieldListAtom} from "../../App";
-import {useRecoilValue} from "recoil";
-import SectionItemCreator from "../RecoilTest/SectionItemCreator";
-import SectionItem from "../RecoilTest/SectionItem";
+import React, {useState} from "react";
+import WindowTitle from "../RecoilTest/WindowTitle";
+import Content from "../RecoilTest/Content";
+import { Button } from "@material-ui/core";
 
 
 const Dashboard = () => {
 
-    const sectionList = useRecoilValue(fieldListAtom);
+    const [displayWrapper, setDisplayWrapper] = useState("");
 
     return(
         <>
-            <br></br>
-            <SectionItemCreator/>
-            <br></br>
-            {sectionList.map((section) => (
-                <SectionItem key={section.id} item={section}/>
-            ))}
+            <Button onClick={() => setDisplayWrapper("title")}>Window Title</Button>
+            <Button onClick={() => setDisplayWrapper("content")}>Content</Button>
+
+            {displayWrapper === "title" && <WindowTitle/>}
+            {displayWrapper === "content" && <Content/>}
+            
+                          
         </>
     );
 

@@ -3,6 +3,8 @@ import Menu from './Components/Appbar/Menu';
 import Dashboard from "./Components/containers/Dashboard";
 import {atom} from "recoil";
 import ShowAll from "./Components/RecoilTest/ShowAll";
+import { Grid } from "@material-ui/core";
+import ListAllTemplates from './Components/Forms/ViewAllTemplates/ListAllTemplates';
 
 
   //Atom that stores all fields in a list. Global state
@@ -11,19 +13,28 @@ import ShowAll from "./Components/RecoilTest/ShowAll";
     default: [],
   });
 
-  //Atom that stores chosen templates in a list. Global state
-  export const chosenTemplateAtom = atom({
-    key: "chosenTemplateAtom",
-    default: "",
-  });
 
 function App() {
 
   return (
     <div className="App">
       <Menu/>
-      <Dashboard/>
-      <ShowAll/>
+
+      <Grid container spacing={1}>
+          <Grid item xs={3}>
+            <ListAllTemplates/>
+          </Grid>
+
+
+          <Grid item xs={9}>      
+            <Dashboard/>
+            <ShowAll/>
+          </Grid>
+
+
+
+      </Grid>
+      
     </div>
   );
 }

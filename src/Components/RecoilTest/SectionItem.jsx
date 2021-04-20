@@ -1,15 +1,16 @@
 import {useRecoilState} from "recoil";
-import {fieldListAtom} from "../../App";
-import {Button, TextField} from "@material-ui/core";
+import {Button, MenuItem, TextField} from "@material-ui/core";
 import React, { useState } from "react";
+import {windowTitleAtom, contentAtom} from "../../Atoms/atoms";
 
-const SectionItem = ({item}) => {
-    const [sectionList, setSectionList] = useRecoilState(fieldListAtom);
+const SectionItem = ({item, wrapper}) => {
+
+    const chosenAtom = (wrapper === "title") ? windowTitleAtom : contentAtom;
+    const [sectionList, setSectionList] = useRecoilState(chosenAtom);
     const index = sectionList.findIndex((sectionItem) => sectionItem === item);
-    const [sectionValue, setSectionValue] = useState(item.text.value);
-    const [sectionType, setSectionType] = useState(item.text.type);
-    const [sectionFormat, setSectionFormat] = useState(item.text.format);
+    const [sectionId, setSectionId] = useState(item.text.id);
     const [sectionUpdated, setSectionUpdated] = useState(false);
+    const [type, setType] = useState(item.text.type);
 
 
 
@@ -23,9 +24,9 @@ const SectionItem = ({item}) => {
         const newSectionList = replaceItemAtIndex(sectionList, index, {
             ...item,
             text: {
-                value:sectionValue,
-                type:sectionType,
-                format:sectionFormat,
+                id:sectionId,
+                type:type,
+                options: [],
             },
         });
 
@@ -33,26 +34,40 @@ const SectionItem = ({item}) => {
     };
 
     const onValueChange =({target: {value}}) => {
-        setSectionValue(value);
+        setSectionId(value);
         setSectionUpdated(true);
     };
 
     const onTypeChange =({target: {value}}) => {
-        setSectionType(value);
-        setSectionUpdated(true);
-    };
-
-    const onFormatChange =({target: {value}}) => {
-        setSectionFormat(value);
+        setType(value);
         setSectionUpdated(true);
     };
 
 
     return(
         <div>
-            <TextField variant="outlined" type="text" value={sectionValue} onChange={onValueChange}/>
-            <TextField variant="outlined" type="text" value={sectionType} onChange={onTypeChange}/>
-            <TextField variant="outlined" type="text" value={sectionFormat} onChange={onFormatChange}/>
+            <TextField variant="outlined" type="text" value={sectionId} onChange={onValueChange}/>
+            <TextField
+                style={{ width: "10%" }}
+                id="select"
+                select
+                value={type}
+                label="Type"
+                variant="outlined"
+                onChange={onTypeChange}
+
+                >
+                <MenuItem value="" />
+                <MenuItem value={1}>Type 1</MenuItem>
+                <MenuItem value={2}>Type 2</MenuItem>
+                <MenuItem value={3}>Type 3</MenuItem>
+                <MenuItem value={4}>Type 4</MenuItem>
+                <MenuItem value={5}>Type 5</MenuItem>
+                <MenuItem value={6}>Type 6</MenuItem>
+                <MenuItem value={7}>Type 7</MenuItem>
+                <MenuItem value={8}>Type 8</MenuItem>
+            </TextField>
+
             {sectionUpdated && <Button variant="outlined" onClick={updateSection}>UPDATE</Button>}
             
             <Button variant="outlined" onClick={deleteSection}>DELETE</Button>

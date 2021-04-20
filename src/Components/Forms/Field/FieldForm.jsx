@@ -14,17 +14,6 @@ function FieldForm({ setFieldFormDatas, fieldFormDatas }) {
     setFieldLabel(e.target.value);
   };
 
-  // useEffect(() => {
-  //   setFormData({
-  //     type: selectedType,
-  //     label: fieldLabel,
-  //   });
-  // }, [selectedType, fieldLabel]);
-
-  // useEffect(() => {
-  //   setFieldFormDatas([...fieldFormDatas, formData]);
-  // }, [formData]);
-
   return (
     <>
       <Grid item xs={6}>

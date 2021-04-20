@@ -11,13 +11,10 @@ import { ExpandMore } from "@material-ui/icons";
 import React, { useState } from "react";
 import FieldForm from "./Field/FieldForm";
 import SectionForm from "./Section/SectionForm";
-import {TemplateMapping} from "./Mapping/TemplateMapping";
-import ListAllTemplates from "./ViewAllTemplates/ListAllTemplates"
 
-function FormWrapper({ setPreviewJson, previewJson }) {
+function FormWrapper({ wrapperType }) {
   const [formList, setFormList] = useState([]);
   const [fieldFormDatas, setFieldFormDatas] = useState([]);
-
 
   const onAddFieldClick = () => {
     setFormList([
@@ -29,14 +26,9 @@ function FormWrapper({ setPreviewJson, previewJson }) {
     ]);
   };
 
-  const onPreviewJsonClick = () => {
-    setPreviewJson(fieldFormDatas);
-    console.log(JSON.stringify({12:"hello", 13:"bybye"}));
-  };
-
   return (
     <div>
-      <Accordion>
+      {/* <Accordion>
         <AccordionSummary expandIcon={<ExpandMore />}>
           <Typography>Section</Typography>
         </AccordionSummary>
@@ -47,16 +39,18 @@ function FormWrapper({ setPreviewJson, previewJson }) {
               {formList.map((f) => {
                 return f;
               })}
-              <Button onClick={onAddFieldClick}>Add field</Button>
-              <Button onClick={onPreviewJsonClick}>Preview Json</Button>
+              {wrapperType === "contentWrapper" && (
+                <Button onClick={onAddFieldClick}>Add field</Button>
+              )}
             </Grid>
           </FormControl>
         </AccordionDetails>
-      </Accordion>
+      </Accordion> */}
 
-      {/* <FormControl> */}
+       {/* < Create sections> */}
 
-      {/* </FormControl> */}
+       {/* < Render sections> */}
+
     </div>
   );
 }
