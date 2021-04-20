@@ -1,27 +1,42 @@
-import {Button} from "@material-ui/core";
-import {useRecoilValue} from "recoil";
+import { Button, TextareaAutosize, TextField } from "@material-ui/core";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 // import {fieldListAtom} from "../../App";
-import {useState} from "react";
-import { JsonPreviewSelector } from "../../Selectors/Selectors";
-
+import { useEffect, useState } from "react";
+import { JsonPreviewSelector, TemplateJsonSelector } from "../../Selectors/Selectors";
 
 const ShowAll = () => {
 
-    const previewJson = useRecoilValue(JsonPreviewSelector);
-    const [displayJSON, setDisplayJSON] = useState(true);
+    const templateJson = useRecoilValue(TemplateJsonSelector)
+  const previewJson = useRecoilValue(JsonPreviewSelector);
+  const [displayJSON, setDisplayJSON] = useState(true);
 
-    const showJSON = () => {
-        setDisplayJSON(!displayJSON);
-    }
+  const updateJson = useSetRecoilState(JsonPreviewSelector);
 
-    return(
-        <div>
-            <Button onClick={showJSON}>JSON</Button>
+  const [textValue, setTextValue] = useState("");
 
-            {displayJSON && <pre>{JSON.stringify(previewJson, null, 2)}</pre>}
-        </div>
-        
-    )
-}
+  const showJSON = () => {
+    setDisplayJSON(!displayJSON);
+  };
+
+//   const handleJsonTextAreaChange = (e) => {
+//     updateJson(JSON.parse(e.target.value));
+    
+//   };
+
+  return (
+    <div>
+      <Button onClick={showJSON}>JSON</Button>
+      <div style={{ width: "50%" }}>
+        {displayJSON && (
+          <TextareaAutosize
+            style={{ width: "100%" }}
+            value={JSON.stringify(templateJson, null, 2)}
+            
+          ></TextareaAutosize>
+        )}
+      </div>
+    </div>
+  );
+};
 
 export default ShowAll;

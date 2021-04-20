@@ -11,3 +11,12 @@ export const contentAtom = atom({
 key: "contentAtom",
 default: [],
 });
+
+//Atom for whole json, Global state
+export const TemplateJsonAtom = atom({
+    key: 'TemplateJsonAtom',
+    default: {
+        title: [],
+        content: []
+    },
+})

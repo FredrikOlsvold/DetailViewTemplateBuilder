@@ -3,7 +3,7 @@ import SectionItem from "../RecoilTest/SectionItem";
 import { useRecoilValue } from "recoil";
 import { windowTitleAtom } from "../../Atoms/atoms";
 
-const Content = () => {
+const WindowTitle = () => {
 
     const sectionList = useRecoilValue(windowTitleAtom);
 
@@ -20,4 +20,4 @@ const Content = () => {
     )
 };
 
-export default Content;
+export default WindowTitle;
