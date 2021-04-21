@@ -24,11 +24,17 @@ const SectionItem = ({ item, wrapper, mode }) => {
     setSectionList(newSectionList);
   };
 
+  const deleteOption = () => {
+    setSectionUpdated(true);
+    
+    // updateSection();
+  };
+
   const updateSection = () => {
     setSectionUpdated(false);
     const newSectionList = replaceItemAtIndex(sectionList, index, {
       ...item,
-      id: uniqueGuid(),
+      id: item.id,
       type: type,
       options: optionList,
       fields: fields,
@@ -75,27 +81,25 @@ const SectionItem = ({ item, wrapper, mode }) => {
       </Button>
 
       {/* Mappa ut fields og options */}
-      {optionList.map((option, index) => (
+      {optionList.map((option) => (
         <OptionsCreator
-          key={index}
+          key={getUniqueId()}
           item={option}
           mode={mode}
           wrapper={wrapper}
           optionList={optionList}
           setOptionList={setOptionList}
+          deleteOption={deleteOption}
         />
       ))}
     </div>
   );
 };
 
-// //Copied directly from recoil
-// function replaceItemAtIndex(arr, index, newValue) {
-//     return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
-// };
-// //Copied directly from recoil
-// function removeItemAtIndex(arr, index) {
-// return [...arr.slice(0, index), ...arr.slice(index + 1)];
-// };
+let uniqueId = 0;
+const getUniqueId = () => {
+  console.log(uniqueId);
+  return uniqueId++;
+};
 
 export default SectionItem;

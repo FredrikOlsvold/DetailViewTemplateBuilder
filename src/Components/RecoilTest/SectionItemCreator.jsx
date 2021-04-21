@@ -113,9 +113,9 @@ const SectionItemCreator = ({ wrapper }) => {
         {optionList.length > 0 && (
           <Paper style={{ padding: "2em", margin: "1em" }}>
             <Typography>Options:</Typography>
-            {optionList.map((option, index) => (
+            {optionList.map((option) => (
               <OptionsCreator
-                key={index}
+                key={getUniqueId()}
                 item={option}
                 setOptionList={setOptionList}
                 optionList={optionList}
@@ -133,7 +133,7 @@ const SectionItemCreator = ({ wrapper }) => {
             <Typography>Fields:</Typography>
             {fieldList.map((field, index) => (
               <FieldsCreator
-                key={index}
+                key={getUniqueId()}
                 item={field}
                 setFieldList={setFieldList}
                 fieldList={fieldList}
@@ -159,6 +159,7 @@ const SectionItemCreator = ({ wrapper }) => {
 
 let uniqueId = 0;
 const getUniqueId = () => {
+  console.log(uniqueId);
   return uniqueId++;
 };
 export default SectionItemCreator;

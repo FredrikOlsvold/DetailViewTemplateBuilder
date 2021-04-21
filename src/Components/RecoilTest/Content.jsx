@@ -18,14 +18,20 @@ const Content = () => {
 
                 <Grid item xs={6}>
                 <Typography>Edit Section</Typography>
-                {sectionList.map((section, index) => (
-                <SectionItem key={index} item={section} wrapper={"content"}/>
+                {sectionList.map((section) => (
+                <SectionItem key={getUniqueId()} item={section} wrapper={"content"}/>
                 ))}
                 </Grid>
                 </Grid>
 
         </div>
     )
+};
+
+let uniqueId = 0;
+const getUniqueId = () => {
+  console.log(uniqueId);
+  return uniqueId++;
 };
 
 export default Content;

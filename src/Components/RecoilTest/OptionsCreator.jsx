@@ -8,16 +8,19 @@ import {
   replaceItemAtIndex,
   removeItemAtIndex,
 } from "../../Helpers/HelperMethods";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 
-function OptionsCreator({ setOptionList, item, optionList, mode, wrapper }) {
+function OptionsCreator({ setOptionList, item, optionList, mode, wrapper, deleteOption}) {
   const chosenAtom = wrapper === "title" ? windowTitleAtom : contentAtom;
   const [sectionList, setSectionList] = useRecoilState(chosenAtom);
+  const index = optionList.findIndex((optionItem) => optionItem === item);
 
   const [optionKey, setOptionKey] = useState(item.key);
   const [optionValue, setOptionValue] = useState(item.value);
+
+
   const [disabledValue, setDisabledValue] = useState(false);
-  const index = optionList.findIndex((optionItem) => optionItem === item);
+  
 
   const onOptionKeyChange = ({ target: { value } }) => {
     setOptionKey(value);
@@ -41,11 +44,13 @@ function OptionsCreator({ setOptionList, item, optionList, mode, wrapper }) {
     if (mode === "create") {
       const newOptionList = removeItemAtIndex(optionList, index);
       setOptionList(newOptionList);
+
     } else {
-      console.log(sectionList);
-      console.log("index:", index);
-      const newSectionList = removeItemAtIndex(sectionList[0].options, index);
-      setSectionList(newSectionList);
+      console.log(item);
+      const newOptionList = removeItemAtIndex(optionList, index);
+      setOptionList(newOptionList);
+      deleteOption();  
+
     }
   };
 
@@ -56,7 +61,7 @@ function OptionsCreator({ setOptionList, item, optionList, mode, wrapper }) {
           <Grid item xs={4}>
             <TextField
               disabled={disabledValue}
-              id="optionskey"
+              id= {getUniqueId()}
               label="Key"
               value={optionKey}
               variant="outlined"
@@ -67,7 +72,7 @@ function OptionsCreator({ setOptionList, item, optionList, mode, wrapper }) {
           <Grid item xs={4}>
             <TextField
               disabled={disabledValue}
-              id="optionsvalue"
+              id= {getUniqueId()}
               label="Value"
               value={optionValue}
               variant="outlined"
@@ -76,7 +81,9 @@ function OptionsCreator({ setOptionList, item, optionList, mode, wrapper }) {
             />
           </Grid>
 
-          <Grid item xs={2}>
+          
+            {mode === "create" && 
+            <Grid item xs={2}>
             <Button
               type="button"
               variant="contained"
@@ -87,6 +94,8 @@ function OptionsCreator({ setOptionList, item, optionList, mode, wrapper }) {
               {disabledValue ? "Edit" : "Save"}
             </Button>
           </Grid>
+            }
+            
 
           <Grid item xs={2}>
             <Button

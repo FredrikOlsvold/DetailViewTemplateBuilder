@@ -19,9 +19,9 @@ const WindowTitle = () => {
         {/* Edit Section */}
         <Grid item xs={6}>
           <Typography>Edit Section</Typography>
-          {sectionList.map((section, index) => (
+          {sectionList.map((section) => (
             <SectionItem
-              key={index}
+              key={getUniqueId()}
               item={section}
               wrapper={"title"}
               mode={"edit"}
@@ -31,6 +31,12 @@ const WindowTitle = () => {
       </Grid>
     </div>
   );
+};
+
+let uniqueId = 0;
+const getUniqueId = () => {
+  console.log(uniqueId);
+  return uniqueId++;
 };
 
 export default WindowTitle;
