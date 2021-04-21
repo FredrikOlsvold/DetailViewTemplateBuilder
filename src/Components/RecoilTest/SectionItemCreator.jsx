@@ -46,6 +46,7 @@ const SectionItemCreator = ({wrapper}) => {
         setFieldList((oldFieldList) => [
             ...oldFieldList,
             {
+                    id: "",
                     type: "",
                     value: "",
                     format: "",
