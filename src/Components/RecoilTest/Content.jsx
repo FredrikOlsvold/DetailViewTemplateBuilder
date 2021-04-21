@@ -17,8 +17,8 @@ const Content = () => {
 
                 <Grid item xs={6}>
 
-                {sectionList.map((section) => (
-                <SectionItem key={section.id} item={section} wrapper={"content"}/>
+                {sectionList.map((section, index) => (
+                <SectionItem key={index} item={section} wrapper={"content"}/>
                 ))}
                 </Grid>
                 </Grid>

@@ -1,5 +1,4 @@
 import './App.css';
-import Menu from './Components/Appbar/Menu';
 import Dashboard from "./Components/containers/Dashboard";
 import {atom} from "recoil";
 import ShowAll from "./Components/RecoilTest/ShowAll";

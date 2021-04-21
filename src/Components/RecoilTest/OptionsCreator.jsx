@@ -7,8 +7,8 @@ import {replaceItemAtIndex, removeItemAtIndex} from "../../Helpers/HelperMethods
 
 function OptionsCreator({setOptionList, item, optionList}) {
 
-    const [optionKey, setOptionKey] = useState(item.text.key);
-    const [optionValue, setOptionValue] = useState(item.text.value);
+    const [optionKey, setOptionKey] = useState(item.key);
+    const [optionValue, setOptionValue] = useState(item.value);
     const [disabledValue, setDisabledValue] = useState(false);
     const index = optionList.findIndex((optionItem) => optionItem === item);
 
@@ -31,10 +31,8 @@ function OptionsCreator({setOptionList, item, optionList}) {
     const updateOptions = () => {
       const newOptionList = replaceItemAtIndex(optionList, index, {
           ...item,
-          text: {
               key:optionKey,
               value: optionValue,
-          },
       });
 
       setOptionList(newOptionList);

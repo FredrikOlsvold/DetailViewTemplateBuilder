@@ -1,17 +1,16 @@
 import {useRecoilState} from "recoil";
-import {Button, MenuItem, TextField} from "@material-ui/core";
+import {Button, MenuItem, TextField, Typography} from "@material-ui/core";
 import React, { useState } from "react";
 import {windowTitleAtom, contentAtom} from "../../Atoms/atoms";
-import {replaceItemAtIndex, removeItemAtIndex} from "../../Helpers/HelperMethods"
+import {replaceItemAtIndex, removeItemAtIndex, uniqueGuid} from "../../Helpers/HelperMethods"
 
 const SectionItem = ({item, wrapper}) => {
 
     const chosenAtom = (wrapper === "title") ? windowTitleAtom : contentAtom;
     const [sectionList, setSectionList] = useRecoilState(chosenAtom);
     const index = sectionList.findIndex((sectionItem) => sectionItem === item);
-    const [sectionId, setSectionId] = useState(item.text.id);
     const [sectionUpdated, setSectionUpdated] = useState(false);
-    const [type, setType] = useState(item.text.type);
+    const [type, setType] = useState(item.type);
 
     // if(wrapper === "title"){
 
@@ -28,19 +27,13 @@ const SectionItem = ({item, wrapper}) => {
         setSectionUpdated(false);
         const newSectionList = replaceItemAtIndex(sectionList, index, {
             ...item,
-            text: {
-                id:sectionId,
+                id:uniqueGuid(),
                 type:type,
                 options: [],
-            },
+                fields:[],
         });
 
         setSectionList(newSectionList);
-    };
-
-    const onValueChange =({target: {value}}) => {
-        setSectionId(value);
-        setSectionUpdated(true);
     };
 
     const onTypeChange =({target: {value}}) => {
@@ -51,7 +44,6 @@ const SectionItem = ({item, wrapper}) => {
 
     return(
         <div>
-            <TextField variant="outlined" type="text" value={sectionId} onChange={onValueChange}/>
             <TextField
                 style={{ width: "10%" }}
                 id="select"

@@ -3,18 +3,16 @@ import { TextField, Grid, Button } from "@material-ui/core";
 import SaveIcon from '@material-ui/icons/Save';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import {replaceItemAtIndex, removeItemAtIndex} from "../../Helpers/HelperMethods";
+import {replaceItemAtIndex, removeItemAtIndex, uniqueGuid} from "../../Helpers/HelperMethods";
 
 function FieldsCreator({setFieldList, fieldList, item}) {
 
-    const [fieldId, setFieldId] = useState(item.text.id);
-    const [fieldType, setFieldType] = useState(item.text.type);
-    const [fieldValue, setFieldValue] = useState(item.text.value);
-    const [fieldFormat, setFieldFormat] = useState(item.text.format);
+    const [fieldType, setFieldType] = useState(item.type);
+    const [fieldValue, setFieldValue] = useState(item.value);
+    const [fieldFormat, setFieldFormat] = useState(item.format);
     const index = fieldList.findIndex((fieldItem) => fieldItem === item);
     const [disabledValue, setDisabledValue] = useState(false);
 
-    const onFieldIdChange =({target: {value}}) => {setFieldId(value);};
     const onFieldTypeChange =({target: {value}}) => {setFieldType(value);};
     const onFieldValueChange =({target: {value}}) => {setFieldValue(value);};
     const onFieldFormatChange =({target: {value}}) => {setFieldFormat(value);};
@@ -23,12 +21,10 @@ function FieldsCreator({setFieldList, fieldList, item}) {
     const updateFields = () => {
       const newFieldList = replaceItemAtIndex(fieldList, index, {
         ...item,
-        text: {
-            id:fieldId,
+            id:uniqueGuid(),
             type: fieldType,
             value: fieldValue,
             format: fieldFormat,
-        },
     });
 
       setFieldList(newFieldList);
@@ -53,17 +49,6 @@ function FieldsCreator({setFieldList, fieldList, item}) {
   return (
     <>
     <Grid container spacing={2}>
-        <Grid item xs={3}>
-        <TextField
-          id="fieldid"
-          disabled={disabledValue}
-          label="id"
-          value={fieldId}
-          variant="outlined"
-          style={{ width: "100%" }}
-          onChange={onFieldIdChange}
-        />
-      </Grid>
       <Grid item xs={3}>
         <TextField
           id="fieldtype"

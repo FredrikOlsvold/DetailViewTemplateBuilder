@@ -6,11 +6,11 @@ import SaveIcon from '@material-ui/icons/Save';
 import AddIcon from '@material-ui/icons/Add';
 import OptionsCreator from "../RecoilTest/OptionsCreator";
 import FieldsCreator from "./FieldsCreator";
+import {uniqueGuid} from "../../Helpers/HelperMethods";
 
 const SectionItemCreator = ({wrapper}) => {
     const chosenAtom = (wrapper === "title") ? windowTitleAtom : contentAtom;
     const setSectionList = useSetRecoilState(chosenAtom);
-    const [sectionId, setSectionId] = useState("");
     const [type, setType] = useState("");
     const [optionList, setOptionList] = useState([]);
     const [fieldList, setFieldList] = useState([]);
@@ -20,16 +20,12 @@ const SectionItemCreator = ({wrapper}) => {
         setSectionList((oldSectionList) => [
             ...oldSectionList,
             {
-                id: getUniqueId(),
-                text: {
-                    id:sectionId,
+                    id:uniqueGuid(),
                     type:type,
                     options:optionList,
                     fields:fieldList,
-                },
             },
         ]);
-        setSectionId("");
         setType("");
         setOptionList([]);
         setFieldList([]);
@@ -40,11 +36,8 @@ const SectionItemCreator = ({wrapper}) => {
         setOptionList((oldOptionList) => [
             ...oldOptionList,
             {
-                id: getUniqueId(),
-                text: {
                     key: "",
                     value: "",
-                },
             },
         ]);
     }
@@ -53,27 +46,19 @@ const SectionItemCreator = ({wrapper}) => {
         setFieldList((oldFieldList) => [
             ...oldFieldList,
             {
-                id: getUniqueId(),
-                text: {
-                    id: "",
                     type: "",
                     value: "",
                     format: "",
-                },
             },
         ]);
     }
 
-    const onValueChange =({target: {value}}) => {setSectionId(value);};
     const onTypeChange =({target: {value}}) => {setType(value);};
 
     return(
         <>
         <div style={{padding:"2em"}}>
         <Grid container spacing={2}>
-            <Grid item xs={3}>
-                <TextField label="id" variant="outlined" type="text" value={sectionId} onChange={onValueChange}/>
-            </Grid>
 
             <Grid item xs={3}>
                <TextField
@@ -112,8 +97,8 @@ const SectionItemCreator = ({wrapper}) => {
             {optionList.length > 0 && 
             <Paper style={{ padding: "2em", margin:"1em" }}>
                 <Typography>Options:</Typography>
-               {optionList.map((option) => (
-                    <OptionsCreator key={option.id} item={option} setOptionList={setOptionList} optionList={optionList}/>
+               {optionList.map((option, index) => (
+                    <OptionsCreator key={index} item={option} setOptionList={setOptionList} optionList={optionList}/>
                 ))} 
             </Paper>
             }
@@ -125,8 +110,8 @@ const SectionItemCreator = ({wrapper}) => {
             {fieldList.length > 0 &&
             <Paper style={{ padding: "2em", margin:"1em" }}>
             <Typography>Fields:</Typography>
-            {fieldList.map((field) => (
-            <FieldsCreator key={field.id} item={field} setFieldList={setFieldList} fieldList={fieldList}/>
+            {fieldList.map((field, index) => (
+            <FieldsCreator key={index} item={field} setFieldList={setFieldList} fieldList={fieldList}/>
             ))} 
         </Paper>
 
