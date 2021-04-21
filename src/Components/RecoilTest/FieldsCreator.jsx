@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { TextField, Grid, Button, Paper } from "@material-ui/core";
+import { TextField, Grid, Button } from "@material-ui/core";
 import SaveIcon from '@material-ui/icons/Save';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import {replaceItemAtIndex, removeItemAtIndex} from "../../Helpers/HelperMethods";
 
 function FieldsCreator({setFieldList, fieldList, item}) {
 
@@ -18,25 +19,6 @@ function FieldsCreator({setFieldList, fieldList, item}) {
     const onFieldValueChange =({target: {value}}) => {setFieldValue(value);};
     const onFieldFormatChange =({target: {value}}) => {setFieldFormat(value);};
 
-    const addField = () => {
-
-
-        setFieldList([...fieldList, 
-            {
-                id: getUniqueId(),
-                text: {
-                    id:fieldId, 
-                    type:fieldType,
-                    value:fieldValue,
-                    format: fieldFormat,
-                },
-            }]);
-
-        setFieldId("");
-        setFieldType("");
-        setFieldValue("");
-        setFieldFormat("");
-    };
 
     const updateFields = () => {
       const newFieldList = replaceItemAtIndex(fieldList, index, {
@@ -59,14 +41,14 @@ function FieldsCreator({setFieldList, fieldList, item}) {
   
     };
 
-    //Copied directly from recoil
-function removeItemAtIndex(arr, index) {
-  return [...arr.slice(0, index), ...arr.slice(index + 1)];
-  };
+//     //Copied directly from recoil
+// function removeItemAtIndex(arr, index) {
+//   return [...arr.slice(0, index), ...arr.slice(index + 1)];
+//   };
 
-  function replaceItemAtIndex(arr, index, newValue) {
-    return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
-};
+//   function replaceItemAtIndex(arr, index, newValue) {
+//     return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
+// };
 
   return (
     <>
@@ -145,11 +127,5 @@ function removeItemAtIndex(arr, index) {
     </>
   );
 }
-
-let uniqueId = 0;
-const getUniqueId = () => {
-    return uniqueId++;
-}
-
 
 export default FieldsCreator;

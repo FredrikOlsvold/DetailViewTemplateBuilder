@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {useSetRecoilState} from "recoil";
 import {windowTitleAtom, contentAtom} from "../../Atoms/atoms";
-import {Button, Grid, MenuItem, Paper, Select, TextField, Typography} from "@material-ui/core";
+import {Button, Grid, MenuItem, Paper, TextField, Typography} from "@material-ui/core";
 import SaveIcon from '@material-ui/icons/Save';
 import AddIcon from '@material-ui/icons/Add';
 import OptionsCreator from "../RecoilTest/OptionsCreator";

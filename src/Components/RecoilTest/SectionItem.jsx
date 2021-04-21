@@ -2,6 +2,7 @@ import {useRecoilState} from "recoil";
 import {Button, MenuItem, TextField} from "@material-ui/core";
 import React, { useState } from "react";
 import {windowTitleAtom, contentAtom} from "../../Atoms/atoms";
+import {replaceItemAtIndex, removeItemAtIndex} from "../../Helpers/HelperMethods"
 
 const SectionItem = ({item, wrapper}) => {
 
@@ -11,6 +12,10 @@ const SectionItem = ({item, wrapper}) => {
     const [sectionId, setSectionId] = useState(item.text.id);
     const [sectionUpdated, setSectionUpdated] = useState(false);
     const [type, setType] = useState(item.text.type);
+
+    // if(wrapper === "title"){
+
+    // }
 
 
 
@@ -78,14 +83,14 @@ const SectionItem = ({item, wrapper}) => {
 }
 
 
-//Copied directly from recoil
-function replaceItemAtIndex(arr, index, newValue) {
-    return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
-};
-//Copied directly from recoil
-function removeItemAtIndex(arr, index) {
-return [...arr.slice(0, index), ...arr.slice(index + 1)];
-};
+// //Copied directly from recoil
+// function replaceItemAtIndex(arr, index, newValue) {
+//     return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
+// };
+// //Copied directly from recoil
+// function removeItemAtIndex(arr, index) {
+// return [...arr.slice(0, index), ...arr.slice(index + 1)];
+// };
 
 export default SectionItem;
 

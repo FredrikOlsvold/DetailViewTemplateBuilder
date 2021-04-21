@@ -11,3 +11,8 @@ export const contentAtom = atom({
 key: "contentAtom",
 default: [],
 });
+
+export const cssAtom = atom({
+    key: "cssAtom",
+    default: "Give me some styling...",
+});
