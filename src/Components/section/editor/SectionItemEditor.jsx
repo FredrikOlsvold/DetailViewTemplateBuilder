@@ -11,13 +11,13 @@ import {
   Typography,
 } from "@material-ui/core";
 import React, { useState } from "react";
-import { windowTitleAtom, contentAtom } from "../../Atoms/atoms";
+import { windowTitleAtom, contentAtom } from "../../../store/Store";
 import {
   replaceItemAtIndex,
   removeItemAtIndex,
-} from "../../Helpers/HelperMethods";
-import OptionsCreator from "./OptionsCreator";
-import FieldsCreator from "./FieldsCreator";
+} from "../../../helpers/HelperMethods";
+import OptionsCreator from "../creator/options/OptionsCreator";
+import FieldsCreator from "../creator/field/FieldsCreator";
 import { ExpandMore } from "@material-ui/icons";
 
 const SectionItem = ({ item, wrapper, mode }) => {

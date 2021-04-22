@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSetRecoilState } from "recoil";
-import { windowTitleAtom, contentAtom } from "../../Atoms/atoms";
+import { windowTitleAtom, contentAtom } from "../../../store/Store";
 import {
   Button,
   Grid,
@@ -11,9 +11,9 @@ import {
 } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
 import AddIcon from "@material-ui/icons/Add";
-import OptionsCreator from "../RecoilTest/OptionsCreator";
-import FieldsCreator from "./FieldsCreator";
-import { uniqueGuid } from "../../Helpers/HelperMethods";
+import OptionsCreator from "./options/OptionsCreator";
+import FieldsCreator from "./field/FieldsCreator";
+import { uniqueGuid } from "../../../helpers/HelperMethods";
 import { ModeCommentOutlined } from "@material-ui/icons";
 
 const SectionItemCreator = ({ wrapper, mode }) => {

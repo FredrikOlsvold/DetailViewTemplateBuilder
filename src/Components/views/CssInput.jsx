@@ -2,7 +2,7 @@ import React from "react";
 import TextField from '@material-ui/core/TextField';
 import { Button } from "@material-ui/core";
 import SaveIcon from '@material-ui/icons/Save';
-import {cssAtom} from "../../../Atoms/atoms";
+import {cssAtom} from "../../store/Store";
 import { useRecoilState } from "recoil";
 
 const CssInput = () => {

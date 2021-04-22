@@ -1,10 +1,10 @@
 import './App.css';
-import Dashboard from "./Components/containers/Dashboard";
+import Dashboard from "./components/containers/Dashboard";
 import {atom} from "recoil";
-import ShowAll from "./Components/RecoilTest/ShowAll";
 import { Grid, Typography } from "@material-ui/core";
-import ListAllTemplates from './Components/Forms/ViewAllTemplates/ListAllTemplates';
-import TemplateMapping from "../src/Components/Forms/Mapping/TemplateMapping";
+import ListAllTemplates from './components/templateMenu/ListAllTemplates';
+import TemplateMapping from "./components/containers/Mapping/TemplateMapping";
+import OutputDisplayWrapper from "./components/containers/OutputDisplayWrapper"
 
 
   //Atom that stores all fields in a list. Global state
@@ -29,7 +29,7 @@ function App() {
           <Grid item xs={9}> 
             <TemplateMapping/>     
             <Dashboard/>
-            <ShowAll/>
+            <OutputDisplayWrapper/>
           </Grid>
 
       </Grid>

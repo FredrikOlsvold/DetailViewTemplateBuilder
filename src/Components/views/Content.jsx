@@ -1,11 +1,15 @@
-import SectionItemCreator from "../RecoilTest/SectionItemCreator";
-import SectionItem from "../RecoilTest/SectionItem";
 import { useRecoilValue } from "recoil";
-import { windowTitleAtom } from "../../Atoms/atoms";
+import { contentAtom } from "../../store/Store";
 import { Grid, Typography } from "@material-ui/core";
+import SectionItemCreator from "../section/creator/SectionItemCreator";
+import SectionItemEditor from "../section/editor/SectionItemEditor";
 
-const WindowTitle = () => {
-  const sectionList = useRecoilValue(windowTitleAtom);
+
+
+
+
+const Content = () => {
+  const sectionList = useRecoilValue(contentAtom);
 
   return (
     <div style={{ marginTop: "2em" }}>
@@ -16,10 +20,9 @@ const WindowTitle = () => {
           >
             Create Section
           </Typography>
-          <SectionItemCreator wrapper={"title"} mode={"create"} />
+          <SectionItemCreator wrapper={"content"} mode={"create"}/>
         </Grid>
 
-        {/* Edit Section */}
         <Grid item xs={6}>
           <Typography
             style={{ textAlign: "center", textDecoration: "underline" }}
@@ -27,13 +30,8 @@ const WindowTitle = () => {
             Edit Section
           </Typography>
           {sectionList.map((section) => (
-            <SectionItem
-              key={section.id}
-              item={section}
-              wrapper={"title"}
-              mode={"edit"}
-            />
-          ))}
+                <SectionItemEditor key={section.id} item={section} wrapper={"content"} mode={"edit"}/>
+                ))}
         </Grid>
       </Grid>
     </div>
@@ -41,4 +39,4 @@ const WindowTitle = () => {
 };
 
 
-export default WindowTitle;
+export default Content;

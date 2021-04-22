@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import WindowTitle from "../RecoilTest/WindowTitle";
-import Content from "../RecoilTest/Content";
+import WindowTitle from "../views/WindowTitle";
+import Content from "../views/Content";
 import { Button, Grid, Paper, Typography } from "@material-ui/core";
-import CssInput from "../Forms/AddCss/CssInput";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
+import CssInput from "../views/CssInput";
 
 const Dashboard = () => {
   const [displayWrapper, setDisplayWrapper] = useState("");

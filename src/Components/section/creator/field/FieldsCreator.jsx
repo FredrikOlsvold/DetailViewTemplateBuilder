@@ -7,7 +7,7 @@ import {
   replaceItemAtIndex,
   removeItemAtIndex,
   uniqueGuid,
-} from "../../Helpers/HelperMethods";
+} from "../../../../helpers/HelperMethods";
 
 function FieldsCreator({
   sectionUpdated,

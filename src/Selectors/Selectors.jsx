@@ -1,5 +1,5 @@
 import { selector } from "recoil";
-import {windowTitleAtom, contentAtom} from "../Atoms/atoms";
+import {windowTitleAtom, contentAtom} from "../store/Store";
 
 
 

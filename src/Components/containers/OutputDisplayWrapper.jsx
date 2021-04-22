@@ -2,10 +2,10 @@ import { Button, Grid, Paper, Typography } from "@material-ui/core";
 import { useRecoilValue } from "recoil";
 // import {fieldListAtom} from "../../App";
 import { useState } from "react";
-import { JsonPreviewSelector } from "../../Selectors/Selectors";
-import { copyToClipboard } from "../../Helpers/HelperMethods";
+import { JsonPreviewSelector } from "../../selectors/Selectors";
+import { copyToClipboard } from "../../helpers/HelperMethods";
 
-const ShowAll = () => {
+const OutputDisplayWrapper = () => {
   const previewJson = useRecoilValue(JsonPreviewSelector);
   const [displayJSON, setDisplayJSON] = useState(true);
   const [displayTemplate, setDisplayTemplate] = useState(false);
@@ -65,4 +65,4 @@ const ShowAll = () => {
   );
 };
 
-export default ShowAll;
+export default OutputDisplayWrapper;
