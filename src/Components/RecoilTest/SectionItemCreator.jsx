@@ -67,7 +67,7 @@ const SectionItemCreator = ({ wrapper }) => {
     <>
       <div style={{ padding: "2em" }}>
         <Grid container spacing={2}>
-          <Grid item xs={3}>
+          <Grid item xs={12}>
             <TextField
               id="select"
               select
@@ -159,7 +159,7 @@ const SectionItemCreator = ({ wrapper }) => {
 
 let uniqueId = 0;
 const getUniqueId = () => {
-  console.log(uniqueId);
+  //console.log(uniqueId);
   return uniqueId++;
 };
 export default SectionItemCreator;

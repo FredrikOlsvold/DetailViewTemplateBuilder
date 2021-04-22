@@ -10,7 +10,14 @@ import {
 } from "../../Helpers/HelperMethods";
 import { useRecoilState } from "recoil";
 
-function OptionsCreator({ setOptionList, item, optionList, mode, wrapper, deleteOption}) {
+function OptionsCreator({
+  setOptionList,
+  item,
+  optionList,
+  mode,
+  wrapper,
+  deleteOption,
+}) {
   const chosenAtom = wrapper === "title" ? windowTitleAtom : contentAtom;
   const [sectionList, setSectionList] = useRecoilState(chosenAtom);
   const index = optionList.findIndex((optionItem) => optionItem === item);
@@ -18,9 +25,7 @@ function OptionsCreator({ setOptionList, item, optionList, mode, wrapper, delete
   const [optionKey, setOptionKey] = useState(item.key);
   const [optionValue, setOptionValue] = useState(item.value);
 
-
   const [disabledValue, setDisabledValue] = useState(false);
-  
 
   const onOptionKeyChange = ({ target: { value } }) => {
     setOptionKey(value);
@@ -44,13 +49,11 @@ function OptionsCreator({ setOptionList, item, optionList, mode, wrapper, delete
     if (mode === "create") {
       const newOptionList = removeItemAtIndex(optionList, index);
       setOptionList(newOptionList);
-
     } else {
       console.log(item);
       const newOptionList = removeItemAtIndex(optionList, index);
       setOptionList(newOptionList);
-      deleteOption();  
-
+      deleteOption();
     }
   };
 
@@ -58,10 +61,10 @@ function OptionsCreator({ setOptionList, item, optionList, mode, wrapper, delete
     <>
       <div>
         <Grid container spacing={2}>
-          <Grid item xs={4}>
+          <Grid item>
             <TextField
               disabled={disabledValue}
-              id= {getUniqueId()}
+              id={getUniqueId()}
               label="Key"
               value={optionKey}
               variant="outlined"
@@ -69,10 +72,10 @@ function OptionsCreator({ setOptionList, item, optionList, mode, wrapper, delete
               onChange={onOptionKeyChange}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item>
             <TextField
               disabled={disabledValue}
-              id= {getUniqueId()}
+              id={getUniqueId()}
               label="Value"
               value={optionValue}
               variant="outlined"
@@ -80,25 +83,27 @@ function OptionsCreator({ setOptionList, item, optionList, mode, wrapper, delete
               onChange={onOptionValueChange}
             />
           </Grid>
+        </Grid>
 
-          
-            {mode === "create" && 
-            <Grid item xs={2}>
-            <Button
-              type="button"
-              variant="contained"
-              color="default"
-              startIcon={disabledValue ? <EditIcon /> : <SaveIcon />}
-              onClick={updateOptions}
-            >
-              {disabledValue ? "Edit" : "Save"}
-            </Button>
-          </Grid>
-            }
-            
+        <Grid container spacing={2}>
+          {mode === "create" && (
+            <Grid item>
+              <Button
+                size="small"
+                type="button"
+                variant="contained"
+                color="default"
+                startIcon={disabledValue ? <EditIcon /> : <SaveIcon />}
+                onClick={updateOptions}
+              >
+                {disabledValue ? "Edit" : "Save"}
+              </Button>
+            </Grid>
+          )}
 
-          <Grid item xs={2}>
+          <Grid item>
             <Button
+              size="small"
               type="button"
               variant="contained"
               color="default"

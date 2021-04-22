@@ -1,5 +1,15 @@
 import { useRecoilState } from "recoil";
-import { Button, MenuItem, TextField, Typography } from "@material-ui/core";
+import {
+  Accordion,
+  AccordionActions,
+  AccordionDetails,
+  AccordionSummary,
+  Button,
+  Grid,
+  MenuItem,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import React, { useState } from "react";
 import { windowTitleAtom, contentAtom } from "../../Atoms/atoms";
 import {
@@ -8,6 +18,7 @@ import {
   uniqueGuid,
 } from "../../Helpers/HelperMethods";
 import OptionsCreator from "./OptionsCreator";
+import { ExpandMore } from "@material-ui/icons";
 
 const SectionItem = ({ item, wrapper, mode }) => {
   const chosenAtom = wrapper === "title" ? windowTitleAtom : contentAtom;
@@ -26,8 +37,6 @@ const SectionItem = ({ item, wrapper, mode }) => {
 
   const deleteOption = () => {
     setSectionUpdated(true);
-    
-    // updateSection();
   };
 
   const updateSection = () => {
@@ -47,51 +56,70 @@ const SectionItem = ({ item, wrapper, mode }) => {
     setType(value);
     setSectionUpdated(true);
   };
+  console.log(optionList.map((op) => op.options));
+  console.log(sectionList.map((op) => op.options));
 
   return (
-    <div>
-      <TextField
-        style={{ width: "10%" }}
-        id="select"
-        select
-        value={type}
-        label="Type"
-        variant="outlined"
-        onChange={onTypeChange}
+    <div style={{ padding: "2em" }}>
+      <Accordion
+        style={{ padding: "2em", margin: "1em" }}
+        defaultExpanded={false}
       >
-        <MenuItem value="" />
-        <MenuItem value={1}>Type 1</MenuItem>
-        <MenuItem value={2}>Type 2</MenuItem>
-        <MenuItem value={3}>Type 3</MenuItem>
-        <MenuItem value={4}>Type 4</MenuItem>
-        <MenuItem value={5}>Type 5</MenuItem>
-        <MenuItem value={6}>Type 6</MenuItem>
-        <MenuItem value={7}>Type 7</MenuItem>
-        <MenuItem value={8}>Type 8</MenuItem>
-      </TextField>
+        <AccordionSummary expandIcon={<ExpandMore />}>
+          <Typography>Type: {type}</Typography>
+        </AccordionSummary>
 
-      {sectionUpdated && (
-        <Button variant="outlined" onClick={updateSection}>
-          UPDATE
-        </Button>
-      )}
+        <AccordionDetails>
+          <TextField
+            id="select"
+            select
+            value={type}
+            label="Type"
+            variant="outlined"
+            style={{ width: "100%" }}
+            onChange={onTypeChange}
+          >
+            <MenuItem value="" />
+            <MenuItem value={1}>Type 1</MenuItem>
+            <MenuItem value={2}>Type 2</MenuItem>
+            <MenuItem value={3}>Type 3</MenuItem>
+            <MenuItem value={4}>Type 4</MenuItem>
+            <MenuItem value={5}>Type 5</MenuItem>
+            <MenuItem value={6}>Type 6</MenuItem>
+            <MenuItem value={7}>Type 7</MenuItem>
+            <MenuItem value={8}>Type 8</MenuItem>
+          </TextField>
+        </AccordionDetails>
 
-      <Button variant="outlined" onClick={deleteSection}>
-        DELETE
-      </Button>
+        <AccordionActions>
+          {sectionUpdated && (
+            <Button variant="outlined" onClick={updateSection}>
+              UPDATE
+            </Button>
+          )}
 
-      {/* Mappa ut fields og options */}
-      {optionList.map((option) => (
-        <OptionsCreator
-          key={getUniqueId()}
-          item={option}
-          mode={mode}
-          wrapper={wrapper}
-          optionList={optionList}
-          setOptionList={setOptionList}
-          deleteOption={deleteOption}
-        />
-      ))}
+          <Button variant="outlined" onClick={deleteSection}>
+            DELETE
+          </Button>
+        </AccordionActions>
+
+        <Grid item>
+          <AccordionDetails>
+            {/* Mappa ut fields og options */}
+            {optionList.map((option) => (
+              <OptionsCreator
+                key={getUniqueId()}
+                item={option}
+                mode={mode}
+                wrapper={wrapper}
+                optionList={optionList}
+                setOptionList={setOptionList}
+                deleteOption={deleteOption}
+              />
+            ))}
+          </AccordionDetails>
+        </Grid>
+      </Accordion>
     </div>
   );
 };

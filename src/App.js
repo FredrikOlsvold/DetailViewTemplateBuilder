@@ -2,7 +2,7 @@ import './App.css';
 import Dashboard from "./Components/containers/Dashboard";
 import {atom} from "recoil";
 import ShowAll from "./Components/RecoilTest/ShowAll";
-import { Grid } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import ListAllTemplates from './Components/Forms/ViewAllTemplates/ListAllTemplates';
 import TemplateMapping from "../src/Components/Forms/Mapping/TemplateMapping";
 
@@ -18,19 +18,19 @@ function App() {
 
   return (
     <div className="App">
+      <div style={{ marginTop: "2em", textAlign: "center" }}>
+        <Typography variant="h4">Detail View Templates</Typography>
+      </div>
       <Grid container spacing={1}>
-          <Grid item xs={2}>
+        
             <ListAllTemplates/>
-          </Grid>
+         
 
-
-          <Grid item xs={10}> 
+          <Grid item xs={9}> 
             <TemplateMapping/>     
             <Dashboard/>
             <ShowAll/>
           </Grid>
-
-
 
       </Grid>
       
