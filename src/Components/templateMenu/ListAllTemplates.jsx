@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { allTemplates } from "../../api/getData";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import { Button, Grid, Typography } from "@material-ui/core";
+import { Button, Grid } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
 import EditIcon from "@material-ui/icons/Edit";
 

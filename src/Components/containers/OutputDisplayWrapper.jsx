@@ -2,8 +2,8 @@ import { Button, Grid, Paper, Typography } from "@material-ui/core";
 import { useRecoilValue } from "recoil";
 // import {fieldListAtom} from "../../App";
 import { useState } from "react";
-import { JsonPreviewSelector } from "../../selectors/Selectors";
-import { copyToClipboard } from "../../helpers/HelperMethods";
+import { JsonPreviewSelector } from "../../Selectors/Selectors";
+import { copyToClipboard } from "../../Helpers/HelperMethods";
 
 const OutputDisplayWrapper = () => {
   const previewJson = useRecoilValue(JsonPreviewSelector);
