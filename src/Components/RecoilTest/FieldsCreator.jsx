@@ -5,13 +5,14 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import {replaceItemAtIndex, removeItemAtIndex, uniqueGuid} from "../../Helpers/HelperMethods";
 
-function FieldsCreator({setFieldList, fieldList, item}) {
+function FieldsCreator({setFieldList, fieldList, item, mode, deleteField}) {
 
     const [fieldType, setFieldType] = useState(item.type);
     const [fieldValue, setFieldValue] = useState(item.value);
     const [fieldFormat, setFieldFormat] = useState(item.format);
-    const index = fieldList.findIndex((fieldItem) => fieldItem === item);
     const [disabledValue, setDisabledValue] = useState(false);
+    const index = fieldList.findIndex((fieldItem) => fieldItem === item);
+
 
     const onFieldTypeChange =({target: {value}}) => {setFieldType(value);};
     const onFieldValueChange =({target: {value}}) => {setFieldValue(value);};
@@ -32,19 +33,19 @@ function FieldsCreator({setFieldList, fieldList, item}) {
     };
 
     const removeItem = () => {
-      const newFieldList = removeItemAtIndex(fieldList, index);
-      setFieldList(newFieldList);
+
+      if(mode === "create"){
+        const newFieldList = removeItemAtIndex(fieldList, index);
+        setFieldList(newFieldList);
+      }else{
+        const newFieldList = removeItemAtIndex(fieldList, index);
+        setFieldList(newFieldList);
+        deleteField();  
+      }
+      
   
     };
 
-//     //Copied directly from recoil
-// function removeItemAtIndex(arr, index) {
-//   return [...arr.slice(0, index), ...arr.slice(index + 1)];
-//   };
-
-//   function replaceItemAtIndex(arr, index, newValue) {
-//     return [...arr.slice(0, index), newValue, ...arr.slice(index + 1)];
-// };
 
   return (
     <>
@@ -83,19 +84,23 @@ function FieldsCreator({setFieldList, fieldList, item}) {
         />
       </Grid>
 
-        <Grid item xs={2}>
-        <Button
-          type="button"
-          variant="contained"
-          color="default"
-          size="small"
-          startIcon={disabledValue ? <EditIcon /> : <SaveIcon/>}
-          onClick={updateFields}
-          style={{ marginBottom: "2em" }}
-        >
-          {disabledValue ? "Edit" : "Save"}
-        </Button>
-        </Grid>
+
+          <Grid item xs={2}>
+          <Button
+            type="button"
+            variant="contained"
+            color="default"
+            size="small"
+            startIcon={disabledValue ? <EditIcon /> : <SaveIcon/>}
+            onClick={updateFields}
+            style={{ marginBottom: "2em" }}
+          >
+            {disabledValue ? "Edit" : "Save"}
+          </Button>
+          </Grid>  
+          
+        
+        
 
       <Grid item xs={2}>
         <Button 

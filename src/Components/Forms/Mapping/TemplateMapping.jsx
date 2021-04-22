@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, TextField, MenuItem, Grid, Paper, Accordion, AccordionSummary, Typography, AccordionDetails, AccordionActions } from '@material-ui/core'
+import { Button, TextField, MenuItem, Grid, Accordion, AccordionSummary, Typography, AccordionDetails, AccordionActions } from '@material-ui/core'
 import { Delete, ExpandMore } from "@material-ui/icons";
 import SaveIcon from '@material-ui/icons/Save';
 import {scopeOptions, dataItemTypeOptions, sourceDataTypeOptions} from "../../../api/getData"

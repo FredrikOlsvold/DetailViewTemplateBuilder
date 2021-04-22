@@ -14,8 +14,9 @@ import AddIcon from "@material-ui/icons/Add";
 import OptionsCreator from "../RecoilTest/OptionsCreator";
 import FieldsCreator from "./FieldsCreator";
 import { uniqueGuid } from "../../Helpers/HelperMethods";
+import { ModeCommentOutlined } from "@material-ui/icons";
 
-const SectionItemCreator = ({ wrapper }) => {
+const SectionItemCreator = ({ wrapper, mode }) => {
   const chosenAtom = wrapper === "title" ? windowTitleAtom : contentAtom;
   const setSectionList = useSetRecoilState(chosenAtom);
   const [type, setType] = useState("");
@@ -41,6 +42,7 @@ const SectionItemCreator = ({ wrapper }) => {
     setOptionList((oldOptionList) => [
       ...oldOptionList,
       {
+        id:uniqueGuid(), 
         key: "",
         value: "",
       },
@@ -51,7 +53,7 @@ const SectionItemCreator = ({ wrapper }) => {
     setFieldList((oldFieldList) => [
       ...oldFieldList,
       {
-        id: "",
+        id: uniqueGuid(),
         type: "",
         value: "",
         format: "",
@@ -115,11 +117,11 @@ const SectionItemCreator = ({ wrapper }) => {
             <Typography>Options:</Typography>
             {optionList.map((option) => (
               <OptionsCreator
-                key={getUniqueId()}
+                key={option.id}
                 item={option}
                 setOptionList={setOptionList}
                 optionList={optionList}
-                mode={"create"}
+                mode={mode}
                 wrapper={wrapper}
               />
             ))}
@@ -131,12 +133,13 @@ const SectionItemCreator = ({ wrapper }) => {
         {fieldList.length > 0 && (
           <Paper style={{ padding: "2em", margin: "1em" }}>
             <Typography>Fields:</Typography>
-            {fieldList.map((field, index) => (
+            {fieldList.map((field) => (
               <FieldsCreator
-                key={getUniqueId()}
+              key={field.id}
                 item={field}
                 setFieldList={setFieldList}
                 fieldList={fieldList}
+                mode={mode}
               />
             ))}
           </Paper>
@@ -157,9 +160,4 @@ const SectionItemCreator = ({ wrapper }) => {
   );
 };
 
-let uniqueId = 0;
-const getUniqueId = () => {
-  console.log(uniqueId);
-  return uniqueId++;
-};
 export default SectionItemCreator;

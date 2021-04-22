@@ -1,13 +1,13 @@
 import { useRecoilState } from "recoil";
-import { Button, MenuItem, TextField, Typography } from "@material-ui/core";
+import { Button, MenuItem, TextField } from "@material-ui/core";
 import React, { useState } from "react";
 import { windowTitleAtom, contentAtom } from "../../Atoms/atoms";
 import {
   replaceItemAtIndex,
-  removeItemAtIndex,
-  uniqueGuid,
+  removeItemAtIndex
 } from "../../Helpers/HelperMethods";
 import OptionsCreator from "./OptionsCreator";
+import FieldsCreator from "./FieldsCreator";
 
 const SectionItem = ({ item, wrapper, mode }) => {
   const chosenAtom = wrapper === "title" ? windowTitleAtom : contentAtom;
@@ -16,8 +16,8 @@ const SectionItem = ({ item, wrapper, mode }) => {
 
   const [sectionUpdated, setSectionUpdated] = useState(false);
   const [type, setType] = useState(item.type);
-  const [fields, setFields] = useState(item.fields);
   const [optionList, setOptionList] = useState(item.options);
+  const [fieldList, setFieldList] = useState(item.fields);
 
   const deleteSection = () => {
     const newSectionList = removeItemAtIndex(sectionList, index);
@@ -26,8 +26,10 @@ const SectionItem = ({ item, wrapper, mode }) => {
 
   const deleteOption = () => {
     setSectionUpdated(true);
-    
-    // updateSection();
+  };
+
+  const deleteField = () => {
+    setSectionUpdated(true);
   };
 
   const updateSection = () => {
@@ -37,7 +39,7 @@ const SectionItem = ({ item, wrapper, mode }) => {
       id: item.id,
       type: type,
       options: optionList,
-      fields: fields,
+      fields: fieldList,
     });
 
     setSectionList(newSectionList);
@@ -80,16 +82,27 @@ const SectionItem = ({ item, wrapper, mode }) => {
         DELETE
       </Button>
 
-      {/* Mappa ut fields og options */}
+      {/* Mappa ut options */}
       {optionList.map((option) => (
         <OptionsCreator
           key={getUniqueId()}
           item={option}
           mode={mode}
-          wrapper={wrapper}
           optionList={optionList}
           setOptionList={setOptionList}
           deleteOption={deleteOption}
+        />
+      ))}
+
+        {/* Mappa ut fields */}
+        {fieldList.map((field) => (
+        <FieldsCreator
+          key={getUniqueId()}
+          item={field}
+          mode={mode}
+          fieldList={fieldList}
+          setFieldList={setFieldList}
+          deleteField={deleteField}
         />
       ))}
     </div>
@@ -98,7 +111,6 @@ const SectionItem = ({ item, wrapper, mode }) => {
 
 let uniqueId = 0;
 const getUniqueId = () => {
-  console.log(uniqueId);
   return uniqueId++;
 };
 

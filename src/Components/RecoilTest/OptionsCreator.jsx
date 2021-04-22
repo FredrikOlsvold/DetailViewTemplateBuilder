@@ -3,22 +3,17 @@ import { TextField, Grid, Button } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
-import { windowTitleAtom, contentAtom } from "../../Atoms/atoms";
 import {
   replaceItemAtIndex,
   removeItemAtIndex,
+  uniqueGuid
 } from "../../Helpers/HelperMethods";
-import { useRecoilState } from "recoil";
 
-function OptionsCreator({ setOptionList, item, optionList, mode, wrapper, deleteOption}) {
-  const chosenAtom = wrapper === "title" ? windowTitleAtom : contentAtom;
-  const [sectionList, setSectionList] = useRecoilState(chosenAtom);
+function OptionsCreator({ setOptionList, item, optionList, mode, deleteOption}) {
+  
   const index = optionList.findIndex((optionItem) => optionItem === item);
-
   const [optionKey, setOptionKey] = useState(item.key);
   const [optionValue, setOptionValue] = useState(item.value);
-
-
   const [disabledValue, setDisabledValue] = useState(false);
   
 
@@ -41,12 +36,12 @@ function OptionsCreator({ setOptionList, item, optionList, mode, wrapper, delete
   };
 
   const removeItem = () => {
+
     if (mode === "create") {
       const newOptionList = removeItemAtIndex(optionList, index);
       setOptionList(newOptionList);
 
     } else {
-      console.log(item);
       const newOptionList = removeItemAtIndex(optionList, index);
       setOptionList(newOptionList);
       deleteOption();  
@@ -61,7 +56,7 @@ function OptionsCreator({ setOptionList, item, optionList, mode, wrapper, delete
           <Grid item xs={4}>
             <TextField
               disabled={disabledValue}
-              id= {getUniqueId()}
+              id= {uniqueGuid()}
               label="Key"
               value={optionKey}
               variant="outlined"
@@ -72,7 +67,7 @@ function OptionsCreator({ setOptionList, item, optionList, mode, wrapper, delete
           <Grid item xs={4}>
             <TextField
               disabled={disabledValue}
-              id= {getUniqueId()}
+              id= {uniqueGuid()}
               label="Value"
               value={optionValue}
               variant="outlined"
@@ -114,9 +109,5 @@ function OptionsCreator({ setOptionList, item, optionList, mode, wrapper, delete
   );
 }
 
-let uniqueId = 0;
-const getUniqueId = () => {
-  return uniqueId++;
-};
 
 export default OptionsCreator;

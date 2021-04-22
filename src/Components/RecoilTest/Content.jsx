@@ -19,7 +19,7 @@ const Content = () => {
                 <Grid item xs={6}>
                 <Typography>Edit Section</Typography>
                 {sectionList.map((section) => (
-                <SectionItem key={getUniqueId()} item={section} wrapper={"content"}/>
+                <SectionItem key={section.id} item={section} wrapper={"content"}/>
                 ))}
                 </Grid>
                 </Grid>
@@ -28,10 +28,5 @@ const Content = () => {
     )
 };
 
-let uniqueId = 0;
-const getUniqueId = () => {
-  console.log(uniqueId);
-  return uniqueId++;
-};
 
 export default Content;

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {allTemplates} from "../../../api/getData";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import { Grid, Button } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import { Add } from "@material-ui/icons";
 import EditIcon from '@material-ui/icons/Edit';
 
@@ -31,8 +31,8 @@ const ListAllTemplates = () => {
             startIcon={<Add />}>CREATE NEW</Button> 
             </ListItem>
 
-            {templateList.map((templateName) => (
-                <ListItem >
+            {templateList.map((templateName, index) => (
+                <ListItem key={index}>
                     <Button 
                     style={{minWidth: "200px", textAlign:"left"}}
                     onClick={onTemplateClicked}
