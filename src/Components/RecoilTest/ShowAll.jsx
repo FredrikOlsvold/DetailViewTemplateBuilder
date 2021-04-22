@@ -3,14 +3,24 @@ import { useRecoilValue } from "recoil";
 // import {fieldListAtom} from "../../App";
 import { useState } from "react";
 import { JsonPreviewSelector } from "../../Selectors/Selectors";
+import { copyToClipboard } from "../../Helpers/HelperMethods";
 
 const ShowAll = () => {
   const previewJson = useRecoilValue(JsonPreviewSelector);
   const [displayJSON, setDisplayJSON] = useState(true);
   const [displayTemplate, setDisplayTemplate] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const showJSON = () => {
     setDisplayJSON(!displayJSON);
+  };
+
+  const handleCopyClick = () => {
+    copyToClipboard(previewJson);
+    setCopied(true)
+    setTimeout(()=> {
+        setCopied(false)
+    }, 2000);
   };
 
   return (
@@ -35,7 +45,20 @@ const ShowAll = () => {
         </Grid>
       </Grid>
 
-      {displayJSON && <pre>{JSON.stringify(previewJson, null, 2)}</pre>}
+      {displayJSON && (
+        <>
+          <pre>{JSON.stringify(previewJson, null, 2)}</pre>
+
+          <Button
+            size="small"
+            type="button"
+            variant="contained"
+            color="default"
+            onClick={handleCopyClick}
+          >{copied ? "Json copied" : "Copy to clipboard"}
+          </Button>
+        </>
+      )}
 
       {displayTemplate && <pre>{JSON.stringify(previewJson, null, 2)}</pre>}
     </Paper>
