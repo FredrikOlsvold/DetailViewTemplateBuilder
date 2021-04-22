@@ -1,31 +1,81 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import WindowTitle from "../RecoilTest/WindowTitle";
 import Content from "../RecoilTest/Content";
-import { Button, Paper } from "@material-ui/core";
+import { Button, Grid, Paper, Typography } from "@material-ui/core";
 import CssInput from "../Forms/AddCss/CssInput";
-
+import { ExpandLess, ExpandMore } from "@material-ui/icons";
 
 const Dashboard = () => {
+  const [displayWrapper, setDisplayWrapper] = useState("");
+  const [toggleMenu, setToggleMenu] = useState("");
 
-    const [displayWrapper, setDisplayWrapper] = useState("");
+  return (
+    <>
+      <Paper style={{ padding: "2em", margin: "1em" }}>
+        <Grid container spacing={2}>
+          <Grid item xs={3}>
+            <Button
+              style={
+                displayWrapper === "title"
+                  ? { color: "#6200ee" }
+                  : { color: "#ccc" }
+              }
+              onClick={() => setDisplayWrapper("title")}
+            >
+              <Typography variant="h6"> Window Title</Typography>
+            </Button>
+          </Grid>
 
-    return(
-        <>
-            <Paper style={{padding:"2em", margin:"1em"}}>
-                <Button style={displayWrapper === "title" ? {color: "#6200ee"} : {color: "#ccc"}} indicatorColor="primary" onClick={() => setDisplayWrapper("title")}>Window Title</Button>
-                <Button style={displayWrapper === "content" ? {color: "#6200ee"} : {color: "#ccc"}} onClick={() => setDisplayWrapper("content")}>Content</Button>
-                <Button style={displayWrapper === "css" ? {color: "#6200ee"} : {color: "#ccc"}} onClick={() => setDisplayWrapper("css")}>Styling</Button>
+          <Grid item xs={3}>
+            <Button
+              style={
+                displayWrapper === "content"
+                  ? { color: "#6200ee" }
+                  : { color: "#ccc" }
+              }
+              onClick={() => setDisplayWrapper("content")}
+            >
+              <Typography variant="h6"> Content</Typography>
+            </Button>
+          </Grid>
 
-                {displayWrapper === "title" && <WindowTitle/>}
-                {displayWrapper === "content" && <Content/>}
-                {displayWrapper === "css" && <CssInput/>}     
-            </Paper>
-            
-            
-                          
-        </>
-    );
+          <Grid item xs={3}>
+            <Button
+              style={
+                displayWrapper === "css"
+                  ? { color: "#6200ee" }
+                  : { color: "#ccc" }
+              }
+              onClick={() => setDisplayWrapper("css")}
+            >
+              <Typography variant="h6"> Styling</Typography>
+            </Button>
+          </Grid>
 
-}
+          {/* Close Menu Button */}
+          <Grid item xs={3}>
+            <Button
+              style={{ float: "right" }}
+              startIcon={
+                displayWrapper === "title" ||
+                displayWrapper === "content" ||
+                displayWrapper === "css" ? (
+                  <ExpandLess />
+                ) : (
+                  <ExpandMore />
+                )
+              }
+              onClick={() => setDisplayWrapper("")}
+            />
+          </Grid>
+        </Grid>
+
+        {displayWrapper === "title" && <WindowTitle />}
+        {displayWrapper === "content" && <Content />}
+        {displayWrapper === "css" && <CssInput />}
+      </Paper>
+    </>
+  );
+};
 
 export default Dashboard;

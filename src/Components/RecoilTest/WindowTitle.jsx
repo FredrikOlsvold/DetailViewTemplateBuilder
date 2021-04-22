@@ -8,18 +8,25 @@ const WindowTitle = () => {
   const sectionList = useRecoilValue(windowTitleAtom);
 
   return (
-    <div>
+    <div style={{ marginTop: "2em" }}>
       <Grid container spacing={2}>
-        <Grid item xs={6}>
-          <Typography>Create Section</Typography>
-
-          <SectionItemCreator mode={"create"} wrapper={"title"} />
+        <Grid item xs={6} style={{ borderRight: "1px solid #ccc" }}>
+          <Typography
+            style={{ textAlign: "center", textDecoration: "underline" }}
+          >
+            Create Section
+          </Typography>
+          <SectionItemCreator wrapper={"title"} mode={"create"} />
         </Grid>
 
         {/* Edit Section */}
         <Grid item xs={6}>
-          <Typography>Edit Section</Typography>
-          {sectionList.map((section, index) => (
+          <Typography
+            style={{ textAlign: "center", textDecoration: "underline" }}
+          >
+            Edit Section
+          </Typography>
+          {sectionList.map((section) => (
             <SectionItem
               key={section.id}
               item={section}

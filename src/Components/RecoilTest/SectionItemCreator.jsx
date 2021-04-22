@@ -69,7 +69,7 @@ const SectionItemCreator = ({ wrapper, mode }) => {
     <>
       <div style={{ padding: "2em" }}>
         <Grid container spacing={2}>
-          <Grid item xs={3}>
+          <Grid item xs={12}>
             <TextField
               id="select"
               select

@@ -9,16 +9,17 @@ import {
   uniqueGuid
 } from "../../Helpers/HelperMethods";
 
-function OptionsCreator({ setOptionList, item, optionList, mode, deleteOption}) {
+function OptionsCreator({ setOptionList, item, sectionUpdated, optionList, mode, deleteOption, setSectionUpdated}) {
   
   const index = optionList.findIndex((optionItem) => optionItem === item);
   const [optionKey, setOptionKey] = useState(item.key);
   const [optionValue, setOptionValue] = useState(item.value);
   const [disabledValue, setDisabledValue] = useState(false);
-  
+  const [disabledEditValue, setDisabledEditValue] = useState(false);
 
   const onOptionKeyChange = ({ target: { value } }) => {
-    setOptionKey(value);
+      setOptionKey(value);   
+
   };
   const onOptionValueChange = ({ target: { value } }) => {
     setOptionValue(value);
@@ -31,8 +32,13 @@ function OptionsCreator({ setOptionList, item, optionList, mode, deleteOption}) 
       value: optionValue,
     });
 
+    console.log(disabledValue);
     setOptionList(newOptionList);
     setDisabledValue(!disabledValue);
+    if(mode ==="edit"){
+      setSectionUpdated(!sectionUpdated);
+      setDisabledEditValue(!disabledEditValue);
+    }
   };
 
   const removeItem = () => {
@@ -40,12 +46,10 @@ function OptionsCreator({ setOptionList, item, optionList, mode, deleteOption}) 
     if (mode === "create") {
       const newOptionList = removeItemAtIndex(optionList, index);
       setOptionList(newOptionList);
-
     } else {
       const newOptionList = removeItemAtIndex(optionList, index);
       setOptionList(newOptionList);
-      deleteOption();  
-
+      deleteOption();
     }
   };
 
@@ -53,7 +57,7 @@ function OptionsCreator({ setOptionList, item, optionList, mode, deleteOption}) 
     <>
       <div>
         <Grid container spacing={2}>
-          <Grid item xs={4}>
+          <Grid item>
             <TextField
               disabled={disabledValue}
               id= {uniqueGuid()}
@@ -64,7 +68,7 @@ function OptionsCreator({ setOptionList, item, optionList, mode, deleteOption}) 
               onChange={onOptionKeyChange}
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item>
             <TextField
               disabled={disabledValue}
               id= {uniqueGuid()}
@@ -75,25 +79,25 @@ function OptionsCreator({ setOptionList, item, optionList, mode, deleteOption}) 
               onChange={onOptionValueChange}
             />
           </Grid>
+        </Grid>
 
-          
-            {mode === "create" && 
-            <Grid item xs={2}>
-            <Button
-              type="button"
-              variant="contained"
-              color="default"
-              startIcon={disabledValue ? <EditIcon /> : <SaveIcon />}
-              onClick={updateOptions}
-            >
-              {disabledValue ? "Edit" : "Save"}
-            </Button>
-          </Grid>
-            }
-            
+        <Grid container spacing={2}>
+            <Grid item>
+              <Button
+                size="small"
+                type="button"
+                variant="contained"
+                color="default"
+                startIcon={disabledValue ? <EditIcon /> : <SaveIcon />}
+                onClick={updateOptions}
+              >
+                {disabledValue ? "Edit" : "Save"}
+              </Button>
+            </Grid>
 
-          <Grid item xs={2}>
+          <Grid item>
             <Button
+              size="small"
               type="button"
               variant="contained"
               color="default"
@@ -102,6 +106,8 @@ function OptionsCreator({ setOptionList, item, optionList, mode, deleteOption}) 
             >
               DELETE
             </Button>
+
+            
           </Grid>
         </Grid>
       </div>
