@@ -28,8 +28,8 @@ function OptionsCreator({ setOptionList, item, sectionUpdated, optionList, mode,
   const updateOptions = () => {
     const newOptionList = replaceItemAtIndex(optionList, index, {
       ...item,
-      key: optionKey,
-      value: optionValue,
+      Key: optionKey,
+      Value: optionValue,
     });
 
     console.log(disabledValue);

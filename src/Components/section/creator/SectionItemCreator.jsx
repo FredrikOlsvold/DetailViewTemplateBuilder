@@ -27,10 +27,10 @@ const SectionItemCreator = ({ wrapper, mode }) => {
     setSectionList((oldSectionList) => [
       ...oldSectionList,
       {
-        id: uniqueGuid(),
-        type: type,
-        options: optionList,
-        fields: fieldList,
+        Id: uniqueGuid(),
+        Type: type,
+        Options: optionList,
+        Fields: fieldList,
       },
     ]);
     setType("");
@@ -42,9 +42,9 @@ const SectionItemCreator = ({ wrapper, mode }) => {
     setOptionList((oldOptionList) => [
       ...oldOptionList,
       {
-        id:uniqueGuid(), 
-        key: "",
-        value: "",
+        Id:uniqueGuid(), 
+        Key: "",
+        Value: "",
       },
     ]);
   };
@@ -53,10 +53,10 @@ const SectionItemCreator = ({ wrapper, mode }) => {
     setFieldList((oldFieldList) => [
       ...oldFieldList,
       {
-        id: uniqueGuid(),
-        type: "",
-        value: "",
-        format: "",
+        Id: uniqueGuid(),
+        Type: "",
+        Value: "",
+        Format: "",
       },
     ]);
   };

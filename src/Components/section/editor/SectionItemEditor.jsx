@@ -20,7 +20,7 @@ import OptionsCreator from "../creator/options/OptionsCreator";
 import FieldsCreator from "../creator/field/FieldsCreator";
 import { ExpandMore } from "@material-ui/icons";
 
-const SectionItem = ({ item, wrapper, mode }) => {
+const SectionItemEditor = ({ item, wrapper, mode }) => {
   const chosenAtom = wrapper === "title" ? windowTitleAtom : contentAtom;
   const [sectionList, setSectionList] = useRecoilState(chosenAtom);
   const index = sectionList.findIndex((sectionItem) => sectionItem === item);
@@ -47,10 +47,10 @@ const SectionItem = ({ item, wrapper, mode }) => {
     setSectionUpdated(false);
     const newSectionList = replaceItemAtIndex(sectionList, index, {
       ...item,
-      id: item.id,
-      type: type,
-      options: optionList,
-      fields: fieldList,
+      Id: item.id,
+      Type: type,
+      Options: optionList,
+      Fields: fieldList,
     });
 
     setSectionList(newSectionList);
@@ -153,4 +153,4 @@ const getUniqueId = () => {
   return uniqueId++;
 };
 
-export default SectionItem;
+export default SectionItemEditor;

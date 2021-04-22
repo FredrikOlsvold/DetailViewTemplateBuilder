@@ -1,15 +1,18 @@
-import { Button, Grid, Paper, Typography } from "@material-ui/core";
-import { useRecoilValue } from "recoil";
+import { Button, Grid, Paper, TextareaAutosize, Typography } from "@material-ui/core";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 // import {fieldListAtom} from "../../App";
 import { useState } from "react";
-import { JsonPreviewSelector } from "../../selectors/Selectors";
-import { copyToClipboard } from "../../helpers/HelperMethods";
+import { JsonPreviewSelector, TestSelector } from "../../selectors/Selectors";
+import { copyToClipboard, jsonValidator } from "../../helpers/HelperMethods";
+import { previewJsonAtom } from "../../store/Store";
 
 const OutputDisplayWrapper = () => {
-  const previewJson = useRecoilValue(JsonPreviewSelector);
+  //const previewJson = useRecoilValue(JsonPreviewSelector);
+  const [previewJson, setPreviewJson] = useRecoilState(TestSelector);
   const [displayJSON, setDisplayJSON] = useState(true);
   const [displayTemplate, setDisplayTemplate] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [textAreaValue, setTextAreaValue] = useState("");
 
   const showJSON = () => {
     setDisplayJSON(!displayJSON);
@@ -22,6 +25,16 @@ const OutputDisplayWrapper = () => {
         setCopied(false)
     }, 2000);
   };
+
+  const handleTextAreaChange = (e) => {
+      if(jsonValidator(e.target.value)){
+        setTextAreaValue(e.target.value)
+        setPreviewJson(JSON.parse(e.target.value))
+      }
+    
+   
+    
+  }
 
   return (
     <Paper style={{ padding: "2em", margin: "1em" }}>
@@ -48,6 +61,8 @@ const OutputDisplayWrapper = () => {
       {displayJSON && (
         <>
           <pre>{JSON.stringify(previewJson, null, 2)}</pre>
+          <TextareaAutosize value={textAreaValue} onChange={handleTextAreaChange}/>
+
 
           <Button
             size="small"

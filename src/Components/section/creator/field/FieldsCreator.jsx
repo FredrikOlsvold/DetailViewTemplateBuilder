@@ -38,9 +38,9 @@ function FieldsCreator({
     const newFieldList = replaceItemAtIndex(fieldList, index, {
       ...item,
       // id: uniqueGuid(),
-      type: fieldType,
-      value: fieldValue,
-      format: fieldFormat,
+      Type: fieldType,
+      Value: fieldValue,
+      Format: fieldFormat,
     });
 
     setDisabledValue(!disabledValue);
