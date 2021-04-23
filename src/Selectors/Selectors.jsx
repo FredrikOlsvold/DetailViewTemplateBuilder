@@ -24,8 +24,8 @@ export const TestSelector = selector({
     const contentWrapper = get(contentAtom);
     try {
       return {
-        title: titleWrapper,
-        content: contentWrapper,
+        Title: titleWrapper,
+        Content: contentWrapper,
       };
     } catch (error) {
       console.log(error.message);
@@ -33,8 +33,8 @@ export const TestSelector = selector({
   },
   set: ({ set }, newValue) => {
     try {
-      set(windowTitleAtom, newValue.title);
-      set(contentAtom, newValue.content);
+      set(windowTitleAtom, newValue.Title);
+      set(contentAtom, newValue.Content);
     } catch (error) {
       console.log(error);
     }

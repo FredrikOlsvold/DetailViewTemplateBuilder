@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { windowTitleAtom, contentAtom } from "../../../store/Store";
 import {
   replaceItemAtIndex,

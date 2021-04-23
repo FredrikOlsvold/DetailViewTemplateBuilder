@@ -17,9 +17,9 @@ function FieldsCreator({
   mode,
   deleteField,
 }) {
-  const [fieldType, setFieldType] = useState(item.type);
-  const [fieldValue, setFieldValue] = useState(item.value);
-  const [fieldFormat, setFieldFormat] = useState(item.format);
+  const [fieldType, setFieldType] = useState(item.Type);
+  const [fieldValue, setFieldValue] = useState(item.Value);
+  const [fieldFormat, setFieldFormat] = useState(item.Format);
   const [disabledValue, setDisabledValue] = useState(
     mode === "create" ? false : true
   );
