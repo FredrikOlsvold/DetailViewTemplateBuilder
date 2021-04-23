@@ -6,8 +6,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import {
   replaceItemAtIndex,
   removeItemAtIndex,
-  uniqueGuid,
-} from "../../../../helpers/HelperMethods";
+  } from "../../../../Helpers/HelperMethods";
 
 function FieldsCreator({
   sectionUpdated,
@@ -21,7 +20,7 @@ function FieldsCreator({
   const [fieldType, setFieldType] = useState(item.type);
   const [fieldValue, setFieldValue] = useState(item.value);
   const [fieldFormat, setFieldFormat] = useState(item.format);
-  const [disabledValue, setDisabledValue] = useState(false);
+  const [disabledValue, setDisabledValue] = useState(mode === "create" ? false : true);
   const index = fieldList.findIndex((fieldItem) => fieldItem === item);
 
   const onFieldTypeChange = ({ target: { value } }) => {
@@ -42,14 +41,13 @@ function FieldsCreator({
       Value: fieldValue,
       Format: fieldFormat,
     });
-
+    
+    setFieldList(newFieldList);
     setDisabledValue(!disabledValue);
-    // setDisabledValue(!disabledValue);
     if (mode === "edit") {
       setSectionUpdated(!sectionUpdated);
-      // setDisabledEditValue(!disabledEditValue);
     }
-    setFieldList(newFieldList);
+    
   };
 
   const removeItem = () => {
@@ -102,6 +100,7 @@ function FieldsCreator({
       </Grid>
 
       <Grid container spacing={2}>
+        {mode === "create" && 
         <Grid item>
           <Button
             type="button"
@@ -115,6 +114,34 @@ function FieldsCreator({
             {disabledValue ? "Edit" : "Save"}
           </Button>
         </Grid>
+        }
+
+      {mode === "edit" && 
+        <Grid item>
+          <Button
+            type="button"
+            variant="contained"
+            color="default"
+            size="small"
+            startIcon={disabledValue ? <EditIcon /> : <SaveIcon />}
+            onClick={() => {
+              if(disabledValue === true){
+                setFieldType(fieldType);
+                setFieldValue(fieldValue);
+                setFieldFormat(fieldFormat)
+
+              }else{
+                updateFields()
+              }
+              setDisabledValue(!disabledValue);
+            }}
+            style={{ marginBottom: "2em" }}
+          >
+            {disabledValue ? "Edit" : "Save"}
+          </Button>
+        </Grid>
+        }
+        
 
         <Grid item>
           <Button
@@ -129,18 +156,6 @@ function FieldsCreator({
             DELETE
           </Button>
         </Grid>
-
-        {/* <Button
-          onClick={() => setDisabledValue(!disabledValue)}
-          type="button"
-          variant="contained"
-          color="default"
-          size="small"
-          startIcon={disabledValue ? <EditIcon /> : <SaveIcon />}
-          style={{ marginBottom: "2em" }}
-        >
-          {disabledValue ? "true button" : "false button"}
-        </Button> */}
       </Grid>
     </>
   );

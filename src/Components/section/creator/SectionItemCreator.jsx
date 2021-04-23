@@ -13,8 +13,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import AddIcon from "@material-ui/icons/Add";
 import OptionsCreator from "./options/OptionsCreator";
 import FieldsCreator from "./field/FieldsCreator";
-import { uniqueGuid } from "../../../helpers/HelperMethods";
-import { ModeCommentOutlined } from "@material-ui/icons";
+import { uniqueGuid } from "../../../Helpers/HelperMethods";
 
 const SectionItemCreator = ({ wrapper, mode }) => {
   const chosenAtom = wrapper === "title" ? windowTitleAtom : contentAtom;
