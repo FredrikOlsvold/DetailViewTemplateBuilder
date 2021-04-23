@@ -24,8 +24,8 @@ export const TestSelector = selector({
     const contentWrapper = get(contentAtom);
     try {
       return {
-        title: titleWrapper,
-        content: contentWrapper,
+        Title: titleWrapper,
+        Content: contentWrapper,
       };
     } catch (error) {
       console.log(error.message);
