@@ -6,18 +6,27 @@ import EditIcon from "@material-ui/icons/Edit";
 import {
   replaceItemAtIndex,
   removeItemAtIndex,
-  uniqueGuid
-} from "../../../../Helpers/HelperMethods";
+  uniqueGuid,
+} from "../../../../helpers/HelperMethods";
 
-function OptionsCreator({ setOptionList, item, sectionUpdated, optionList, mode, deleteOption, setSectionUpdated}) {
-  
+function OptionsCreator({
+  setOptionList,
+  item,
+  sectionUpdated,
+  optionList,
+  mode,
+  deleteOption,
+  setSectionUpdated,
+}) {
   const index = optionList.findIndex((optionItem) => optionItem === item);
   const [optionKey, setOptionKey] = useState(item.key);
   const [optionValue, setOptionValue] = useState(item.value);
-  const [disabledValue, setDisabledValue] = useState(mode === "create" ? false : true);
+  const [disabledValue, setDisabledValue] = useState(
+    mode === "create" ? false : true
+  );
 
   const onOptionKeyChange = ({ target: { value } }) => {
-      setOptionKey(value);
+    setOptionKey(value);
   };
   const onOptionValueChange = ({ target: { value } }) => {
     setOptionValue(value);
@@ -32,13 +41,12 @@ function OptionsCreator({ setOptionList, item, sectionUpdated, optionList, mode,
 
     setOptionList(newOptionList);
     setDisabledValue(!disabledValue);
-    if(mode ==="edit"){
+    if (mode === "edit") {
       setSectionUpdated(!sectionUpdated);
     }
   };
 
   const removeItem = () => {
-
     if (mode === "create") {
       const newOptionList = removeItemAtIndex(optionList, index);
       setOptionList(newOptionList);
@@ -56,7 +64,7 @@ function OptionsCreator({ setOptionList, item, sectionUpdated, optionList, mode,
           <Grid item>
             <TextField
               disabled={disabledValue}
-              id= {uniqueGuid()}
+              id={uniqueGuid()}
               label="Key"
               value={optionKey}
               variant="outlined"
@@ -67,7 +75,7 @@ function OptionsCreator({ setOptionList, item, sectionUpdated, optionList, mode,
           <Grid item>
             <TextField
               disabled={disabledValue}
-              id= {uniqueGuid()}
+              id={uniqueGuid()}
               label="Value"
               value={optionValue}
               variant="outlined"
@@ -78,8 +86,8 @@ function OptionsCreator({ setOptionList, item, sectionUpdated, optionList, mode,
         </Grid>
 
         <Grid container spacing={2}>
-          {mode === "create" && 
-          <Grid item>
+          {mode === "create" && (
+            <Grid item>
               <Button
                 size="small"
                 type="button"
@@ -91,11 +99,10 @@ function OptionsCreator({ setOptionList, item, sectionUpdated, optionList, mode,
                 {disabledValue ? "Edit" : "Save"}
               </Button>
             </Grid>
-          }
+          )}
 
-
-          {mode === "edit" && 
-          <Grid item>
+          {mode === "edit" && (
+            <Grid item>
               <Button
                 size="small"
                 type="button"
@@ -103,11 +110,11 @@ function OptionsCreator({ setOptionList, item, sectionUpdated, optionList, mode,
                 color="default"
                 startIcon={disabledValue ? <EditIcon /> : <SaveIcon />}
                 onClick={() => {
-                  if(disabledValue === true){
+                  if (disabledValue === true) {
                     setOptionValue(optionValue);
                     setOptionKey(optionKey);
-                  }else{
-                    updateOptions()
+                  } else {
+                    updateOptions();
                   }
                   setDisabledValue(!disabledValue);
                 }}
@@ -115,9 +122,7 @@ function OptionsCreator({ setOptionList, item, sectionUpdated, optionList, mode,
                 {disabledValue ? "Edit" : "Save"}
               </Button>
             </Grid>
-          }
-            
-            
+          )}
 
           <Grid item>
             <Button
@@ -130,14 +135,11 @@ function OptionsCreator({ setOptionList, item, sectionUpdated, optionList, mode,
             >
               DELETE
             </Button>
-
-            
           </Grid>
         </Grid>
       </div>
     </>
   );
 }
-
 
 export default OptionsCreator;

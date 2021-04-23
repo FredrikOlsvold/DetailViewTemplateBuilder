@@ -6,7 +6,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import {
   replaceItemAtIndex,
   removeItemAtIndex,
-  } from "../../../../Helpers/HelperMethods";
+} from "../../../../helpers/HelperMethods";
 
 function FieldsCreator({
   sectionUpdated,
@@ -20,7 +20,9 @@ function FieldsCreator({
   const [fieldType, setFieldType] = useState(item.type);
   const [fieldValue, setFieldValue] = useState(item.value);
   const [fieldFormat, setFieldFormat] = useState(item.format);
-  const [disabledValue, setDisabledValue] = useState(mode === "create" ? false : true);
+  const [disabledValue, setDisabledValue] = useState(
+    mode === "create" ? false : true
+  );
   const index = fieldList.findIndex((fieldItem) => fieldItem === item);
 
   const onFieldTypeChange = ({ target: { value } }) => {
@@ -41,13 +43,12 @@ function FieldsCreator({
       Value: fieldValue,
       Format: fieldFormat,
     });
-    
+
     setFieldList(newFieldList);
     setDisabledValue(!disabledValue);
     if (mode === "edit") {
       setSectionUpdated(!sectionUpdated);
     }
-    
   };
 
   const removeItem = () => {
@@ -100,48 +101,46 @@ function FieldsCreator({
       </Grid>
 
       <Grid container spacing={2}>
-        {mode === "create" && 
-        <Grid item>
-          <Button
-            type="button"
-            variant="contained"
-            color="default"
-            size="small"
-            startIcon={disabledValue ? <EditIcon /> : <SaveIcon />}
-            onClick={updateFields}
-            style={{ marginBottom: "2em" }}
-          >
-            {disabledValue ? "Edit" : "Save"}
-          </Button>
-        </Grid>
-        }
+        {mode === "create" && (
+          <Grid item>
+            <Button
+              type="button"
+              variant="contained"
+              color="default"
+              size="small"
+              startIcon={disabledValue ? <EditIcon /> : <SaveIcon />}
+              onClick={updateFields}
+              style={{ marginBottom: "2em" }}
+            >
+              {disabledValue ? "Edit" : "Save"}
+            </Button>
+          </Grid>
+        )}
 
-      {mode === "edit" && 
-        <Grid item>
-          <Button
-            type="button"
-            variant="contained"
-            color="default"
-            size="small"
-            startIcon={disabledValue ? <EditIcon /> : <SaveIcon />}
-            onClick={() => {
-              if(disabledValue === true){
-                setFieldType(fieldType);
-                setFieldValue(fieldValue);
-                setFieldFormat(fieldFormat)
-
-              }else{
-                updateFields()
-              }
-              setDisabledValue(!disabledValue);
-            }}
-            style={{ marginBottom: "2em" }}
-          >
-            {disabledValue ? "Edit" : "Save"}
-          </Button>
-        </Grid>
-        }
-        
+        {mode === "edit" && (
+          <Grid item>
+            <Button
+              type="button"
+              variant="contained"
+              color="default"
+              size="small"
+              startIcon={disabledValue ? <EditIcon /> : <SaveIcon />}
+              onClick={() => {
+                if (disabledValue === true) {
+                  setFieldType(fieldType);
+                  setFieldValue(fieldValue);
+                  setFieldFormat(fieldFormat);
+                } else {
+                  updateFields();
+                }
+                setDisabledValue(!disabledValue);
+              }}
+              style={{ marginBottom: "2em" }}
+            >
+              {disabledValue ? "Edit" : "Save"}
+            </Button>
+          </Grid>
+        )}
 
         <Grid item>
           <Button

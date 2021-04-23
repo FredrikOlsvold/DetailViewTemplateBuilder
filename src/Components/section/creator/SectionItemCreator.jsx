@@ -13,7 +13,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import AddIcon from "@material-ui/icons/Add";
 import OptionsCreator from "./options/OptionsCreator";
 import FieldsCreator from "./field/FieldsCreator";
-import { uniqueGuid } from "../../../Helpers/HelperMethods";
+import { uniqueGuid } from "../../../helpers/HelperMethods";
 
 const SectionItemCreator = ({ wrapper, mode }) => {
   const chosenAtom = wrapper === "title" ? windowTitleAtom : contentAtom;
@@ -41,7 +41,7 @@ const SectionItemCreator = ({ wrapper, mode }) => {
     setOptionList((oldOptionList) => [
       ...oldOptionList,
       {
-        Id:uniqueGuid(), 
+        Id: uniqueGuid(),
         Key: "",
         Value: "",
       },
@@ -134,7 +134,7 @@ const SectionItemCreator = ({ wrapper, mode }) => {
             <Typography>Fields:</Typography>
             {fieldList.map((field) => (
               <FieldsCreator
-              key={field.id}
+                key={field.id}
                 item={field}
                 setFieldList={setFieldList}
                 fieldList={fieldList}
