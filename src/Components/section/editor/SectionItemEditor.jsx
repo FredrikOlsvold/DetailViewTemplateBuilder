@@ -26,9 +26,9 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
   const index = sectionList.findIndex((sectionItem) => sectionItem === item);
 
   const [sectionUpdated, setSectionUpdated] = useState(false);
-  const [type, setType] = useState(item.type);
-  const [optionList, setOptionList] = useState(item.options);
-  const [fieldList, setFieldList] = useState(item.fields);
+  const [type, setType] = useState(item.Type);
+  const [optionList, setOptionList] = useState(item.Options);
+  const [fieldList, setFieldList] = useState(item.Fields);
 
   const deleteSection = () => {
     const newSectionList = removeItemAtIndex(sectionList, index);
@@ -47,7 +47,7 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
     setSectionUpdated(false);
     const newSectionList = replaceItemAtIndex(sectionList, index, {
       ...item,
-      Id: item.id,
+      Id: item.Id,
       Type: type,
       Options: optionList,
       Fields: fieldList,
