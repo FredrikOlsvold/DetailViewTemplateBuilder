@@ -3,11 +3,10 @@ import WindowTitle from "../views/WindowTitle";
 import Content from "../views/Content";
 import { Button, Grid, Paper, Typography } from "@material-ui/core";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
-import CssInput from "../views/CssInput";
+import CssEditor from "../views/CssEditor";
 
 const Dashboard = () => {
   const [displayWrapper, setDisplayWrapper] = useState("");
-  const [toggleMenu, setToggleMenu] = useState("");
 
   return (
     <>
@@ -72,7 +71,8 @@ const Dashboard = () => {
 
         {displayWrapper === "title" && <WindowTitle />}
         {displayWrapper === "content" && <Content />}
-        {displayWrapper === "css" && <CssInput />}
+        {/* {displayWrapper === "css" && <CssInput />} */}
+        {displayWrapper === "css" && <CssEditor />}
       </Paper>
     </>
   );

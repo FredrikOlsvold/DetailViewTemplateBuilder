@@ -17,9 +17,9 @@ const OutputDisplayWrapper = () => {
 
   const handleCopyClick = () => {
     copyToClipboard(previewJson);
-    setCopied(true)
-    setTimeout(()=> {
-        setCopied(false)
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
     }, 2000);
   };
 
@@ -55,7 +55,8 @@ const OutputDisplayWrapper = () => {
             variant="contained"
             color="default"
             onClick={handleCopyClick}
-          >{copied ? "Json copied" : "Copy to clipboard"}
+          >
+            {copied ? "Json copied" : "Copy to clipboard"}
           </Button>
         </>
       )}
