@@ -15,6 +15,7 @@ import { windowTitleAtom, contentAtom } from "../../../store/Store";
 import {
   replaceItemAtIndex,
   removeItemAtIndex,
+  reduceArray,
 } from "../../../helpers/HelperMethods";
 import OptionsCreator from "../creator/options/OptionsCreator";
 import FieldsCreator from "../creator/field/FieldsCreator";
@@ -49,7 +50,7 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
       ...item,
       Id: item.Id,
       Type: type,
-      Options: optionList,
+      Options: reduceArray(optionList),
       Fields: fieldList,
     });
 
@@ -108,7 +109,7 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
         <Grid item>
           <AccordionDetails>
             {/* Mappa ut options */}
-            {optionList.map((option) => (
+            {Object.entries(optionList).map((option) => (
               <OptionsCreator
                 key={getUniqueId()}
                 item={option}

@@ -37,3 +37,14 @@ export function jsonValidator(string) {
   }
   return true;
 }
+
+//Reduce array to map
+export const reduceArray = (array) => {
+  const reduced = array.reduce((map, obj) => {
+    map[obj.Key] = obj.Value;
+    console.log(map);
+    return map;
+  }, {});
+  console.log(reduced);
+  return reduced
+};

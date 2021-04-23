@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { windowTitleAtom, contentAtom } from "../../../store/Store";
 import {
@@ -13,7 +13,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import AddIcon from "@material-ui/icons/Add";
 import OptionsCreator from "./options/OptionsCreator";
 import FieldsCreator from "./field/FieldsCreator";
-import { uniqueGuid } from "../../../helpers/HelperMethods";
+import { reduceArray, uniqueGuid } from "../../../helpers/HelperMethods";
 
 const SectionItemCreator = ({ wrapper, mode }) => {
   const chosenAtom = wrapper === "title" ? windowTitleAtom : contentAtom;
@@ -28,7 +28,7 @@ const SectionItemCreator = ({ wrapper, mode }) => {
       {
         Id: uniqueGuid(),
         Type: type,
-        Options: optionList,
+        Options: reduceArray(optionList),
         Fields: fieldList,
       },
     ]);
@@ -37,16 +37,24 @@ const SectionItemCreator = ({ wrapper, mode }) => {
     setFieldList([]);
   };
 
-  const addOptionClicked = () => {
-    setOptionList((oldOptionList) => [
-      ...oldOptionList,
-      {
-        Id: uniqueGuid(),
-        Key: "",
-        Value: "",
-      },
-    ]);
-  };
+//   const addOptionClicked = () => {
+//     setOptionList({ ...optionList, count: uniqueGuid() });
+//   };
+
+//   useEffect(() => {
+//     console.log(optionList);
+//   }, [optionList]);
+
+    const addOptionClicked = () => {
+      setOptionList((oldOptionList) => [
+        ...oldOptionList,
+        {
+          Id: uniqueGuid(),
+          Key: "",
+          Value: "",
+        },
+      ]);
+    };
 
   const addFieldClicked = () => {
     setFieldList((oldFieldList) => [

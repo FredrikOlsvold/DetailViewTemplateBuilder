@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TextField, Grid, Button } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -19,8 +19,8 @@ function OptionsCreator({
   setSectionUpdated,
 }) {
   const index = optionList.findIndex((optionItem) => optionItem === item);
-  const [optionKey, setOptionKey] = useState(item.Key);
-  const [optionValue, setOptionValue] = useState(item.Value);
+  const [optionKey, setOptionKey] = useState(mode === 'create' ? item.Key : item[0]);
+  const [optionValue, setOptionValue] = useState(mode === 'create' ? item.Value : item[1]);
   const [disabledValue, setDisabledValue] = useState(
     mode === "create" ? false : true
   );
@@ -56,6 +56,10 @@ function OptionsCreator({
       deleteOption();
     }
   };
+
+  useEffect(() => {
+     console.log(item);
+  }, [])
 
   return (
     <>
