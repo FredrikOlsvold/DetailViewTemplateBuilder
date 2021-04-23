@@ -28,7 +28,7 @@ const WindowTitle = () => {
           </Typography>
           {sectionList.map((section) => (
             <SectionItemEditor
-              key={section.id}
+              key={section.Id}
               item={section}
               wrapper={"title"}
               mode={"edit"}

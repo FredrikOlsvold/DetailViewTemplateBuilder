@@ -19,8 +19,8 @@ function OptionsCreator({
   setSectionUpdated,
 }) {
   const index = optionList.findIndex((optionItem) => optionItem === item);
-  const [optionKey, setOptionKey] = useState(item.key);
-  const [optionValue, setOptionValue] = useState(item.value);
+  const [optionKey, setOptionKey] = useState(item.Key);
+  const [optionValue, setOptionValue] = useState(item.Value);
   const [disabledValue, setDisabledValue] = useState(
     mode === "create" ? false : true
   );

@@ -30,7 +30,7 @@ const Content = () => {
             Edit Section
           </Typography>
           {sectionList.map((section) => (
-                <SectionItemEditor key={section.id} item={section} wrapper={"content"} mode={"edit"}/>
+                <SectionItemEditor key={section.Id} item={section} wrapper={"content"} mode={"edit"}/>
                 ))}
         </Grid>
       </Grid>
