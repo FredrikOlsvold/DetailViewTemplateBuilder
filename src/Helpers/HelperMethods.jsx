@@ -30,10 +30,10 @@ export function copyToClipboard(json) {
 
 //Checks if the provided string can be parsed as a json
 export function jsonValidator(string) {
-    try{
-        JSON.parse(string)
-    } catch(e){
-        return false
-    }
-    return true
+  try {
+    JSON.parse(string);
+  } catch (e) {
+    return false;
+  }
+  return true;
 }

@@ -1,4 +1,10 @@
-import { Button, Grid, Paper, TextareaAutosize, Typography } from "@material-ui/core";
+import {
+  Button,
+  Grid,
+  Paper,
+  TextareaAutosize,
+  Typography,
+} from "@material-ui/core";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 // import {fieldListAtom} from "../../App";
 import { useState } from "react";
@@ -27,14 +33,11 @@ const OutputDisplayWrapper = () => {
   };
 
   const handleTextAreaChange = (e) => {
-      if(jsonValidator(e.target.value)){
-        setTextAreaValue(e.target.value)
-        setPreviewJson(JSON.parse(e.target.value))
-      }
-    
-   
-    
-  }
+    if (jsonValidator(e.target.value)) {
+      setTextAreaValue(e.target.value);
+      setPreviewJson(JSON.parse(e.target.value));
+    }
+  };
 
   return (
     <Paper style={{ padding: "2em", margin: "1em" }}>
@@ -61,8 +64,10 @@ const OutputDisplayWrapper = () => {
       {displayJSON && (
         <>
           <pre>{JSON.stringify(previewJson, null, 2)}</pre>
-          <TextareaAutosize value={textAreaValue} onChange={handleTextAreaChange}/>
-
+          <TextareaAutosize
+            value={textAreaValue}
+            onChange={handleTextAreaChange}
+          />
 
           <Button
             size="small"
