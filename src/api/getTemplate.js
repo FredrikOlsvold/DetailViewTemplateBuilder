@@ -1,5 +1,5 @@
 export const workOrderTemplate = {
-	"Header": [
+	"title": [
 		{
 			"Type": "1",
 			"Id": "520ECD6A-0D2B-415B-8B23-0000000A12AF",
@@ -13,7 +13,7 @@ export const workOrderTemplate = {
 			]
 		}
 	],
-	"Content": [
+	"content": [
 		{
 			"Type": "3",
 			"Id": "520ECD6A-0D2B-415B-8B23-0000000A12AF",
@@ -107,6 +107,4 @@ export const workOrderTemplate = {
 	]
 };
 
-export const basisPlanItem = {
-
-};
+export const workOrderObject = JSON.parse(workOrderTemplate);
