@@ -16,3 +16,9 @@ export const cssAtom = atom({
     key: "cssAtom",
     default: "Give me some styling...",
 });
+
+//PreviewJson Atom
+export const previewJsonAtom = atom({
+    key: "previewJsonAtom",
+    default: {}
+})

@@ -7,19 +7,17 @@ import {
   replaceItemAtIndex,
   removeItemAtIndex,
   uniqueGuid
-} from "../../../../helpers/HelperMethods";
+} from "../../../../Helpers/HelperMethods";
 
 function OptionsCreator({ setOptionList, item, sectionUpdated, optionList, mode, deleteOption, setSectionUpdated}) {
   
   const index = optionList.findIndex((optionItem) => optionItem === item);
   const [optionKey, setOptionKey] = useState(item.key);
   const [optionValue, setOptionValue] = useState(item.value);
-  const [disabledValue, setDisabledValue] = useState(false);
-  const [disabledEditValue, setDisabledEditValue] = useState(false);
+  const [disabledValue, setDisabledValue] = useState(mode === "create" ? false : true);
 
   const onOptionKeyChange = ({ target: { value } }) => {
-      setOptionKey(value);   
-
+      setOptionKey(value);
   };
   const onOptionValueChange = ({ target: { value } }) => {
     setOptionValue(value);
@@ -28,16 +26,14 @@ function OptionsCreator({ setOptionList, item, sectionUpdated, optionList, mode,
   const updateOptions = () => {
     const newOptionList = replaceItemAtIndex(optionList, index, {
       ...item,
-      key: optionKey,
-      value: optionValue,
+      Key: optionKey,
+      Value: optionValue,
     });
 
-    console.log(disabledValue);
     setOptionList(newOptionList);
     setDisabledValue(!disabledValue);
     if(mode ==="edit"){
       setSectionUpdated(!sectionUpdated);
-      setDisabledEditValue(!disabledEditValue);
     }
   };
 
@@ -82,7 +78,8 @@ function OptionsCreator({ setOptionList, item, sectionUpdated, optionList, mode,
         </Grid>
 
         <Grid container spacing={2}>
-            <Grid item>
+          {mode === "create" && 
+          <Grid item>
               <Button
                 size="small"
                 type="button"
@@ -94,6 +91,33 @@ function OptionsCreator({ setOptionList, item, sectionUpdated, optionList, mode,
                 {disabledValue ? "Edit" : "Save"}
               </Button>
             </Grid>
+          }
+
+
+          {mode === "edit" && 
+          <Grid item>
+              <Button
+                size="small"
+                type="button"
+                variant="contained"
+                color="default"
+                startIcon={disabledValue ? <EditIcon /> : <SaveIcon />}
+                onClick={() => {
+                  if(disabledValue === true){
+                    setOptionValue(optionValue);
+                    setOptionKey(optionKey);
+                  }else{
+                    updateOptions()
+                  }
+                  setDisabledValue(!disabledValue);
+                }}
+              >
+                {disabledValue ? "Edit" : "Save"}
+              </Button>
+            </Grid>
+          }
+            
+            
 
           <Grid item>
             <Button

@@ -13,8 +13,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import AddIcon from "@material-ui/icons/Add";
 import OptionsCreator from "./options/OptionsCreator";
 import FieldsCreator from "./field/FieldsCreator";
-import { uniqueGuid } from "../../../helpers/HelperMethods";
-import { ModeCommentOutlined } from "@material-ui/icons";
+import { uniqueGuid } from "../../../Helpers/HelperMethods";
 
 const SectionItemCreator = ({ wrapper, mode }) => {
   const chosenAtom = wrapper === "title" ? windowTitleAtom : contentAtom;
@@ -27,10 +26,10 @@ const SectionItemCreator = ({ wrapper, mode }) => {
     setSectionList((oldSectionList) => [
       ...oldSectionList,
       {
-        id: uniqueGuid(),
-        type: type,
-        options: optionList,
-        fields: fieldList,
+        Id: uniqueGuid(),
+        Type: type,
+        Options: optionList,
+        Fields: fieldList,
       },
     ]);
     setType("");
@@ -42,9 +41,9 @@ const SectionItemCreator = ({ wrapper, mode }) => {
     setOptionList((oldOptionList) => [
       ...oldOptionList,
       {
-        id:uniqueGuid(), 
-        key: "",
-        value: "",
+        Id:uniqueGuid(), 
+        Key: "",
+        Value: "",
       },
     ]);
   };
@@ -53,10 +52,10 @@ const SectionItemCreator = ({ wrapper, mode }) => {
     setFieldList((oldFieldList) => [
       ...oldFieldList,
       {
-        id: uniqueGuid(),
-        type: "",
-        value: "",
-        format: "",
+        Id: uniqueGuid(),
+        Type: "",
+        Value: "",
+        Format: "",
       },
     ]);
   };

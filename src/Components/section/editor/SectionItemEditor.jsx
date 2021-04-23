@@ -15,7 +15,7 @@ import { windowTitleAtom, contentAtom } from "../../../store/Store";
 import {
   replaceItemAtIndex,
   removeItemAtIndex,
-} from "../../../helpers/HelperMethods";
+} from "../../../Helpers/HelperMethods";
 import OptionsCreator from "../creator/options/OptionsCreator";
 import FieldsCreator from "../creator/field/FieldsCreator";
 import { ExpandMore } from "@material-ui/icons";
@@ -47,10 +47,10 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
     setSectionUpdated(false);
     const newSectionList = replaceItemAtIndex(sectionList, index, {
       ...item,
-      id: item.id,
-      type: type,
-      options: optionList,
-      fields: fieldList,
+      Id: item.id,
+      Type: type,
+      Options: optionList,
+      Fields: fieldList,
     });
 
     setSectionList(newSectionList);
@@ -60,9 +60,6 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
     setType(value);
     setSectionUpdated(true);
   };
-
-  // console.log(optionList.map((op) => op.options));
-  // console.log(sectionList.map((op) => op.options));
 
   return (
     <div style={{ padding: "2em" }}>

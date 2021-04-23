@@ -17,6 +17,8 @@ export function uniqueGuid() {
   });
 }
 
+//Function creates new element, sets its value to be a json, and executes
+//a copy command on the new element before deleting the element
 export function copyToClipboard(json) {
   const el = document.createElement("textarea");
   el.value = JSON.stringify(json, null, 2);
@@ -24,4 +26,14 @@ export function copyToClipboard(json) {
   el.select();
   document.execCommand("copy");
   document.body.removeChild(el);
+}
+
+//Checks if the provided string can be parsed as a json
+export function jsonValidator(string) {
+    try{
+        JSON.parse(string)
+    } catch(e){
+        return false
+    }
+    return true
 }
