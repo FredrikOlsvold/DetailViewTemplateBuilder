@@ -6,10 +6,9 @@ import {
   AccordionSummary,
   Button,
   Grid,
-  MenuItem,
-  TextField,
   Typography,
 } from "@material-ui/core";
+import SaveIcon from "@material-ui/icons/Save";
 import React, { useState } from "react";
 import { windowTitleAtom, contentAtom } from "../../../store/Store";
 import {
@@ -19,6 +18,7 @@ import {
 import OptionsCreator from "../creator/options/OptionsCreator";
 import FieldsCreator from "../creator/field/FieldsCreator";
 import { ExpandMore } from "@material-ui/icons";
+import MenuTypes from "../creator/MenuTypes";
 
 const SectionItemEditor = ({ item, wrapper, mode }) => {
   const chosenAtom = wrapper === "title" ? windowTitleAtom : contentAtom;
@@ -72,7 +72,7 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
         </AccordionSummary>
 
         <AccordionDetails>
-          <TextField
+          <MenuTypes
             id="select"
             select
             value={type}
@@ -80,26 +80,10 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
             variant="outlined"
             style={{ width: "100%" }}
             onChange={onTypeChange}
-          >
-            <MenuItem value="" />
-            <MenuItem value={1}>Type 1</MenuItem>
-            <MenuItem value={2}>Type 2</MenuItem>
-            <MenuItem value={3}>Type 3</MenuItem>
-            <MenuItem value={4}>Type 4</MenuItem>
-            <MenuItem value={5}>Type 5</MenuItem>
-            <MenuItem value={6}>Type 6</MenuItem>
-            <MenuItem value={7}>Type 7</MenuItem>
-            <MenuItem value={8}>Type 8</MenuItem>
-          </TextField>
+          />
         </AccordionDetails>
 
         <AccordionActions>
-          {sectionUpdated && (
-            <Button variant="outlined" onClick={updateSection}>
-              UPDATE
-            </Button>
-          )}
-
           <Button variant="outlined" onClick={deleteSection}>
             DELETE
           </Button>
@@ -108,6 +92,7 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
         <Grid item>
           <AccordionDetails>
             {/* Mappa ut options */}
+            {optionList.length > 0 && <Typography>Options:</Typography>}
             {optionList.map((option) => (
               <OptionsCreator
                 key={getUniqueId()}
@@ -126,6 +111,7 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
         <Grid item>
           <AccordionDetails>
             {/* Mappa ut fields */}
+            {fieldList.length > 0 && <Typography>Fields:</Typography>}
             {fieldList.map((field) => (
               <FieldsCreator
                 key={getUniqueId()}
@@ -140,6 +126,18 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
             ))}
           </AccordionDetails>
         </Grid>
+        <AccordionActions>
+          {sectionUpdated && (
+            <Button
+              color="primary"
+              startIcon={<SaveIcon />}
+              variant="contained"
+              onClick={updateSection}
+            >
+              Save changes
+            </Button>
+          )}
+        </AccordionActions>
       </Accordion>
     </div>
   );

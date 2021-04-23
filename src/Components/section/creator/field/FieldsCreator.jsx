@@ -72,7 +72,7 @@ function FieldsCreator({
             label="type"
             value={fieldType}
             variant="outlined"
-            style={{ width: "100%" }}
+            fullWidth
             onChange={onFieldTypeChange}
           />
         </Grid>
@@ -83,7 +83,7 @@ function FieldsCreator({
             label="Value"
             value={fieldValue}
             variant="outlined"
-            style={{ width: "100%" }}
+            fullWidth
             onChange={onFieldValueChange}
           />
         </Grid>
@@ -94,7 +94,7 @@ function FieldsCreator({
             label="format"
             value={fieldFormat}
             variant="outlined"
-            style={{ width: "100%" }}
+            fullWidth
             onChange={onFieldFormatChange}
           />
         </Grid>

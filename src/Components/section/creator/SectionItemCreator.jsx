@@ -1,19 +1,13 @@
 import React, { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { windowTitleAtom, contentAtom } from "../../../store/Store";
-import {
-  Button,
-  Grid,
-  MenuItem,
-  Paper,
-  TextField,
-  Typography,
-} from "@material-ui/core";
+import { Button, Grid, Paper, Typography } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
 import AddIcon from "@material-ui/icons/Add";
 import OptionsCreator from "./options/OptionsCreator";
 import FieldsCreator from "./field/FieldsCreator";
 import { uniqueGuid } from "../../../helpers/HelperMethods";
+import MenuTypes from "./MenuTypes";
 
 const SectionItemCreator = ({ wrapper, mode }) => {
   const chosenAtom = wrapper === "title" ? windowTitleAtom : contentAtom;
@@ -22,19 +16,25 @@ const SectionItemCreator = ({ wrapper, mode }) => {
   const [optionList, setOptionList] = useState([]);
   const [fieldList, setFieldList] = useState([]);
 
+  const [error, setError] = useState("");
+
   const addSection = () => {
-    setSectionList((oldSectionList) => [
-      ...oldSectionList,
-      {
-        Id: uniqueGuid(),
-        Type: type,
-        Options: optionList,
-        Fields: fieldList,
-      },
-    ]);
-    setType("");
-    setOptionList([]);
-    setFieldList([]);
+    if (type !== "") {
+      setSectionList((oldSectionList) => [
+        ...oldSectionList,
+        {
+          Id: uniqueGuid(),
+          Type: type,
+          Options: optionList,
+          Fields: fieldList,
+        },
+      ]);
+      setType("");
+      setOptionList([]);
+      setFieldList([]);
+    }
+
+    setError("Required field!");
   };
 
   const addOptionClicked = () => {
@@ -62,6 +62,7 @@ const SectionItemCreator = ({ wrapper, mode }) => {
 
   const onTypeChange = ({ target: { value } }) => {
     setType(value);
+    setError("");
   };
 
   return (
@@ -69,7 +70,7 @@ const SectionItemCreator = ({ wrapper, mode }) => {
       <div style={{ padding: "2em" }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <TextField
+            <MenuTypes
               id="select"
               select
               value={type}
@@ -77,17 +78,9 @@ const SectionItemCreator = ({ wrapper, mode }) => {
               variant="outlined"
               style={{ width: "100%" }}
               onChange={onTypeChange}
-            >
-              <MenuItem value="" />
-              <MenuItem value={1}>Type 1</MenuItem>
-              <MenuItem value={2}>Type 2</MenuItem>
-              <MenuItem value={3}>Type 3</MenuItem>
-              <MenuItem value={4}>Type 4</MenuItem>
-              <MenuItem value={5}>Type 5</MenuItem>
-              <MenuItem value={6}>Type 6</MenuItem>
-              <MenuItem value={7}>Type 7</MenuItem>
-              <MenuItem value={8}>Type 8</MenuItem>
-            </TextField>
+              error={error}
+              helperText={error}
+            />
           </Grid>
         </Grid>
       </div>

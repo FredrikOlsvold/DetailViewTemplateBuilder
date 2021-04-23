@@ -68,7 +68,7 @@ function OptionsCreator({
               label="Key"
               value={optionKey}
               variant="outlined"
-              style={{ width: "100%" }}
+              fullWidth
               onChange={onOptionKeyChange}
             />
           </Grid>
@@ -79,7 +79,7 @@ function OptionsCreator({
               label="Value"
               value={optionValue}
               variant="outlined"
-              style={{ width: "100%" }}
+              fullWidth
               onChange={onOptionValueChange}
             />
           </Grid>
