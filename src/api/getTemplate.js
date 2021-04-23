@@ -106,5 +106,3 @@ export const workOrderTemplate = {
 		}
 	]
 };
-
-export const workOrderObject = JSON.parse(workOrderTemplate);
