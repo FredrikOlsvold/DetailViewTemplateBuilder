@@ -116,7 +116,7 @@ const SectionItemCreator = ({ wrapper, mode }) => {
             <Typography>Options:</Typography>
             {optionList.map((option) => (
               <OptionsCreator
-                key={option.id}
+                key={option.Id}
                 item={option}
                 setOptionList={setOptionList}
                 optionList={optionList}
