@@ -25,14 +25,24 @@ function OptionsCreator({
     mode === "create" ? false : true
   );
 
+  const [error, setError] = useState("");
+
   const onOptionKeyChange = ({ target: { value } }) => {
     setOptionKey(value);
+    value.preventDefault();
+    setError("");
   };
   const onOptionValueChange = ({ target: { value } }) => {
     setOptionValue(value);
+    setError("");
+    setDisabledValue(disabledValue);
   };
 
   const updateOptions = () => {
+    if (optionKey !== "" || optionValue !== "") {
+      setError("Required field!");
+      setDisabledValue(disabledValue);
+    }
     const newOptionList = replaceItemAtIndex(optionList, index, {
       ...item,
       Key: optionKey,
@@ -63,6 +73,7 @@ function OptionsCreator({
         <Grid container spacing={2}>
           <Grid item>
             <TextField
+              required
               disabled={disabledValue}
               id={uniqueGuid()}
               label="Key"
@@ -70,10 +81,13 @@ function OptionsCreator({
               variant="outlined"
               fullWidth
               onChange={onOptionKeyChange}
+              error={error}
+              helperText={error}
             />
           </Grid>
           <Grid item>
             <TextField
+              required
               disabled={disabledValue}
               id={uniqueGuid()}
               label="Value"
@@ -81,6 +95,8 @@ function OptionsCreator({
               variant="outlined"
               fullWidth
               onChange={onOptionValueChange}
+              error={error}
+              helperText={error}
             />
           </Grid>
         </Grid>
