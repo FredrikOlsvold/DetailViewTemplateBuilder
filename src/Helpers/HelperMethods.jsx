@@ -37,3 +37,24 @@ export function jsonValidator(string) {
   }
   return true;
 }
+
+
+//Creates object from array
+export const objectToArray = (array, key) => {
+  const initialValue = {};
+  return array.reduce((obj, item) => {
+    return {
+      ...obj,
+      [item[key]]: item.value,
+    };
+  }, initialValue);
+};
+
+//Creates array from object
+// export const arrayToObject = (yourArray) => {
+//   const obj = {};
+
+//   for (const key of yourArray) {
+//        obj[key] = whatever;
+//   }
+// };

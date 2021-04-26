@@ -62,6 +62,7 @@ const SectionItemCreator = ({ wrapper, mode }) => {
 
   const onTypeChange = ({ target: { value } }) => {
     setType(value);
+    console.log(Object.entries(optionList));
   };
 
   return (
@@ -116,7 +117,7 @@ const SectionItemCreator = ({ wrapper, mode }) => {
             <Typography>Options:</Typography>
             {optionList.map((option) => (
               <OptionsCreator
-                key={option.Id}
+                key={option.id}
                 item={option}
                 setOptionList={setOptionList}
                 optionList={optionList}
