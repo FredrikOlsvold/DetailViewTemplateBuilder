@@ -80,8 +80,8 @@ function OptionsCreator({
               variant="outlined"
               fullWidth
               onChange={onOptionKeyChange}
-            //   error={error}
-            //   helperText={error}
+              //   error={error}
+              //   helperText={error}
             />
           </Grid>
           <Grid item>
@@ -93,8 +93,8 @@ function OptionsCreator({
               variant="outlined"
               fullWidth
               onChange={onOptionValueChange}
-            //   error={error}
-            //   helperText={error}
+              //   error={error}
+              //   helperText={error}
             />
           </Grid>
         </Grid>

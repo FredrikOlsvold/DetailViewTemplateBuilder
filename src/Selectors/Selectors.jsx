@@ -8,7 +8,7 @@ export const JsonPreviewSelector = selector({
     const contentWrapper = get(contentAtom);
     try {
       return {
-        Title: titleWrapper,
+        Header: titleWrapper,
         Content: contentWrapper,
       };
     } catch (error) {
@@ -24,7 +24,7 @@ export const TestSelector = selector({
     const contentWrapper = get(contentAtom);
     try {
       return {
-        Title: titleWrapper,
+        Header: titleWrapper,
         Content: contentWrapper,
       };
     } catch (error) {
@@ -33,7 +33,7 @@ export const TestSelector = selector({
   },
   set: ({ set }, newValue) => {
     try {
-      set(windowTitleAtom, newValue.Title);
+      set(windowTitleAtom, newValue.Header);
       set(contentAtom, newValue.Content);
     } catch (error) {
       console.log(error);

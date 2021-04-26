@@ -152,3 +152,24 @@ export const allTemplates = [
     "Operation_ENG",
     "Request_ENG"
 ];
+
+export const sectionTypes = [
+    "",
+    "Header",
+    "Standard",
+    "Column",
+    "ClickableList",
+    "Table",
+    "Type 6",
+    "Tab",
+    "ExternalData"
+];
+
+export const optionTypes = [
+    "",
+    "datasource",
+    "ListItemIdentifier",
+    "TemplateId",
+    "Source",
+    "Title"
+];

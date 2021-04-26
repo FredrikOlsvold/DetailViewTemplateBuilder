@@ -37,3 +37,21 @@ export function jsonValidator(string) {
   }
   return true;
 }
+
+export function listToObject(list) {
+  let singleObject = {};
+  list.forEach((obj) => {
+    singleObject[obj.Key] = obj.Value;
+  });
+
+  return singleObject;
+}
+
+export function objectToList(object) {
+  let list = [];
+  for (const [key, value] of Object.entries(object)) {
+    list.push({ Key: key, Value: value });
+  }
+
+  return list;
+}

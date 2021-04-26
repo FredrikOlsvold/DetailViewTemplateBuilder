@@ -14,6 +14,8 @@ import { windowTitleAtom, contentAtom } from "../../../store/Store";
 import {
   replaceItemAtIndex,
   removeItemAtIndex,
+  objectToList,
+  listToObject
 } from "../../../helpers/HelperMethods";
 import OptionsCreator from "../creator/options/OptionsCreator";
 import FieldsCreator from "../creator/field/FieldsCreator";
@@ -27,7 +29,7 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
 
   const [sectionUpdated, setSectionUpdated] = useState(false);
   const [type, setType] = useState(item.Type);
-  const [optionList, setOptionList] = useState(item.Options);
+  const [optionList, setOptionList] = useState(objectToList(item.Options));
   const [fieldList, setFieldList] = useState(item.Fields);
 
   const deleteSection = () => {
@@ -49,7 +51,7 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
       ...item,
       Id: item.Id,
       Type: type,
-      Options: optionList,
+      Options: listToObject(optionList),
       Fields: fieldList,
     });
 

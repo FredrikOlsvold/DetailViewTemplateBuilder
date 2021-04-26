@@ -1,35 +1,43 @@
 import React, { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { windowTitleAtom, contentAtom } from "../../../store/Store";
-import { Button, Grid, Paper, Typography } from "@material-ui/core";
+import {
+  Button,
+  Grid,
+  MenuItem,
+  Paper,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
 import AddIcon from "@material-ui/icons/Add";
 import OptionsCreator from "./options/OptionsCreator";
 import FieldsCreator from "./field/FieldsCreator";
-import { uniqueGuid } from "../../../helpers/HelperMethods";
+import { uniqueGuid, listToObject, objectToList } from "../../../helpers/HelperMethods";
 import MenuTypes from "./MenuTypes";
+import { sectionTypes } from "../../../api/getData";
 
 const SectionItemCreator = ({ wrapper, mode }) => {
   const chosenAtom = wrapper === "title" ? windowTitleAtom : contentAtom;
   const setSectionList = useSetRecoilState(chosenAtom);
-  const [type, setType] = useState("");
+  const [sectionType, setSectionType] = useState("");
   const [optionList, setOptionList] = useState([]);
   const [fieldList, setFieldList] = useState([]);
 
   const [error, setError] = useState("");
 
   const addSection = () => {
-    if (type !== "") {
+    if (sectionType !== "") {
       setSectionList((oldSectionList) => [
         ...oldSectionList,
         {
           Id: uniqueGuid(),
-          Type: type,
-          Options: optionList,
+          Type: sectionType,
+          Options: listToObject(optionList),
           Fields: fieldList,
         },
       ]);
-      setType("");
+      setSectionType("");
       setOptionList([]);
       setFieldList([]);
     }
@@ -62,7 +70,7 @@ const SectionItemCreator = ({ wrapper, mode }) => {
   };
 
   const onTypeChange = ({ target: { value } }) => {
-    setType(value);
+    setSectionType(value);
     setError("");
   };
 
@@ -71,17 +79,19 @@ const SectionItemCreator = ({ wrapper, mode }) => {
       <div style={{ padding: "2em" }}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <MenuTypes
+            <TextField
               id="select"
               select
-              value={type}
+              value={sectionType}
               label="Type"
               variant="outlined"
               style={{ width: "100%" }}
               onChange={onTypeChange}
-            //   error={error}
-            //   helperText={error}
-            />
+            >
+              {sectionTypes.map((type) => (
+                <MenuItem value={type}>{type}</MenuItem>
+              ))}
+            </TextField>
           </Grid>
         </Grid>
       </div>
