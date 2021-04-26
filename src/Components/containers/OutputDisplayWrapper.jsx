@@ -67,7 +67,7 @@ const OutputDisplayWrapper = () => {
 
       {displayJSON && (
         <>
-          <pre onChange={handlePreviewJsonPre}>{JSON.stringify(previewJson, null, 2)}</pre>
+          <pre>{JSON.stringify(previewJson, null, 2)}</pre>
           <Button
             size="small"
             type="button"
