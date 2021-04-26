@@ -79,8 +79,8 @@ const SectionItemCreator = ({ wrapper, mode }) => {
               variant="outlined"
               style={{ width: "100%" }}
               onChange={onTypeChange}
-              error={error}
-              helperText={error}
+            //   error={error}
+            //   helperText={error}
             />
           </Grid>
         </Grid>
