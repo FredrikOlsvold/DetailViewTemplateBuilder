@@ -20,6 +20,7 @@ function FieldsCreator({
   const [fieldType, setFieldType] = useState(item.Type);
   const [fieldValue, setFieldValue] = useState(item.Value);
   const [fieldFormat, setFieldFormat] = useState(item.Format);
+  const [fieldLabel, setFieldLabel] = useState(item.Label);
   const [disabledValue, setDisabledValue] = useState(
     mode === "create" ? false : true
   );
@@ -34,6 +35,9 @@ function FieldsCreator({
   const onFieldFormatChange = ({ target: { value } }) => {
     setFieldFormat(value);
   };
+  const onLabelValueChange = ({ target: { value } }) => {
+    setFieldLabel(value);
+  };
 
   const updateFields = () => {
     const newFieldList = replaceItemAtIndex(fieldList, index, {
@@ -42,6 +46,7 @@ function FieldsCreator({
       Type: fieldType,
       Value: fieldValue,
       Format: fieldFormat,
+      Label: fieldLabel,
     });
 
     setFieldList(newFieldList);
@@ -96,6 +101,17 @@ function FieldsCreator({
             variant="outlined"
             fullWidth
             onChange={onFieldFormatChange}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            id="fieldlabel"
+            disabled={disabledValue}
+            label="Label"
+            value={fieldLabel}
+            variant="outlined"
+            fullWidth
+            onChange={onLabelValueChange}
           />
         </Grid>
       </Grid>

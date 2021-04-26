@@ -56,6 +56,7 @@ const SectionItemCreator = ({ wrapper, mode }) => {
         Type: "",
         Value: "",
         Format: "",
+        Label: "",
       },
     ]);
   };
