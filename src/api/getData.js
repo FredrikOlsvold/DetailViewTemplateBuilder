@@ -153,16 +153,29 @@ export const allTemplates = [
     "Request_ENG"
 ];
 
+// export const sectionTypes = [
+//     "",
+//     "Header",
+//     "Standard",
+//     "Column",
+//     "ClickableList",
+//     "Table",
+//     "Type 6",
+//     "Tab",
+//     "ExternalData"
+// ];
+
+
 export const sectionTypes = [
     "",
-    "Header",
-    "Standard",
-    "Column",
-    "ClickableList",
-    "Table",
-    "Type 6",
-    "Tab",
-    "ExternalData"
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8"
 ];
 
 export const optionTypes = [
