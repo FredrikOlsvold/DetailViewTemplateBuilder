@@ -39,6 +39,10 @@ const OutputDisplayWrapper = () => {
     }
   };
 
+  const handlePreviewJsonPre = (e) => {
+    setTextAreaValue(e.target.value);
+  }
+
   return (
     <Paper style={{ padding: "2em", margin: "1em" }}>
       <Grid container spacing={2}>
@@ -63,12 +67,7 @@ const OutputDisplayWrapper = () => {
 
       {displayJSON && (
         <>
-          <pre>{JSON.stringify(previewJson, null, 2)}</pre>
-          <TextareaAutosize
-            value={textAreaValue}
-            onChange={handleTextAreaChange}
-          />
-
+          <pre onChange={handlePreviewJsonPre}>{JSON.stringify(previewJson, null, 2)}</pre>
           <Button
             size="small"
             type="button"
@@ -78,6 +77,12 @@ const OutputDisplayWrapper = () => {
           >
             {copied ? "Json copied" : "Copy to clipboard"}
           </Button>
+          <TextareaAutosize
+            value={textAreaValue}
+            onChange={handleTextAreaChange}
+          />
+
+          
         </>
       )}
 
