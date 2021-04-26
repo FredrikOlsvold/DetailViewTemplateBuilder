@@ -16,7 +16,7 @@ import {
   removeItemAtIndex,
   objectToList,
   listToObject
-} from "../../../helpers/HelperMethods";
+} from "../../../Helpers/HelperMethods";
 import OptionsCreator from "../creator/options/OptionsCreator";
 import FieldsCreator from "../creator/field/FieldsCreator";
 import { ExpandMore } from "@material-ui/icons";

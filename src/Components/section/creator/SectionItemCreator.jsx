@@ -13,7 +13,7 @@ import SaveIcon from "@material-ui/icons/Save";
 import AddIcon from "@material-ui/icons/Add";
 import OptionsCreator from "./options/OptionsCreator";
 import FieldsCreator from "./field/FieldsCreator";
-import { uniqueGuid, listToObject, objectToList } from "../../../helpers/HelperMethods";
+import { uniqueGuid, listToObject, objectToList } from "../../../Helpers/HelperMethods";
 import MenuTypes from "./MenuTypes";
 import { sectionTypes } from "../../../api/getData";
 

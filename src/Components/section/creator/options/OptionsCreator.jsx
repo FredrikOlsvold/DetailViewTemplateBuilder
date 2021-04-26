@@ -7,7 +7,7 @@ import {
   replaceItemAtIndex,
   removeItemAtIndex,
   uniqueGuid,
-} from "../../../../helpers/HelperMethods";
+} from "../../../../Helpers/HelperMethods";
 
 function OptionsCreator({
   setOptionList,

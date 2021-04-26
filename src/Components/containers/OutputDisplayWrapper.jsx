@@ -8,8 +8,8 @@ import {
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 // import {fieldListAtom} from "../../App";
 import { useState } from "react";
-import { JsonPreviewSelector, TestSelector } from "../../selectors/Selectors";
-import { copyToClipboard, jsonValidator } from "../../helpers/HelperMethods";
+import { JsonPreviewSelector, TestSelector } from "../../Selectors/Selectors";
+import { copyToClipboard, jsonValidator } from "../../Helpers/HelperMethods";
 import { previewJsonAtom } from "../../store/Store";
 
 const OutputDisplayWrapper = () => {
