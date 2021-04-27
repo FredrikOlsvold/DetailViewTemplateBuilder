@@ -23,11 +23,11 @@ function App() {
       </div>
       <Grid container spacing={1}>
         
-            <ListAllTemplates/>
+            {/* <ListAllTemplates/> */}
          
 
           <Grid item xs={9}> 
-            <TemplateMapping/>     
+            {/* <TemplateMapping/>      */}
             <Dashboard/>
             <OutputDisplayWrapper/>
           </Grid>

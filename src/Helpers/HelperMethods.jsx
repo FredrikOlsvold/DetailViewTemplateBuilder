@@ -48,10 +48,15 @@ export function listToObject(list) {
 }
 
 export function objectToList(object) {
-  let list = [];
-  for (const [key, value] of Object.entries(object)) {
-    list.push({ Key: key, Value: value });
+  try {
+    let list = [];
+    for (const [key, value] of Object.entries(object)) {
+      list.push({ Key: key, Value: value });
+    }
+    return list;
+  }catch(error){
+    console.log(error.message);
+    return [];
   }
 
-  return list;
 }
