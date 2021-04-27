@@ -19,13 +19,15 @@ const OutputDisplayWrapper = () => {
   const [displayTemplate, setDisplayTemplate] = useState(false);
   const [copied, setCopied] = useState(false);
   const [textAreaValue, setTextAreaValue] = useState("");
+  const [jsonIsUpdated, setJsonIsUpdated] = useState(false);
+  const [updatedJson, setUpdatedJson] = useState(null)
 
   const showJSON = () => {
     setDisplayJSON(!displayJSON);
   };
 
   const handleCopyClick = () => {
-    copyToClipboard(previewJson);
+    copyToClipboard(JSON.parse(textAreaValue));
     setCopied(true);
     setTimeout(() => {
       setCopied(false);
@@ -33,11 +35,16 @@ const OutputDisplayWrapper = () => {
   };
 
   const handleTextAreaChange = (e) => {
-    if (jsonValidator(e.target.value)) {
-      setTextAreaValue(e.target.value);
-      setPreviewJson(JSON.parse(e.target.value));
-    }
+        setTextAreaValue(e.target.value);
+     
   };
+
+  const handleUseJsonClick = () => {
+    if (jsonValidator(textAreaValue)) {
+        setPreviewJson(JSON.parse(textAreaValue));
+        setJsonIsUpdated(!jsonIsUpdated)
+      }
+  }
 
   return (
     <Paper style={{ padding: "2em", margin: "1em" }}>
@@ -63,11 +70,21 @@ const OutputDisplayWrapper = () => {
 
       {displayJSON && (
         <>
-          <pre>{JSON.stringify(previewJson, null, 2)}</pre>
+          {/* <pre>{JSON.stringify(previewJson, null, 2)}</pre> */}
           <TextareaAutosize
-            value={textAreaValue}
+            value={jsonIsUpdated ? updatedJson : textAreaValue}
             onChange={handleTextAreaChange}
           />
+
+          <Button
+            size="small"
+            type="button"
+            variant="contained"
+            color="default"
+            onClick={handleUseJsonClick}
+          >
+            Use Json
+          </Button>
 
           <Button
             size="small"
