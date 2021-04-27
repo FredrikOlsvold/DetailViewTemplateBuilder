@@ -6,7 +6,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import {
   replaceItemAtIndex,
   removeItemAtIndex,
-} from "../../../../Helpers/HelperMethods";
+} from "../../../../helpers/HelperMethods";
 
 function FieldsCreator({
   sectionUpdated,
