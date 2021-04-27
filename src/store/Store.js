@@ -28,3 +28,9 @@ export const displayWrapperAtom = atom({
     key: "displayWrapperAtom",
     default: "",
 })
+
+//Template Data Atom
+export const templateDataAtom = atom({
+    key: "templateDataAtom",
+    default: "",
+})

@@ -1,5 +1,5 @@
 import { selector } from "recoil";
-import { windowTitleAtom, contentAtom, previewJsonAtom } from "../store/Store";
+import { windowTitleAtom, contentAtom, previewJsonAtom, templateDataAtom } from "../store/Store";
 
 export const JsonPreviewSelector = selector({
   key: "JsonPreviewSelector",
@@ -40,3 +40,14 @@ export const TestSelector = selector({
     }
   },
 });
+
+export const TemplateDataSelector = selector({
+    key: "TemplateDataSelector",
+    get: ({get}) => {
+        const templateData = get(templateDataAtom);
+        return templateData
+    },
+    set: ({ set }, newData) => {
+        set(templateDataAtom, newData)
+    }
+})

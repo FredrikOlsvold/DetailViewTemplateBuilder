@@ -9,8 +9,6 @@ const CssEditor = () => {
     let value = content,
       selStartPos = e.currentTarget.selectionStart;
 
-    console.log(e.currentTarget);
-
     // handle 4-space indent on
     if (e.key === "Tab") {
       value =

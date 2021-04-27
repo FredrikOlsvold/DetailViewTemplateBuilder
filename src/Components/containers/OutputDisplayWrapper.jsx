@@ -8,22 +8,48 @@ import {
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 // import {fieldListAtom} from "../../App";
 import { useEffect, useState } from "react";
-import { JsonPreviewSelector, TestSelector } from "../../selectors/Selectors";
+import {
+  JsonPreviewSelector,
+  TemplateDataSelector,
+  TestSelector,
+} from "../../selectors/Selectors";
 import { copyToClipboard, jsonValidator } from "../../helpers/HelperMethods";
-import { displayWrapperAtom, previewJsonAtom } from "../../store/Store";
+import { displayWrapperAtom, cssAtom } from "../../store/Store";
+import CssEditor from "../views/CssEditor";
 
 const OutputDisplayWrapper = () => {
   //const previewJson = useRecoilValue(JsonPreviewSelector);
   const [previewJson, setPreviewJson] = useRecoilState(TestSelector);
   const setDisplayWrapperAtom = useSetRecoilState(displayWrapperAtom);
   const [displayJSON, setDisplayJSON] = useState(true);
-  const [displayTemplate, setDisplayTemplate] = useState(false);
+  const [displayData, setDisplayData] = useState(false);
+  const [displayStyle, setDisplayStyle] = useState(false);
   const [copied, setCopied] = useState(false);
   const [textAreaValue, setTextAreaValue] = useState("");
-  const [newValue, setNewValue] = useState("default")
+  const [newValue, setNewValue] = useState("default");
+  const [templateData, setTemplateData] = useRecoilState(TemplateDataSelector);
+  const [stylingAtom, setStylingAtom] = useRecoilState(cssAtom)
+
+  const [templateDataTextAreaValue, setTemplateDataTextAreaValue] = useState(
+    ""
+  );
 
   const showJSON = () => {
     setDisplayJSON(!displayJSON);
+    setDisplayData(false);
+    setDisplayStyle(false);
+  };
+
+  const showData = () => {
+    setDisplayData(!displayData);
+    setDisplayJSON(false);
+    setDisplayStyle(false);
+  };
+
+  const showStyle = () => {
+    setDisplayStyle(!displayStyle);
+    setDisplayData(false);
+    setDisplayJSON(false);
   };
 
   const handleCopyClick = () => {
@@ -35,27 +61,30 @@ const OutputDisplayWrapper = () => {
   };
 
   const handleTextAreaChange = (e) => {
-        if(e.target.value !== previewJson){
-            setNewValue("primary")
-        }
-        setTextAreaValue(e.target.value);
-     
+    if (e.target.value !== previewJson) {
+      setNewValue("primary");
+    }
+    setTextAreaValue(e.target.value);
+  };
+
+  const handleTemplateDataTextAreaChange = (e) => {
+    setTemplateData(e.target.value);
   };
 
   const handleUseJsonClick = () => {
     if (jsonValidator(textAreaValue)) {
-        setNewValue("default")
-        setPreviewJson(JSON.parse(textAreaValue));
-        setDisplayWrapperAtom("");
-      }
-      else{
-        alert("Not valid JSON");
-      }
-  }
+      setNewValue("default");
+      setPreviewJson(JSON.parse(textAreaValue));
+      setDisplayWrapperAtom("");
+    } else {
+      alert("Not valid JSON");
+    }
+  };
 
   useEffect(() => {
-        setTextAreaValue(JSON.stringify(previewJson, null, 2))
-  }, [previewJson])
+    setTextAreaValue(JSON.stringify(previewJson, null, 2));
+    setTemplateDataTextAreaValue(templateData);
+  }, [previewJson, templateData]);
 
   return (
     <Paper style={{ padding: "2em", margin: "1em" }}>
@@ -65,16 +94,24 @@ const OutputDisplayWrapper = () => {
             onClick={showJSON}
             style={displayJSON ? { color: "#6200ee" } : { color: "#ccc" }}
           >
-            <Typography variant="h6">Display JSON</Typography>
+            <Typography variant="h6">Template JSON</Typography>
           </Button>
         </Grid>
 
         <Grid item xs={3}>
           <Button
-            onClick={showJSON}
-            style={displayTemplate ? { color: "#6200ee" } : { color: "#ccc" }}
+            onClick={showData}
+            style={displayData ? { color: "#6200ee" } : { color: "#ccc" }}
           >
-            <Typography variant="h6">Display Template</Typography>
+            <Typography variant="h6">Display Data</Typography>
+          </Button>
+        </Grid>
+        <Grid item xs={3}>
+          <Button
+            style={displayStyle ? { color: "#6200ee" } : { color: "#ccc" }}
+            onClick={showStyle}
+          >
+            <Typography variant="h6"> Styling</Typography>
           </Button>
         </Grid>
       </Grid>
@@ -109,7 +146,14 @@ const OutputDisplayWrapper = () => {
         </>
       )}
 
-      {displayTemplate && <pre>{JSON.stringify(previewJson, null, 2)}</pre>}
+      {displayData && (
+        <TextareaAutosize
+          value={templateDataTextAreaValue}
+          onChange={handleTemplateDataTextAreaChange}
+        ></TextareaAutosize>
+      )}
+
+      {displayStyle && <CssEditor />}
     </Paper>
   );
 };

@@ -98,7 +98,7 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
       return;
     }
 
-    setError("Requred field!")
+    setError("Required field!")
 
   };
 
