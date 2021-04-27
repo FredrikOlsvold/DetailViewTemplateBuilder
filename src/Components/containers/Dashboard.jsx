@@ -4,13 +4,15 @@ import Content from "../views/Content";
 import { Button, Grid, Paper, Typography } from "@material-ui/core";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
 import CssEditor from "../views/CssEditor";
-import { useRecoilValue } from "recoil";
-import { contentAtom, windowTitleAtom } from "../../store/Store";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { contentAtom, displayWrapperAtom, windowTitleAtom } from "../../store/Store";
 
 const Dashboard = () => {
   const [displayWrapper, setDisplayWrapper] = useState("");
   const titleSectionList = useRecoilValue(windowTitleAtom);
   const contentSectionList = useRecoilValue(contentAtom);
+  const [displayAtom, setDisplayAtom] = useRecoilState(displayWrapperAtom);
+  
 
   return (
     <>
@@ -19,11 +21,11 @@ const Dashboard = () => {
           <Grid item xs={3}>
             <Button
               style={
-                displayWrapper === "title"
+                displayAtom === "title"
                   ? { color: "#6200ee" }
                   : { color: "#ccc" }
               }
-              onClick={() => setDisplayWrapper("title")}
+              onClick={() => setDisplayAtom("title")}
             >
               <Typography variant="h6"> Window Title</Typography>
             </Button>
@@ -32,11 +34,11 @@ const Dashboard = () => {
           <Grid item xs={3}>
             <Button
               style={
-                displayWrapper === "content"
+                displayAtom === "content"
                   ? { color: "#6200ee" }
                   : { color: "#ccc" }
               }
-              onClick={() => setDisplayWrapper("content")}
+              onClick={() => setDisplayAtom("content")}
             >
               <Typography variant="h6"> Content</Typography>
             </Button>
@@ -45,11 +47,11 @@ const Dashboard = () => {
           <Grid item xs={3}>
             <Button
               style={
-                displayWrapper === "css"
+                displayAtom === "css"
                   ? { color: "#6200ee" }
                   : { color: "#ccc" }
               }
-              onClick={() => setDisplayWrapper("css")}
+              onClick={() => setDisplayAtom("css")}
             >
               <Typography variant="h6"> Styling</Typography>
             </Button>
@@ -60,23 +62,23 @@ const Dashboard = () => {
             <Button
               style={{ float: "right" }}
               startIcon={
-                displayWrapper === "title" ||
-                displayWrapper === "content" ||
-                displayWrapper === "css" ? (
+                displayAtom === "title" ||
+                displayAtom === "content" ||
+                displayAtom === "css" ? (
                   <ExpandLess />
                 ) : (
                   <ExpandMore />
                 )
               }
-              onClick={() => setDisplayWrapper("")}
+              onClick={() => setDisplayAtom("")}
             />
           </Grid>
         </Grid>
 
-        {displayWrapper === "title" && <WindowTitle titleSectionList={titleSectionList}/>}
-        {displayWrapper === "content" && <Content contentSectionList={contentSectionList} />}
+        {displayAtom === "title" && <WindowTitle titleSectionList={titleSectionList}/>}
+        {displayAtom === "content" && <Content contentSectionList={contentSectionList} />}
         {/* {displayWrapper === "css" && <CssInput />} */}
-        {displayWrapper === "css" && <CssEditor />}
+        {displayAtom === "css" && <CssEditor />}
       </Paper>
     </>
   );

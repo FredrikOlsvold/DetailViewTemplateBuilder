@@ -10,11 +10,12 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import { JsonPreviewSelector, TestSelector } from "../../selectors/Selectors";
 import { copyToClipboard, jsonValidator } from "../../helpers/HelperMethods";
-import { previewJsonAtom } from "../../store/Store";
+import { displayWrapperAtom, previewJsonAtom } from "../../store/Store";
 
 const OutputDisplayWrapper = () => {
   //const previewJson = useRecoilValue(JsonPreviewSelector);
   const [previewJson, setPreviewJson] = useRecoilState(TestSelector);
+  const setDisplayWrapperAtom = useSetRecoilState(displayWrapperAtom);
   const [displayJSON, setDisplayJSON] = useState(true);
   const [displayTemplate, setDisplayTemplate] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -40,6 +41,7 @@ const OutputDisplayWrapper = () => {
   const handleUseJsonClick = () => {
     if (jsonValidator(textAreaValue)) {
         setPreviewJson(JSON.parse(textAreaValue));
+        setDisplayWrapperAtom("");
       }
   }
 

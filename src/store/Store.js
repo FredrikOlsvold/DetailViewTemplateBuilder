@@ -22,3 +22,9 @@ export const previewJsonAtom = atom({
     key: "previewJsonAtom",
     default: {}
 })
+
+//PreviewJson Atom
+export const displayWrapperAtom = atom({
+    key: "displayWrapperAtom",
+    default: "",
+})
