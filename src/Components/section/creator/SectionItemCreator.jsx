@@ -13,7 +13,11 @@ import SaveIcon from "@material-ui/icons/Save";
 import AddIcon from "@material-ui/icons/Add";
 import OptionsCreator from "./options/OptionsCreator";
 import FieldsCreator from "./field/FieldsCreator";
-import { uniqueGuid, listToObject, objectToList } from "../../../helpers/HelperMethods";
+import {
+  uniqueGuid,
+  listToObject,
+  objectToList,
+} from "../../../helpers/HelperMethods";
 import MenuTypes from "./MenuTypes";
 import { sectionTypes } from "../../../api/getData";
 
@@ -40,6 +44,8 @@ const SectionItemCreator = ({ wrapper, mode }) => {
       setSectionType("");
       setOptionList([]);
       setFieldList([]);
+      setError("");
+      return;
     }
 
     setError("Required field!");
@@ -80,6 +86,9 @@ const SectionItemCreator = ({ wrapper, mode }) => {
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
+              error={error}
+              required
+              helperText={error}
               id="select"
               select
               value={sectionType}
@@ -89,7 +98,9 @@ const SectionItemCreator = ({ wrapper, mode }) => {
               onChange={onTypeChange}
             >
               {sectionTypes.map((type) => (
-                <MenuItem key={type} value={type}>{type}</MenuItem>
+                <MenuItem key={type} value={type}>
+                  {type}
+                </MenuItem>
               ))}
             </TextField>
           </Grid>

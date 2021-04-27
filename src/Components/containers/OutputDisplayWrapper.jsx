@@ -20,6 +20,7 @@ const OutputDisplayWrapper = () => {
   const [displayTemplate, setDisplayTemplate] = useState(false);
   const [copied, setCopied] = useState(false);
   const [textAreaValue, setTextAreaValue] = useState("");
+  const [newValue, setNewValue] = useState("default")
 
   const showJSON = () => {
     setDisplayJSON(!displayJSON);
@@ -34,12 +35,16 @@ const OutputDisplayWrapper = () => {
   };
 
   const handleTextAreaChange = (e) => {
+        if(e.target.value !== previewJson){
+            setNewValue("primary")
+        }
         setTextAreaValue(e.target.value);
      
   };
 
   const handleUseJsonClick = () => {
     if (jsonValidator(textAreaValue)) {
+        setNewValue("default")
         setPreviewJson(JSON.parse(textAreaValue));
         setDisplayWrapperAtom("");
       }
@@ -83,7 +88,7 @@ const OutputDisplayWrapper = () => {
             size="small"
             type="button"
             variant="contained"
-            color="default"
+            color={newValue}
             onClick={handleUseJsonClick}
           >
             Use Json
