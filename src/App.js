@@ -1,10 +1,10 @@
 import './App.css';
-import Dashboard from "./Components/containers/Dashboard";
+import Dashboard from "./components/containers/Dashboard";
 import {atom} from "recoil";
 import { Grid, Typography } from "@material-ui/core";
-import ListAllTemplates from './Components/templateMenu/ListAllTemplates';
-import TemplateMapping from "./Components/containers/Mapping/TemplateMapping";
-import OutputDisplayWrapper from "./Components/containers/OutputDisplayWrapper";
+import ListAllTemplates from './components/templateMenu/ListAllTemplates';
+import TemplateMapping from "./components/containers/mapping/TemplateMapping";
+import OutputDisplayWrapper from "./components/containers/OutputDisplayWrapper";
 
 
   //Atom that stores all fields in a list. Global state

@@ -7,7 +7,7 @@ import {
 } from "@material-ui/core";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 // import {fieldListAtom} from "../../App";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { JsonPreviewSelector, TestSelector } from "../../selectors/Selectors";
 import { copyToClipboard, jsonValidator } from "../../helpers/HelperMethods";
 import { previewJsonAtom } from "../../store/Store";
@@ -19,8 +19,6 @@ const OutputDisplayWrapper = () => {
   const [displayTemplate, setDisplayTemplate] = useState(false);
   const [copied, setCopied] = useState(false);
   const [textAreaValue, setTextAreaValue] = useState("");
-  const [jsonIsUpdated, setJsonIsUpdated] = useState(false);
-  const [updatedJson, setUpdatedJson] = useState(null)
 
   const showJSON = () => {
     setDisplayJSON(!displayJSON);
@@ -42,9 +40,12 @@ const OutputDisplayWrapper = () => {
   const handleUseJsonClick = () => {
     if (jsonValidator(textAreaValue)) {
         setPreviewJson(JSON.parse(textAreaValue));
-        setJsonIsUpdated(!jsonIsUpdated)
       }
   }
+
+  useEffect(() => {
+        setTextAreaValue(JSON.stringify(previewJson, null, 2))
+  }, [previewJson])
 
   return (
     <Paper style={{ padding: "2em", margin: "1em" }}>
@@ -72,7 +73,7 @@ const OutputDisplayWrapper = () => {
         <>
           {/* <pre>{JSON.stringify(previewJson, null, 2)}</pre> */}
           <TextareaAutosize
-            value={jsonIsUpdated ? updatedJson : textAreaValue}
+            value={textAreaValue}
             onChange={handleTextAreaChange}
           />
 

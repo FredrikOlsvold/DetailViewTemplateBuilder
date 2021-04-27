@@ -3,10 +3,10 @@ import SectionItemEditor from "../section/editor/SectionItemEditor";
 import { useRecoilValue } from "recoil";
 import { windowTitleAtom } from "../../store/Store";
 import { Grid, Typography } from "@material-ui/core";
+import { useEffect } from "react";
 
-const WindowTitle = () => {
-  const sectionList = useRecoilValue(windowTitleAtom);
-
+const WindowTitle = ({titleSectionList}) => {
+  
   return (
     <div style={{ marginTop: "2em" }}>
       <Grid container spacing={2}>
@@ -26,7 +26,7 @@ const WindowTitle = () => {
           >
             Edit Section
           </Typography>
-          {sectionList.map((section) => (
+          {titleSectionList.map((section) => (
             <SectionItemEditor
               key={section.Id}
               item={section}

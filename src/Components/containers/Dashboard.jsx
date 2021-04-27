@@ -4,9 +4,13 @@ import Content from "../views/Content";
 import { Button, Grid, Paper, Typography } from "@material-ui/core";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
 import CssEditor from "../views/CssEditor";
+import { useRecoilValue } from "recoil";
+import { contentAtom, windowTitleAtom } from "../../store/Store";
 
 const Dashboard = () => {
   const [displayWrapper, setDisplayWrapper] = useState("");
+  const titleSectionList = useRecoilValue(windowTitleAtom);
+  const contentSectionList = useRecoilValue(contentAtom);
 
   return (
     <>
@@ -69,8 +73,8 @@ const Dashboard = () => {
           </Grid>
         </Grid>
 
-        {displayWrapper === "title" && <WindowTitle />}
-        {displayWrapper === "content" && <Content />}
+        {displayWrapper === "title" && <WindowTitle titleSectionList={titleSectionList}/>}
+        {displayWrapper === "content" && <Content contentSectionList={contentSectionList} />}
         {/* {displayWrapper === "css" && <CssInput />} */}
         {displayWrapper === "css" && <CssEditor />}
       </Paper>

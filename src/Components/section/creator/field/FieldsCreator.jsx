@@ -6,6 +6,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import {
   replaceItemAtIndex,
   removeItemAtIndex,
+  uniqueGuid,
 } from "../../../../helpers/HelperMethods";
 
 function FieldsCreator({
@@ -72,7 +73,7 @@ function FieldsCreator({
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <TextField
-            id="fieldtype"
+            id={uniqueGuid()}
             disabled={disabledValue}
             label="type"
             value={fieldType}
@@ -83,7 +84,7 @@ function FieldsCreator({
         </Grid>
         <Grid item xs={6}>
           <TextField
-            id="fieldvalue"
+            id={uniqueGuid()}
             disabled={disabledValue}
             label="Value"
             value={fieldValue}
@@ -94,7 +95,7 @@ function FieldsCreator({
         </Grid>
         <Grid item xs={6}>
           <TextField
-            id="fieldformat"
+            id={uniqueGuid()}
             disabled={disabledValue}
             label="format"
             value={fieldFormat}
@@ -105,7 +106,7 @@ function FieldsCreator({
         </Grid>
         <Grid item xs={6}>
           <TextField
-            id="fieldlabel"
+            id={uniqueGuid()}
             disabled={disabledValue}
             label="Label"
             value={fieldLabel}

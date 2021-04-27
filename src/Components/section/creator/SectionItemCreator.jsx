@@ -89,7 +89,7 @@ const SectionItemCreator = ({ wrapper, mode }) => {
               onChange={onTypeChange}
             >
               {sectionTypes.map((type) => (
-                <MenuItem value={type}>{type}</MenuItem>
+                <MenuItem key={type} value={type}>{type}</MenuItem>
               ))}
             </TextField>
           </Grid>

@@ -31,15 +31,16 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
   const index = sectionList.findIndex((sectionItem) => sectionItem === item);
 
   const [sectionUpdated, setSectionUpdated] = useState(false);
-  const [type, setType] = useState(item.Type);
+  const [sectionType, setSectionType] = useState(item.Type);
   const [optionList, setOptionList] = useState(objectToList(item.Options));
   const [fieldList, setFieldList] = useState(item.Fields);
 
-  useEffect(() => {
-    if(item.Options === null || item.Option === undefined){
-      setOptionList([]);
-    }
-  }, [])
+  useEffect(() =>{
+      console.log("Item is updated");
+    setOptionList(objectToList(item.Options))
+    setFieldList(item.Fields)
+    
+  }, [item])
 
   const deleteSection = () => {
     const newSectionList = removeItemAtIndex(sectionList, index);
@@ -59,7 +60,7 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
     const newSectionList = replaceItemAtIndex(sectionList, index, {
       ...item,
       Id: item.Id,
-      Type: type,
+      Type: sectionType,
       Options: listToObject(optionList),
       Fields: fieldList,
     });
@@ -68,7 +69,7 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
   };
 
   const onTypeChange = ({ target: { value } }) => {
-    setType(value);
+    setSectionType(value);
     setSectionUpdated(true);
   };
 
@@ -79,21 +80,21 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
         defaultExpanded={false}
       >
         <AccordionSummary expandIcon={<ExpandMore />}>
-          <Typography>Type: {type}</Typography>
+          <Typography>Type: {sectionType}</Typography>
         </AccordionSummary>
 
         <AccordionDetails>
         <TextField
               id="select"
               select
-              value={type}
+              value={sectionType}
               label="Type"
               variant="outlined"
               style={{ width: "100%" }}
               onChange={onTypeChange}
             >
               {sectionTypes.map((type) => (
-                <MenuItem value={type}>{type}</MenuItem>
+                <MenuItem key={type} value={type}>{type}</MenuItem>
               ))}
             </TextField>
           {/* <MenuTypes
@@ -120,7 +121,7 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
             {optionList.length > 0 && <Typography>Options:</Typography>}
             {optionList.map((option) => (
               <OptionsCreator
-                key={getUniqueId()}
+                key={option.key}
                 item={option}
                 mode={mode}
                 setSectionUpdated={setSectionUpdated}
@@ -139,7 +140,7 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
             {fieldList.length > 0 && <Typography>Fields:</Typography>}
             {fieldList.map((field) => (
               <FieldsCreator
-                key={getUniqueId()}
+                key={field.Id}
                 item={field}
                 mode={mode}
                 fieldList={fieldList}

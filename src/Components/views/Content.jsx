@@ -8,8 +8,8 @@ import SectionItemEditor from "../section/editor/SectionItemEditor";
 
 
 
-const Content = () => {
-  const sectionList = useRecoilValue(contentAtom);
+const Content = ({contentSectionList}) => {
+  
 
   return (
     <div style={{ marginTop: "2em" }}>
@@ -29,7 +29,7 @@ const Content = () => {
           >
             Edit Section
           </Typography>
-          {sectionList.map((section) => (
+          {contentSectionList.map((section) => (
                 <SectionItemEditor key={section.Id} item={section} wrapper={"content"} mode={"edit"}/>
                 ))}
         </Grid>
