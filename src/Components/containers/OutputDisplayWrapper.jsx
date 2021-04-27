@@ -48,6 +48,9 @@ const OutputDisplayWrapper = () => {
         setPreviewJson(JSON.parse(textAreaValue));
         setDisplayWrapperAtom("");
       }
+      else{
+        alert("Not valid JSON");
+      }
   }
 
   useEffect(() => {
