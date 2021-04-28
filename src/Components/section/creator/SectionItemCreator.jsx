@@ -97,7 +97,7 @@ const SectionItemCreator = ({ wrapper, mode }) => {
               style={{ width: "100%" }}
               onChange={onTypeChange}
             >
-              {sectionTypes.map((type) => (
+              {Object.keys(sectionTypes).map((type) => (
                 <MenuItem key={type} value={type}>
                   {type}
                 </MenuItem>

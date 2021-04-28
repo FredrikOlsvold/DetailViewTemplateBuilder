@@ -153,30 +153,42 @@ export const allTemplates = [
     "Request_ENG"
 ];
 
+export const sectionTypes = {
+    "Standard":[],
+    "ClickableList": ["sort"],
+    "Table":["sumCol"],
+    "Tab": [],
+    "ExternalData":[]
+};
+
+export const dataTypes = {
+    "string": ["split", "concat", "join"],
+    "number" : ["setDenomination", "setDecimales"],
+    "boolean": ["customBooleanValue", "join"],
+    "datetime": ["formatDate", "join"],
+    "object": ["compose", "concat"],
+}
+
+export const fieldTypes = {
+    "Label with data":[],
+    "Multiline": [],
+    "Checkbox":[],
+    "Line": [],
+    "Empty":[]
+}
+
+
 // export const sectionTypes = [
 //     "",
-//     "Header",
-//     "Standard",
-//     "Column",
-//     "ClickableList",
-//     "Table",
-//     "Type 6",
-//     "Tab",
-//     "ExternalData"
+//     "1",
+//     "2",
+//     "3",
+//     "4",
+//     "5",
+//     "6",
+//     "7",
+//     "8"
 // ];
-
-
-export const sectionTypes = [
-    "",
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8"
-];
 
 export const optionTypes = [
     "",

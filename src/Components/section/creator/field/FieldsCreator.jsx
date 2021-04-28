@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Grid, Button } from "@material-ui/core";
+import { TextField, Grid, Button, MenuItem } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -7,7 +7,10 @@ import {
   replaceItemAtIndex,
   removeItemAtIndex,
   uniqueGuid,
+  listToObject,
 } from "../../../../helpers/HelperMethods";
+import { fieldTypes } from "../../../../api/getData";
+import OptionsCreator from "../options/OptionsCreator";
 
 function FieldsCreator({
   sectionUpdated,
@@ -26,7 +29,19 @@ function FieldsCreator({
     mode === "create" ? false : true
   );
   const index = fieldList.findIndex((fieldItem) => fieldItem === item);
+  const [fieldOptions, setFieldOptions] = useState([]);
+  const [fieldOptionKey, setFieldOptionKey] = useState("");
+  const [fieldOptionValue, setFieldOptionValue] = useState("");
+  const [formatters, setFormatters] = useState([]);
+  const [valueDescriptorPath, setValueDescriptorPath] = useState("");
+  const [valueType, setValueType] = useState("");
 
+  const onFieldOptionKeyChange = ({ target: { value } }) => {
+    setFieldOptionKey(value);
+  };
+  const onFieldOptionValueChange = ({ target: { value } }) => {
+    setFieldOptionValue(value);
+  };
   const onFieldTypeChange = ({ target: { value } }) => {
     setFieldType(value);
   };
@@ -39,8 +54,15 @@ function FieldsCreator({
   const onLabelValueChange = ({ target: { value } }) => {
     setFieldLabel(value);
   };
+  const onValueDescriptorPathChange = ({ target: { value } }) => {
+      setValueDescriptorPath(value)
+  }
+  const onValueTypeChange = ({ target: { value } }) => {
+    setValueType(value)
+}
 
   const updateFields = () => {
+      setFieldOptions([...fieldOptions, {Key: fieldOptionKey, Value: fieldOptionValue}])
     const newFieldList = replaceItemAtIndex(fieldList, index, {
       ...item,
       // id: uniqueGuid(),
@@ -48,6 +70,12 @@ function FieldsCreator({
       Value: fieldValue,
       Format: fieldFormat,
       Label: fieldLabel,
+      Options: listToObject(fieldOptions),
+      Formatters: formatters,
+      ValueDescriptors: {
+        Path: valueDescriptorPath,
+        Type: valueType,
+      },
     });
 
     setFieldList(newFieldList);
@@ -73,38 +101,24 @@ function FieldsCreator({
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <TextField
+            select
             id={uniqueGuid()}
             disabled={disabledValue}
-            label="type"
+            label="Type"
             value={fieldType}
             variant="outlined"
             fullWidth
             onChange={onFieldTypeChange}
-          />
+          >
+            {Object.keys(fieldTypes).map((fType) => (
+              <MenuItem key={fType} value={fType}>
+                {fType}
+              </MenuItem>
+            ))}
+          </TextField>
         </Grid>
         <Grid item xs={6}>
-          <TextField
-            id={uniqueGuid()}
-            disabled={disabledValue}
-            label="Value"
-            value={fieldValue}
-            variant="outlined"
-            fullWidth
-            onChange={onFieldValueChange}
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <TextField
-            id={uniqueGuid()}
-            disabled={disabledValue}
-            label="format"
-            value={fieldFormat}
-            variant="outlined"
-            fullWidth
-            onChange={onFieldFormatChange}
-          />
-        </Grid>
-        <Grid item xs={6}>
+            {/* <OptionsCreator key={uniqueGuid() } /> */}
           <TextField
             id={uniqueGuid()}
             disabled={disabledValue}
@@ -113,6 +127,55 @@ function FieldsCreator({
             variant="outlined"
             fullWidth
             onChange={onLabelValueChange}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            disabled={disabledValue}
+            id={uniqueGuid()}
+            label="Option Key"
+            value={fieldOptionKey}
+            variant="outlined"
+            fullWidth
+            onChange={onFieldOptionKeyChange}
+            //   error={error}
+            //   helperText={error}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            disabled={disabledValue}
+            id={uniqueGuid()}
+            label="Option Value"
+            value={fieldOptionValue}
+            variant="outlined"
+            fullWidth
+            onChange={onFieldOptionValueChange}
+            //   error={error}
+            //   helperText={error}
+          />
+        </Grid>
+
+        <Grid item xs={6}>
+          <TextField
+            id={uniqueGuid()}
+            disabled={disabledValue}
+            label="Path"
+            value={valueDescriptorPath}
+            variant="outlined"
+            fullWidth
+            onChange={onValueDescriptorPathChange}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            id={uniqueGuid()}
+            disabled={disabledValue}
+            label="Value Type" // What name??
+            value={valueType}
+            variant="outlined"
+            fullWidth
+            onChange={onValueTypeChange}
           />
         </Grid>
       </Grid>
