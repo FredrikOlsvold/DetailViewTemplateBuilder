@@ -1,16 +1,26 @@
-import React, { useState } from "react";
-import { TextField, Grid, Button, MenuItem } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
+import {
+  TextField,
+  Grid,
+  Button,
+  MenuItem,
+  Paper,
+  Typography,
+} from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import AddIcon from "@material-ui/icons/Add";
 import {
   replaceItemAtIndex,
   removeItemAtIndex,
   uniqueGuid,
   listToObject,
+  formatFormatList
 } from "../../../../helpers/HelperMethods";
 import { fieldTypes } from "../../../../api/getData";
 import OptionsCreator from "../options/OptionsCreator";
+import FormatCreator from "../format/FormatCreator";
 
 function FieldsCreator({
   sectionUpdated,
@@ -30,18 +40,10 @@ function FieldsCreator({
   );
   const index = fieldList.findIndex((fieldItem) => fieldItem === item);
   const [fieldOptions, setFieldOptions] = useState([]);
-  const [fieldOptionKey, setFieldOptionKey] = useState("");
-  const [fieldOptionValue, setFieldOptionValue] = useState("");
   const [formatters, setFormatters] = useState([]);
   const [valueDescriptorPath, setValueDescriptorPath] = useState("");
   const [valueType, setValueType] = useState("");
 
-  const onFieldOptionKeyChange = ({ target: { value } }) => {
-    setFieldOptionKey(value);
-  };
-  const onFieldOptionValueChange = ({ target: { value } }) => {
-    setFieldOptionValue(value);
-  };
   const onFieldTypeChange = ({ target: { value } }) => {
     setFieldType(value);
   };
@@ -55,23 +57,49 @@ function FieldsCreator({
     setFieldLabel(value);
   };
   const onValueDescriptorPathChange = ({ target: { value } }) => {
-      setValueDescriptorPath(value)
-  }
+    setValueDescriptorPath(value);
+  };
   const onValueTypeChange = ({ target: { value } }) => {
-    setValueType(value)
-}
+    setValueType(value);
+  };
+
+  const addFieldOptionClicked = () => {
+    setFieldOptions((oldFieldOptionList) => [
+      ...oldFieldOptionList,
+      {
+        Id: uniqueGuid(),
+        Key: "",
+        Value: "",
+      },
+    ]);
+  };
+
+
+  const addFieldFormatClicked = () => {
+    // setFormatters([...formatters, ""]);
+    setFormatters((oldFieldFormattersList) => [
+      ...oldFieldFormattersList,
+      {
+        Id: uniqueGuid(),
+        Key: "",
+        Value: "",
+      },
+    ]);
+  };
+
+  useEffect(() => {
+    console.log("Formatters:", formatters);
+  }, [formatters])
 
   const updateFields = () => {
-      setFieldOptions([...fieldOptions, {Key: fieldOptionKey, Value: fieldOptionValue}])
+    // setFieldOptions([...fieldOptions, {Key: fieldOptionKey, Value: fieldOptionValue}])
     const newFieldList = replaceItemAtIndex(fieldList, index, {
       ...item,
       // id: uniqueGuid(),
       Type: fieldType,
-      Value: fieldValue,
-      Format: fieldFormat,
       Label: fieldLabel,
       Options: listToObject(fieldOptions),
-      Formatters: formatters,
+      Formatters: formatFormatList(formatters),
       ValueDescriptors: {
         Path: valueDescriptorPath,
         Type: valueType,
@@ -96,6 +124,8 @@ function FieldsCreator({
     }
   };
 
+
+
   return (
     <>
       <Grid container spacing={2}>
@@ -118,7 +148,7 @@ function FieldsCreator({
           </TextField>
         </Grid>
         <Grid item xs={6}>
-            {/* <OptionsCreator key={uniqueGuid() } /> */}
+          {/* <OptionsCreator key={uniqueGuid() } /> */}
           <TextField
             id={uniqueGuid()}
             disabled={disabledValue}
@@ -129,33 +159,6 @@ function FieldsCreator({
             onChange={onLabelValueChange}
           />
         </Grid>
-        <Grid item xs={6}>
-          <TextField
-            disabled={disabledValue}
-            id={uniqueGuid()}
-            label="Option Key"
-            value={fieldOptionKey}
-            variant="outlined"
-            fullWidth
-            onChange={onFieldOptionKeyChange}
-            //   error={error}
-            //   helperText={error}
-          />
-        </Grid>
-        <Grid item xs={6}>
-          <TextField
-            disabled={disabledValue}
-            id={uniqueGuid()}
-            label="Option Value"
-            value={fieldOptionValue}
-            variant="outlined"
-            fullWidth
-            onChange={onFieldOptionValueChange}
-            //   error={error}
-            //   helperText={error}
-          />
-        </Grid>
-
         <Grid item xs={6}>
           <TextField
             id={uniqueGuid()}
@@ -177,8 +180,65 @@ function FieldsCreator({
             fullWidth
             onChange={onValueTypeChange}
           />
+
         </Grid>
+        <Grid item xs={12}>
+        <div>
+          {fieldOptions.length > 0 && (
+            <Paper style={{ padding: "2em", margin: "1em" }}>
+              <Typography>Field Options:</Typography>
+              {fieldOptions.map((option) => (
+                <OptionsCreator
+                  key={option.Id}
+                  item={option}
+                  setOptionList={setFieldOptions}
+                  optionList={fieldOptions}
+                  mode={mode}
+                />
+              ))}
+            </Paper>
+          )}
+        </div>
       </Grid>
+      <Grid item xs={12}>
+        <div>
+          {formatters.length > 0 && (
+            <Paper style={{ padding: "2em", margin: "1em" }}>
+              <Typography>Field Formats:</Typography>
+              {formatters.map((format) => (
+                <FormatCreator
+                  key={format.Id}
+                  item={format}
+                  setFormatters={setFormatters}
+                  formatters={formatters}
+                  mode={mode}
+                />
+              ))}
+            </Paper>
+          )}
+        </div>
+      </Grid>
+        <Grid item>
+              <Button
+                style={{ marginRight: "1em" }}
+                startIcon={<AddIcon />}
+                variant="outlined"
+                onClick={addFieldFormatClicked}
+              >
+                FIELD FORMAT
+              </Button>
+
+              <Button
+                startIcon={<AddIcon />}
+                variant="outlined"
+                onClick={addFieldOptionClicked}
+              >
+                FIELD OPTION
+              </Button>
+          </Grid>
+
+      </Grid>
+
 
       <Grid container spacing={2}>
         {mode === "create" && (

@@ -58,5 +58,15 @@ export function objectToList(object) {
     console.log(error.message);
     return [];
   }
+}
+
+export function formatFormatList(list){
+  let newList = [];
+
+  list.forEach((obj) => {
+    newList.push(`${obj.Key}(${obj.Value})`);
+  })
+
+  return newList;
 
 }

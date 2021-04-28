@@ -68,8 +68,6 @@ const SectionItemCreator = ({ wrapper, mode }) => {
       {
         Id: uniqueGuid(),
         Type: "",
-        Value: "",
-        Format: "",
         Label: "",
       },
     ]);
