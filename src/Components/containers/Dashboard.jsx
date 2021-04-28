@@ -5,14 +5,17 @@ import { Button, Grid, Paper, Typography } from "@material-ui/core";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
 import CssEditor from "../views/CssEditor";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { contentAtom, displayWrapperAtom, windowTitleAtom } from "../../store/Store";
+import {
+  contentAtom,
+  displayWrapperAtom,
+  windowTitleAtom,
+} from "../../store/Store";
 
 const Dashboard = () => {
   const [displayWrapper, setDisplayWrapper] = useState("");
   const titleSectionList = useRecoilValue(windowTitleAtom);
   const contentSectionList = useRecoilValue(contentAtom);
   const [displayAtom, setDisplayAtom] = useRecoilState(displayWrapperAtom);
-  
 
   return (
     <>
@@ -44,27 +47,12 @@ const Dashboard = () => {
             </Button>
           </Grid>
 
-          <Grid item xs={3}>
-            <Button
-              style={
-                displayAtom === "css"
-                  ? { color: "#6200ee" }
-                  : { color: "#ccc" }
-              }
-              onClick={() => setDisplayAtom("css")}
-            >
-              <Typography variant="h6"> Styling</Typography>
-            </Button>
-          </Grid>
-
           {/* Close Menu Button */}
           <Grid item xs={3}>
             <Button
               style={{ float: "right" }}
               startIcon={
-                displayAtom === "title" ||
-                displayAtom === "content" ||
-                displayAtom === "css" ? (
+                displayAtom === "title" || displayAtom === "content" ? (
                   <ExpandLess />
                 ) : (
                   <ExpandMore />
@@ -75,10 +63,12 @@ const Dashboard = () => {
           </Grid>
         </Grid>
 
-        {displayAtom === "title" && <WindowTitle titleSectionList={titleSectionList}/>}
-        {displayAtom === "content" && <Content contentSectionList={contentSectionList} />}
-        {/* {displayWrapper === "css" && <CssInput />} */}
-        {displayAtom === "css" && <CssEditor />}
+        {displayAtom === "title" && (
+          <WindowTitle titleSectionList={titleSectionList} />
+        )}
+        {displayAtom === "content" && (
+          <Content contentSectionList={contentSectionList} />
+        )}
       </Paper>
     </>
   );
