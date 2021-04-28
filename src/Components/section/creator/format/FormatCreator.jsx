@@ -1,17 +1,20 @@
-import { Button, Grid, TextField } from "@material-ui/core";
+import { Button, Grid, MenuItem, TextField } from "@material-ui/core";
 import React, { useState } from "react";
-import { removeItemAtIndex, replaceItemAtIndex, uniqueGuid } from "../../../../helpers/HelperMethods";
+import { removeItemAtIndex, replaceItemAtIndex, uniqueGuid, unformatFormatList } from "../../../../helpers/HelperMethods";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import SaveIcon from "@material-ui/icons/Save";
+import {dataTypes} from "../../../../api/getData";
 
-const FormatCreator = ({ item, setFormatters, formatters, mode }) => {
+const FormatCreator = ({ item, setFormatters, formatters, mode, valueType }) => {
   const index = formatters.findIndex((optionItem) => optionItem === item);
   const [formatKey, setFormatKey] = useState(item.Key);
   const [formatValue, setFormatValue] = useState(item.Value);
   const [disabledValue, setDisabledValue] = useState(
     mode === "create" ? false : true
   );
+
+  console.log(item);
 
   const onFormatKeyChange = ({ target: { value } }) => {
     setFormatKey(value);
@@ -51,6 +54,7 @@ const FormatCreator = ({ item, setFormatters, formatters, mode }) => {
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <TextField
+          select
             disabled={disabledValue}
             id={uniqueGuid()}
             label="Format"
@@ -58,7 +62,14 @@ const FormatCreator = ({ item, setFormatters, formatters, mode }) => {
             variant="outlined"
             fullWidth
             onChange={onFormatKeyChange}
-          />
+          >
+            {dataTypes[valueType] &&            
+            dataTypes[valueType].map((funcType) => (
+              <MenuItem key={funcType} value={funcType}>
+                {funcType}
+              </MenuItem>
+            ))}
+            </TextField>
         </Grid>
 
         <Grid item xs={6}>

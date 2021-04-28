@@ -167,6 +167,7 @@ export const dataTypes = {
     "boolean": ["customBooleanValue", "join"],
     "datetime": ["formatDate", "join"],
     "object": ["compose", "concat"],
+    "static": [],
 }
 
 export const fieldTypes = {

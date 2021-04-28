@@ -70,3 +70,33 @@ export function formatFormatList(list){
   return newList;
 
 }
+
+
+export function unformatFormatList(list){
+  let newList = [];
+
+//split(1)
+  list.forEach((item) => {
+    let firstParentheses  = item.indexOf("(");
+    let lastParentheses  = item.indexOf(")");
+
+    // newObj[item.slice(firstParentheses)] = item.slice(firstParentheses+1, lastParentheses);
+    newList.push({
+      Key: item.slice(0, firstParentheses),
+      Value: item.slice(firstParentheses+1, lastParentheses)
+    })
+  })
+
+  return newList;
+}
+
+// try {
+//   let list = [];
+//   for (const [key, value] of Object.entries(object)) {
+//     list.push({ Key: key, Value: value });
+//   }
+//   return list;
+// }catch(error){
+//   console.log(error.message);
+//   return [];
+// }

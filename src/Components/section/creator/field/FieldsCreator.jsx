@@ -16,9 +16,10 @@ import {
   removeItemAtIndex,
   uniqueGuid,
   listToObject,
-  formatFormatList
+  formatFormatList,
+  unformatFormatList,
 } from "../../../../helpers/HelperMethods";
-import { fieldTypes } from "../../../../api/getData";
+import { dataTypes, fieldTypes } from "../../../../api/getData";
 import OptionsCreator from "../options/OptionsCreator";
 import FormatCreator from "../format/FormatCreator";
 
@@ -39,10 +40,10 @@ function FieldsCreator({
     mode === "create" ? false : true
   );
   const index = fieldList.findIndex((fieldItem) => fieldItem === item);
-  const [fieldOptions, setFieldOptions] = useState([]);
-  const [formatters, setFormatters] = useState([]);
-  const [valueDescriptorPath, setValueDescriptorPath] = useState("");
-  const [valueType, setValueType] = useState("");
+  const [fieldOptions, setFieldOptions] = useState(item.Options);
+  const [formatters, setFormatters] = useState(item.Formatters);
+  const [valueDescriptorPath, setValueDescriptorPath] = useState(mode === "create" ? "" : item.ValueDescriptors.Path);
+  const [valueType, setValueType] = useState(mode === "create" ? "" : item.ValueDescriptors.Type);
 
   const onFieldTypeChange = ({ target: { value } }) => {
     setFieldType(value);
@@ -74,7 +75,6 @@ function FieldsCreator({
     ]);
   };
 
-
   const addFieldFormatClicked = () => {
     // setFormatters([...formatters, ""]);
     setFormatters((oldFieldFormattersList) => [
@@ -89,7 +89,7 @@ function FieldsCreator({
 
   useEffect(() => {
     console.log("Formatters:", formatters);
-  }, [formatters])
+  }, [formatters]);
 
   const updateFields = () => {
     // setFieldOptions([...fieldOptions, {Key: fieldOptionKey, Value: fieldOptionValue}])
@@ -123,8 +123,6 @@ function FieldsCreator({
       deleteField();
     }
   };
-
-
 
   return (
     <>
@@ -172,6 +170,7 @@ function FieldsCreator({
         </Grid>
         <Grid item xs={6}>
           <TextField
+            select
             id={uniqueGuid()}
             disabled={disabledValue}
             label="Value Type" // What name??
@@ -179,66 +178,78 @@ function FieldsCreator({
             variant="outlined"
             fullWidth
             onChange={onValueTypeChange}
-          />
-
+          >
+          {Object.keys(dataTypes).map((dType) => (
+            <MenuItem key={dType} value={dType}>
+              {dType}
+            </MenuItem>
+          ))}
+          </TextField>
         </Grid>
         <Grid item xs={12}>
-        <div>
-          {fieldOptions.length > 0 && (
-            <Paper style={{ padding: "2em", margin: "1em" }}>
-              <Typography>Field Options:</Typography>
-              {fieldOptions.map((option) => (
-                <OptionsCreator
-                  key={option.Id}
-                  item={option}
-                  setOptionList={setFieldOptions}
-                  optionList={fieldOptions}
-                  mode={mode}
-                />
-              ))}
-            </Paper>
-          )}
-        </div>
-      </Grid>
-      <Grid item xs={12}>
-        <div>
-          {formatters.length > 0 && (
-            <Paper style={{ padding: "2em", margin: "1em" }}>
-              <Typography>Field Formats:</Typography>
-              {formatters.map((format) => (
-                <FormatCreator
-                  key={format.Id}
-                  item={format}
-                  setFormatters={setFormatters}
-                  formatters={formatters}
-                  mode={mode}
-                />
-              ))}
-            </Paper>
-          )}
-        </div>
-      </Grid>
+          <div>
+            {fieldOptions.length > 0 && (
+              <Paper style={{ padding: "2em", margin: "1em" }}>
+                <Typography>Field Options:</Typography>
+                {fieldOptions.map((option) => (
+                  <OptionsCreator
+                    key={option.Id}
+                    item={option}
+                    setOptionList={setFieldOptions}
+                    optionList={fieldOptions}
+                    mode={mode}
+                  />
+                ))}
+              </Paper>
+            )}
+          </div>
+        </Grid>
+        <Grid item xs={12}>
+          <div>
+            {formatters.length > 0 && (
+              <Paper style={{ padding: "2em", margin: "1em" }}>
+                <Typography>Field Formats:</Typography>
+                {mode === "edit" ? unformatFormatList(formatters).map((format) => (
+                  <FormatCreator
+                    key={format.Id}
+                    item={format}
+                    setFormatters={setFormatters}
+                    formatters={formatters}
+                    valueType={valueType}
+                    mode={mode}
+                  />
+                ))  : formatters.map((format) => (
+                  <FormatCreator
+                    key={format.Id}
+                    item={format}
+                    setFormatters={setFormatters}
+                    formatters={formatters}
+                    valueType={valueType}
+                    mode={mode}
+                  />))}
+              </Paper>
+            )}
+          </div>
+        </Grid>
         <Grid item>
-              <Button
-                style={{ marginRight: "1em" }}
-                startIcon={<AddIcon />}
-                variant="outlined"
-                onClick={addFieldFormatClicked}
-              >
-                FIELD FORMAT
-              </Button>
+          <Button
+            style={{ marginRight: "1em" }}
+            startIcon={<AddIcon />}
+            variant="outlined"
+            onClick={addFieldFormatClicked}
+          >
+            FIELD FORMAT
+          </Button>
 
-              <Button
-                startIcon={<AddIcon />}
-                variant="outlined"
-                onClick={addFieldOptionClicked}
-              >
-                FIELD OPTION
-              </Button>
-          </Grid>
-
+          <Button
+            startIcon={<AddIcon />}
+            variant="outlined"
+            onClick={addFieldOptionClicked}
+          >
+            FIELD OPTION
+          </Button>
+        </Grid>
       </Grid>
-
 
       <Grid container spacing={2}>
         {mode === "create" && (

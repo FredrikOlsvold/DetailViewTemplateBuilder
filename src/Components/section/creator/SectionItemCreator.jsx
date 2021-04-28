@@ -16,9 +16,7 @@ import FieldsCreator from "./field/FieldsCreator";
 import {
   uniqueGuid,
   listToObject,
-  objectToList,
 } from "../../../helpers/HelperMethods";
-import MenuTypes from "./MenuTypes";
 import { sectionTypes } from "../../../api/getData";
 
 const SectionItemCreator = ({ wrapper, mode }) => {
@@ -69,6 +67,11 @@ const SectionItemCreator = ({ wrapper, mode }) => {
         Id: uniqueGuid(),
         Type: "",
         Label: "",
+        Options: [],
+        Formatters: [],
+        ValueDescriptors : {},
+
+
       },
     ]);
   };

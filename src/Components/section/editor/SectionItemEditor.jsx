@@ -23,7 +23,6 @@ import {
 import OptionsCreator from "../creator/options/OptionsCreator";
 import FieldsCreator from "../creator/field/FieldsCreator";
 import { ExpandMore } from "@material-ui/icons";
-import MenuTypes from "../creator/MenuTypes";
 import { sectionTypes } from "../../../api/getData";
 import AddIcon from "@material-ui/icons/Add";
 
@@ -75,8 +74,6 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
       {
         Id: uniqueGuid(),
         Type: "",
-        Value: "",
-        Format: "",
         Label: "",
       },
     ]);
