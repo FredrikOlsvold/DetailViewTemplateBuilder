@@ -39,6 +39,7 @@ export function jsonValidator(string) {
 }
 
 export function listToObject(list) {
+  console.log("List:", list);
   let singleObject = {};
   list.forEach((obj) => {
     singleObject[obj.Key] = obj.Value;
@@ -60,6 +61,7 @@ export function objectToList(object) {
   }
 }
 
+//return regular list
 export function formatFormatList(list){
   let newList = [];
 
@@ -71,16 +73,14 @@ export function formatFormatList(list){
 
 }
 
-
+//return list of objects
 export function unformatFormatList(list){
   let newList = [];
 
-//split(1)
   list.forEach((item) => {
     let firstParentheses  = item.indexOf("(");
     let lastParentheses  = item.indexOf(")");
 
-    // newObj[item.slice(firstParentheses)] = item.slice(firstParentheses+1, lastParentheses);
     newList.push({
       Key: item.slice(0, firstParentheses),
       Value: item.slice(firstParentheses+1, lastParentheses)

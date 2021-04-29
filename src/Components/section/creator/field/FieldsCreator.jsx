@@ -18,6 +18,7 @@ import {
   listToObject,
   formatFormatList,
   unformatFormatList,
+  objectToList
 } from "../../../../helpers/HelperMethods";
 import { dataTypes, fieldTypes } from "../../../../api/getData";
 import OptionsCreator from "../options/OptionsCreator";
@@ -33,8 +34,8 @@ function FieldsCreator({
   deleteField,
 }) {
   const [fieldType, setFieldType] = useState(item.Type);
-  const [fieldValue, setFieldValue] = useState(item.Value);
-  const [fieldFormat, setFieldFormat] = useState(item.Format);
+  // const [fieldValue, setFieldValue] = useState(item.Value);
+  // const [fieldFormat, setFieldFormat] = useState(item.Format);
   const [fieldLabel, setFieldLabel] = useState(item.Label);
   const [disabledValue, setDisabledValue] = useState(
     mode === "create" ? false : true
@@ -48,12 +49,12 @@ function FieldsCreator({
   const onFieldTypeChange = ({ target: { value } }) => {
     setFieldType(value);
   };
-  const onFieldValueChange = ({ target: { value } }) => {
-    setFieldValue(value);
-  };
-  const onFieldFormatChange = ({ target: { value } }) => {
-    setFieldFormat(value);
-  };
+  // const onFieldValueChange = ({ target: { value } }) => {
+  //   setFieldValue(value);
+  // };
+  // const onFieldFormatChange = ({ target: { value } }) => {
+  //   setFieldFormat(value);
+  // };
   const onLabelValueChange = ({ target: { value } }) => {
     setFieldLabel(value);
   };
@@ -74,9 +75,9 @@ function FieldsCreator({
       },
     ]);
   };
+  console.log(item);
 
   const addFieldFormatClicked = () => {
-    // setFormatters([...formatters, ""]);
     setFormatters((oldFieldFormattersList) => [
       ...oldFieldFormattersList,
       {
@@ -87,11 +88,12 @@ function FieldsCreator({
     ]);
   };
 
-  useEffect(() => {
-    console.log("Formatters:", formatters);
-  }, [formatters]);
+  // useEffect(() => {
+  //   console.log("Formatters:", formatters);
+  // }, [formatters]);
 
   const updateFields = () => {
+    console.log("Inside Update Fields:", fieldOptions)
     // setFieldOptions([...fieldOptions, {Key: fieldOptionKey, Value: fieldOptionValue}])
     const newFieldList = replaceItemAtIndex(fieldList, index, {
       ...item,
@@ -99,7 +101,7 @@ function FieldsCreator({
       Type: fieldType,
       Label: fieldLabel,
       Options: listToObject(fieldOptions),
-      Formatters: formatFormatList(formatters),
+      Formatters: mode === "create" ? formatFormatList(formatters) : formatters,
       ValueDescriptors: {
         Path: valueDescriptorPath,
         Type: valueType,
@@ -187,6 +189,8 @@ function FieldsCreator({
           </TextField>
         </Grid>
         <Grid item xs={12}>
+          {mode === "create" ?
+          
           <div>
             {fieldOptions.length > 0 && (
               <Paper style={{ padding: "2em", margin: "1em" }}>
@@ -203,6 +207,29 @@ function FieldsCreator({
               </Paper>
             )}
           </div>
+                  :
+                    
+          <div>
+            {objectToList(fieldOptions).length > 0 && (
+              <Paper style={{ padding: "2em", margin: "1em" }}>
+                <Typography>Field Options:</Typography>
+                {objectToList(fieldOptions).map((option, index) => (
+                  <OptionsCreator
+                    key={option.Id}
+                    item={option}
+                    setOptionList={setFieldOptions}
+                    optionList={objectToList(fieldOptions)}
+                    mode={mode}
+                    setSectionUpdated={setSectionUpdated}
+                    sectionUpdated={sectionUpdated}
+                    updateFields={updateFields}
+                    position={index}
+                  />
+                ))}
+              </Paper>
+            )}
+          </div>}
+
         </Grid>
         <Grid item xs={12}>
           <div>
@@ -279,8 +306,11 @@ function FieldsCreator({
               onClick={() => {
                 if (disabledValue === true) {
                   setFieldType(fieldType);
-                  setFieldValue(fieldValue);
-                  setFieldFormat(fieldFormat);
+                  // setFieldValue(fieldValue);
+                  // setFieldFormat(fieldFormat);
+                  setValueDescriptorPath(valueDescriptorPath);
+                  setValueType(valueType);
+                  setFieldLabel(fieldLabel);
                 } else {
                   updateFields();
                 }

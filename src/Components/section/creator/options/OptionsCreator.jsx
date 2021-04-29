@@ -6,7 +6,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import {
   replaceItemAtIndex,
   removeItemAtIndex,
-  uniqueGuid,
+  uniqueGuid
 } from "../../../../helpers/HelperMethods";
 
 function OptionsCreator({
@@ -17,7 +17,10 @@ function OptionsCreator({
   mode,
   deleteOption,
   setSectionUpdated,
+  updateFields,
+  position
 }) {
+
   const index = optionList.findIndex((optionItem) => optionItem === item);
   const [optionKey, setOptionKey] = useState(item.Key);
   const [optionValue, setOptionValue] = useState(item.Value);
@@ -25,35 +28,39 @@ function OptionsCreator({
     mode === "create" ? false : true
   );
 
-  const [error, setError] = useState("");
+  console.log("Item.Key:", item.Key);
+  console.log("Item.Value:", item.Value);
+  console.log("Index: ", index);
+  console.log("List:", optionList);
+  console.log("Item:", item);
+
 
   const onOptionKeyChange = ({ target: { value } }) => {
     setOptionKey(value);
-    //value.preventDefault();
-    //setError("");
   };
   const onOptionValueChange = ({ target: { value } }) => {
     setOptionValue(value);
-    //setError("");
-    //setDisabledValue(disabledValue);
   };
 
-  const updateOptions = () => {
-    // if (optionKey !== "" || optionValue !== "") {
-    //   setError("Required field!");
-    //   setDisabledValue(disabledValue);
-    // }
-    const newOptionList = replaceItemAtIndex(optionList, index, {
+
+
+  const updateOptions = async () => {
+    console.log("Update options:", optionList);
+    const newOptionList = replaceItemAtIndex(optionList, 0, {
       ...item,
       Key: optionKey,
       Value: optionValue,
-    });
-
-    setOptionList(newOptionList);
+    }
+    );
+    console.log("New Update list:", newOptionList);
+    await setOptionList(newOptionList);
     setDisabledValue(!disabledValue);
     if (mode === "edit") {
+      
       setSectionUpdated(!sectionUpdated);
     }
+
+    console.log("optionList after update", optionList);
   };
 
   const removeItem = () => {
@@ -125,8 +132,8 @@ function OptionsCreator({
                 startIcon={disabledValue ? <EditIcon /> : <SaveIcon />}
                 onClick={() => {
                   if (disabledValue === true) {
-                    setOptionValue(optionValue);
-                    setOptionKey(optionKey);
+                    // setOptionValue(optionValue);
+                    // setOptionKey(optionKey);
                   } else {
                     updateOptions();
                   }
