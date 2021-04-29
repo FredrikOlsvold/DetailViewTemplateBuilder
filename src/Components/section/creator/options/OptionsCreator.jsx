@@ -18,22 +18,15 @@ function OptionsCreator({
   deleteOption,
   setSectionUpdated,
   updateFields,
-  position
 }) {
 
-  const index = optionList.findIndex((optionItem) => optionItem === item);
+  const index = mode === "create" ? optionList.findIndex((optionItem) => optionItem === item): optionList.findIndex((optionItem) => optionItem.Key === item.Key);
   const [optionKey, setOptionKey] = useState(item.Key);
   const [optionValue, setOptionValue] = useState(item.Value);
   const [disabledValue, setDisabledValue] = useState(
     mode === "create" ? false : true
   );
-
-  console.log("Item.Key:", item.Key);
-  console.log("Item.Value:", item.Value);
-  console.log("Index: ", index);
-  console.log("List:", optionList);
-  console.log("Item:", item);
-
+    console.log("Options Item", item);
 
   const onOptionKeyChange = ({ target: { value } }) => {
     setOptionKey(value);
@@ -45,32 +38,33 @@ function OptionsCreator({
 
 
   const updateOptions = async () => {
-    console.log("Update options:", optionList);
-    const newOptionList = replaceItemAtIndex(optionList, 0, {
+    const newOptionList = replaceItemAtIndex(optionList, index, {
       ...item,
+      Id: item.Id,
       Key: optionKey,
       Value: optionValue,
-    }
+    },
     );
-    console.log("New Update list:", newOptionList);
+
     await setOptionList(newOptionList);
     setDisabledValue(!disabledValue);
     if (mode === "edit") {
-      
+
+      // updateFields();
       setSectionUpdated(!sectionUpdated);
+      
     }
 
-    console.log("optionList after update", optionList);
   };
 
-  const removeItem = () => {
+  const removeItem = async () => {
     if (mode === "create") {
       const newOptionList = removeItemAtIndex(optionList, index);
       setOptionList(newOptionList);
     } else {
       const newOptionList = removeItemAtIndex(optionList, index);
-      setOptionList(newOptionList);
-      deleteOption();
+      await setOptionList(newOptionList);
+      // deleteOption();
     }
   };
 

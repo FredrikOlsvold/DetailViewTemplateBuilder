@@ -18,7 +18,7 @@ import {
   listToObject,
   formatFormatList,
   unformatFormatList,
-  objectToList
+  objectToList,
 } from "../../../../helpers/HelperMethods";
 import { dataTypes, fieldTypes } from "../../../../api/getData";
 import OptionsCreator from "../options/OptionsCreator";
@@ -34,27 +34,29 @@ function FieldsCreator({
   deleteField,
 }) {
   const [fieldType, setFieldType] = useState(item.Type);
-  // const [fieldValue, setFieldValue] = useState(item.Value);
-  // const [fieldFormat, setFieldFormat] = useState(item.Format);
   const [fieldLabel, setFieldLabel] = useState(item.Label);
   const [disabledValue, setDisabledValue] = useState(
     mode === "create" ? false : true
   );
   const index = fieldList.findIndex((fieldItem) => fieldItem === item);
-  const [fieldOptions, setFieldOptions] = useState(item.Options);
-  const [formatters, setFormatters] = useState(item.Formatters);
-  const [valueDescriptorPath, setValueDescriptorPath] = useState(mode === "create" ? "" : item.ValueDescriptors.Path);
-  const [valueType, setValueType] = useState(mode === "create" ? "" : item.ValueDescriptors.Type);
+  const [fieldOptions, setFieldOptions] = useState(mode === "create" ? item.Options : objectToList(item.Options));
+  const [formatters, setFormatters] = useState(mode === "create" ? item.Formatters: unformatFormatList(item.Formatters));
+  const [valueDescriptorPath, setValueDescriptorPath] = useState(
+    mode === "create" ? "" : item.ValueDescriptors.Path
+  );
+  const [valueType, setValueType] = useState(
+    mode === "create" ? "" : item.ValueDescriptors.Type
+  );
+
+
+  console.log("Item.Formatters:", formatters);
+  console.log("Item.Options:", fieldOptions);
+
 
   const onFieldTypeChange = ({ target: { value } }) => {
     setFieldType(value);
   };
-  // const onFieldValueChange = ({ target: { value } }) => {
-  //   setFieldValue(value);
-  // };
-  // const onFieldFormatChange = ({ target: { value } }) => {
-  //   setFieldFormat(value);
-  // };
+
   const onLabelValueChange = ({ target: { value } }) => {
     setFieldLabel(value);
   };
@@ -75,7 +77,6 @@ function FieldsCreator({
       },
     ]);
   };
-  console.log(item);
 
   const addFieldFormatClicked = () => {
     setFormatters((oldFieldFormattersList) => [
@@ -93,7 +94,7 @@ function FieldsCreator({
   // }, [formatters]);
 
   const updateFields = () => {
-    console.log("Inside Update Fields:", fieldOptions)
+    console.log("Inside Update Fields:", fieldOptions);
     // setFieldOptions([...fieldOptions, {Key: fieldOptionKey, Value: fieldOptionValue}])
     const newFieldList = replaceItemAtIndex(fieldList, index, {
       ...item,
@@ -101,7 +102,7 @@ function FieldsCreator({
       Type: fieldType,
       Label: fieldLabel,
       Options: listToObject(fieldOptions),
-      Formatters: mode === "create" ? formatFormatList(formatters) : formatters,
+      Formatters: formatFormatList(formatters),
       ValueDescriptors: {
         Path: valueDescriptorPath,
         Type: valueType,
@@ -181,79 +182,79 @@ function FieldsCreator({
             fullWidth
             onChange={onValueTypeChange}
           >
-          {Object.keys(dataTypes).map((dType) => (
-            <MenuItem key={dType} value={dType}>
-              {dType}
-            </MenuItem>
-          ))}
+            {Object.keys(dataTypes).map((dType) => (
+              <MenuItem key={dType} value={dType}>
+                {dType}
+              </MenuItem>
+            ))}
           </TextField>
         </Grid>
         <Grid item xs={12}>
-          {mode === "create" ?
-          
-          <div>
-            {fieldOptions.length > 0 && (
-              <Paper style={{ padding: "2em", margin: "1em" }}>
-                <Typography>Field Options:</Typography>
-                {fieldOptions.map((option) => (
-                  <OptionsCreator
-                    key={option.Id}
-                    item={option}
-                    setOptionList={setFieldOptions}
-                    optionList={fieldOptions}
-                    mode={mode}
-                  />
-                ))}
-              </Paper>
-            )}
-          </div>
-                  :
-                    
-          <div>
-            {objectToList(fieldOptions).length > 0 && (
-              <Paper style={{ padding: "2em", margin: "1em" }}>
-                <Typography>Field Options:</Typography>
-                {objectToList(fieldOptions).map((option, index) => (
-                  <OptionsCreator
-                    key={option.Id}
-                    item={option}
-                    setOptionList={setFieldOptions}
-                    optionList={objectToList(fieldOptions)}
-                    mode={mode}
-                    setSectionUpdated={setSectionUpdated}
-                    sectionUpdated={sectionUpdated}
-                    updateFields={updateFields}
-                    position={index}
-                  />
-                ))}
-              </Paper>
-            )}
-          </div>}
-
+          {mode === "create" ? (
+            <div>
+              {fieldOptions.length > 0 && (
+                <Paper style={{ padding: "2em", margin: "1em" }}>
+                  <Typography>Field Options:</Typography>
+                  {fieldOptions.map((option) => (
+                    <OptionsCreator
+                      key={uniqueGuid}
+                      item={option}
+                      setOptionList={setFieldOptions}
+                      optionList={fieldOptions}
+                      mode={mode}
+                    />
+                  ))}
+                </Paper>
+              )}
+            </div>
+          ) : (
+            <div>
+              {fieldOptions.length > 0 && (
+                <Paper style={{ padding: "2em", margin: "1em" }}>
+                  <Typography>Field Options:</Typography>
+                  {fieldOptions.map((option) => (
+                    <OptionsCreator
+                      key={uniqueGuid}
+                      item={option}
+                      setOptionList={setFieldOptions}
+                      optionList={fieldOptions}
+                      mode={mode}
+                      setSectionUpdated={setSectionUpdated}
+                      sectionUpdated={sectionUpdated}
+                      updateFields={updateFields}
+                    />
+                  ))}
+                </Paper>
+              )}
+            </div>
+          )}
         </Grid>
         <Grid item xs={12}>
           <div>
             {formatters.length > 0 && (
               <Paper style={{ padding: "2em", margin: "1em" }}>
                 <Typography>Field Formats:</Typography>
-                {mode === "edit" ? unformatFormatList(formatters).map((format) => (
-                  <FormatCreator
-                    key={format.Id}
-                    item={format}
-                    setFormatters={setFormatters}
-                    formatters={formatters}
-                    valueType={valueType}
-                    mode={mode}
-                  />
-                ))  : formatters.map((format) => (
-                  <FormatCreator
-                    key={format.Id}
-                    item={format}
-                    setFormatters={setFormatters}
-                    formatters={formatters}
-                    valueType={valueType}
-                    mode={mode}
-                  />))}
+                {mode === "edit"
+                  ? formatters.map((format) => (
+                      <FormatCreator
+                        key={format.Id}
+                        item={format}
+                        setFormatters={setFormatters}
+                        formatters={formatters}
+                        valueType={valueType}
+                        mode={mode}
+                      />
+                    ))
+                  : formatters.map((format) => (
+                      <FormatCreator
+                        key={format.Id}
+                        item={format}
+                        setFormatters={setFormatters}
+                        formatters={formatters}
+                        valueType={valueType}
+                        mode={mode}
+                      />
+                    ))}
               </Paper>
             )}
           </div>

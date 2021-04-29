@@ -1,4 +1,4 @@
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import {
   Accordion,
   AccordionActions,
@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
 import React, { useEffect, useState } from "react";
-import { windowTitleAtom, contentAtom } from "../../../store/Store";
+import { windowTitleAtom, contentAtom, displayWrapperAtom } from "../../../store/Store";
 import {
   replaceItemAtIndex,
   removeItemAtIndex,
@@ -38,11 +38,12 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
 
   const [error, setError] = useState("");
 
-  useEffect(() => {
-    console.log("Item is updated");
-    setOptionList(objectToList(item.Options));
-    setFieldList(item.Fields);
-  }, [item]);
+
+  // useEffect(() => {
+  //   console.log("Item is updated");
+  //   setOptionList(objectToList(item.Options));
+  //   setFieldList(item.Fields);
+  // }, [item]);
 
   const deleteSection = () => {
     const newSectionList = removeItemAtIndex(sectionList, index);
@@ -91,12 +92,11 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
       });
 
       setSectionList(newSectionList);
-      setError("")
+      setError("");
       return;
     }
 
-    setError("Required field!")
-
+    setError("Required field!");
   };
 
   const onTypeChange = ({ target: { value } }) => {

@@ -51,7 +51,7 @@ export function listToObject(list) {
 export function objectToList(object) {
   try {
     let list = [];
-    for (const [key, value] of Object.entries(object)) {
+    for (const [ key, value] of Object.entries(object)) {
       list.push({ Key: key, Value: value });
     }
     return list;

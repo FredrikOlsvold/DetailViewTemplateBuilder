@@ -38,14 +38,16 @@ const FormatCreator = ({ item, setFormatters, formatters, mode, valueType }) => 
     }
   };
 
-  const removeItem = () => {
+  const removeItem = async () => {
     if (mode === "create") {
       const newFormattersList = removeItemAtIndex(formatters, index);
       setFormatters(newFormattersList);
     } else {
-    //   const newOptionList = removeItemAtIndex(formatters, index);
-    //   setFormatters(newOptionList);
-    //   deleteOption();
+      console.log("Index", index);
+      console.log("Item", item);
+      console.log("Formatters", formatters);
+      const newFormattersList = removeItemAtIndex(formatters, index);
+      await setFormatters(newFormattersList);
     }
   };
 
