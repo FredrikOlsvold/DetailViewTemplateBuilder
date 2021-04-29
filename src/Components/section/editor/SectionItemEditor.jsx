@@ -173,7 +173,7 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
           {optionList.length > 0 && <Typography>Options:</Typography>}
           {optionList.map((option) => (
             <OptionsCreator
-              key={option.key}
+              key={option.Key+option.Value}
               item={option}
               mode={mode}
               setSectionUpdated={setSectionUpdated}
@@ -181,6 +181,7 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
               optionList={optionList}
               setOptionList={setOptionList}
               deleteOption={deleteOption}
+              optionOrigin={"sectionOptionOrigin"}
             />
           ))}
           {/* </AccordionDetails> */}
@@ -219,11 +220,6 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
       </Accordion>
     </div>
   );
-};
-
-let uniqueId = 0;
-const getUniqueId = () => {
-  return uniqueId++;
 };
 
 export default SectionItemEditor;

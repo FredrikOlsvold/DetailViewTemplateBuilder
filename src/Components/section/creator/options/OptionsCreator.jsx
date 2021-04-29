@@ -18,9 +18,11 @@ function OptionsCreator({
   deleteOption,
   setSectionUpdated,
   updateFields,
+  optionOrigin
 }) {
 
-  const index = mode === "create" ? optionList.findIndex((optionItem) => optionItem === item): optionList.findIndex((optionItem) => optionItem.Key === item.Key);
+  // optionOrigin={"sectionOptionOrigin"}
+  const index = (mode === "create" || optionOrigin === "sectionOptionOrigin") ? optionList.findIndex((optionItem) => optionItem === item): optionList.findIndex((optionItem) => optionItem.Key === item.Key);
   const [optionKey, setOptionKey] = useState(item.Key);
   const [optionValue, setOptionValue] = useState(item.Value);
   const [disabledValue, setDisabledValue] = useState(
@@ -60,7 +62,7 @@ function OptionsCreator({
   const removeItem = async () => {
     if (mode === "create") {
       const newOptionList = removeItemAtIndex(optionList, index);
-      setOptionList(newOptionList);
+      await setOptionList(newOptionList);
     } else {
       const newOptionList = removeItemAtIndex(optionList, index);
       await setOptionList(newOptionList);

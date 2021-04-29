@@ -197,7 +197,7 @@ function FieldsCreator({
                   <Typography>Field Options:</Typography>
                   {fieldOptions.map((option) => (
                     <OptionsCreator
-                      key={uniqueGuid}
+                      key={option.Id}
                       item={option}
                       setOptionList={setFieldOptions}
                       optionList={fieldOptions}
@@ -214,7 +214,7 @@ function FieldsCreator({
                   <Typography>Field Options:</Typography>
                   {fieldOptions.map((option) => (
                     <OptionsCreator
-                      key={uniqueGuid}
+                      key={option.Key+option.Value}
                       item={option}
                       setOptionList={setFieldOptions}
                       optionList={fieldOptions}
@@ -222,6 +222,7 @@ function FieldsCreator({
                       setSectionUpdated={setSectionUpdated}
                       sectionUpdated={sectionUpdated}
                       updateFields={updateFields}
+                      optionOrigin={"fieldOptionOrigin"}
                     />
                   ))}
                 </Paper>
@@ -237,7 +238,7 @@ function FieldsCreator({
                 {mode === "edit"
                   ? formatters.map((format) => (
                       <FormatCreator
-                        key={format.Id}
+                        key={format.Key+format.Value}
                         item={format}
                         setFormatters={setFormatters}
                         formatters={formatters}
@@ -307,8 +308,6 @@ function FieldsCreator({
               onClick={() => {
                 if (disabledValue === true) {
                   setFieldType(fieldType);
-                  // setFieldValue(fieldValue);
-                  // setFieldFormat(fieldFormat);
                   setValueDescriptorPath(valueDescriptorPath);
                   setValueType(valueType);
                   setFieldLabel(fieldLabel);
