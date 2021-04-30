@@ -5,6 +5,7 @@ import { Grid, Typography } from "@material-ui/core";
 import ListAllTemplates from './components/templateMenu/ListAllTemplates';
 import TemplateMapping from "./components/containers/mapping/TemplateMapping";
 import OutputDisplayWrapper from "./components/containers/OutputDisplayWrapper";
+import EngineRunner from "./engine/EngineRunner";
 
 
   //Atom that stores all fields in a list. Global state
@@ -24,6 +25,7 @@ function App() {
       <Grid container spacing={1}>
         
             {/* <ListAllTemplates/> */}
+            {/* <EngineRunner/> */}
          
 
           <Grid item xs={9}> 
