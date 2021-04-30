@@ -76,6 +76,10 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
         Id: uniqueGuid(),
         Type: "",
         Label: "",
+        Options: {},
+        Formatters: [],
+        ValueDescriptors: {
+        }
       },
     ]);
   };
