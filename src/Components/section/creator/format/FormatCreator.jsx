@@ -1,12 +1,23 @@
 import { Button, Grid, MenuItem, TextField } from "@material-ui/core";
 import React, { useState } from "react";
-import { removeItemAtIndex, replaceItemAtIndex, uniqueGuid, unformatFormatList } from "../../../../helpers/HelperMethods";
+import {
+  removeItemAtIndex,
+  replaceItemAtIndex,
+  uniqueGuid,
+  unformatFormatList,
+} from "../../../../helpers/HelperMethods";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import SaveIcon from "@material-ui/icons/Save";
-import {dataTypes} from "../../../../api/getData";
+import { dataTypes } from "../../../../api/getData";
 
-const FormatCreator = ({ item, setFormatters, formatters, mode, valueType }) => {
+const FormatCreator = ({
+  item,
+  setFormatters,
+  formatters,
+  mode,
+  valueType,
+}) => {
   const index = formatters.findIndex((optionItem) => optionItem === item);
   const [formatKey, setFormatKey] = useState(item.Key);
   const [formatValue, setFormatValue] = useState(item.Value);
@@ -24,7 +35,6 @@ const FormatCreator = ({ item, setFormatters, formatters, mode, valueType }) => 
   };
 
   const updateFormatters = () => {
-
     const newFormattersList = replaceItemAtIndex(formatters, index, {
       ...item,
       Key: formatKey,
@@ -34,7 +44,7 @@ const FormatCreator = ({ item, setFormatters, formatters, mode, valueType }) => 
     setFormatters(newFormattersList);
     setDisabledValue(!disabledValue);
     if (mode === "edit") {
-    //   setSectionUpdated(!sectionUpdated);
+      //   setSectionUpdated(!sectionUpdated);
     }
   };
 
@@ -56,7 +66,7 @@ const FormatCreator = ({ item, setFormatters, formatters, mode, valueType }) => 
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <TextField
-          select
+            select
             disabled={disabledValue}
             id={uniqueGuid()}
             label="Format"
@@ -65,13 +75,13 @@ const FormatCreator = ({ item, setFormatters, formatters, mode, valueType }) => 
             fullWidth
             onChange={onFormatKeyChange}
           >
-            {dataTypes[valueType] &&            
-            dataTypes[valueType].map((funcType) => (
-              <MenuItem key={funcType} value={funcType}>
-                {funcType}
-              </MenuItem>
-            ))}
-            </TextField>
+            {dataTypes[valueType] &&
+              dataTypes[valueType].map((funcType) => (
+                <MenuItem key={funcType} value={funcType}>
+                  {funcType}
+                </MenuItem>
+              ))}
+          </TextField>
         </Grid>
 
         <Grid item xs={6}>
@@ -88,34 +98,55 @@ const FormatCreator = ({ item, setFormatters, formatters, mode, valueType }) => 
       </Grid>
 
       <Grid container spacing={2}>
-      <Grid item>
-              <Button
-                size="small"
-                type="button"
-                variant="contained"
-                color="default"
-                startIcon={disabledValue ? <EditIcon /> : <SaveIcon />}
-                onClick={() => { 
-                if(mode === "create"){
-                    updateFormatters()
-                }
-                }}
-              >
-                {disabledValue ? "Edit" : "Save"}
-              </Button>
-            </Grid>
-      <Grid item>
+        {mode === "create" && (
+          <Grid item>
             <Button
               size="small"
               type="button"
               variant="contained"
               color="default"
-              startIcon={<DeleteIcon />}
-              onClick={removeItem}
+              startIcon={disabledValue ? <EditIcon /> : <SaveIcon />}
+              onClick={updateFormatters}
             >
-              DELETE
+              {disabledValue ? "Edit" : "Save"}
             </Button>
           </Grid>
+        )}
+
+        {mode === "edit" && (
+          <Grid item>
+            <Button
+              size="small"
+              type="button"
+              variant="contained"
+              color="default"
+              startIcon={disabledValue ? <EditIcon /> : <SaveIcon />}
+              onClick={() => {
+                if (disabledValue === true) {
+                  //Nothing?
+                } else {
+                  updateFormatters();
+                }
+                setDisabledValue(!disabledValue);
+              }}
+            >
+              {disabledValue ? "Edit" : "Save"}
+            </Button>
+          </Grid>
+        )}
+
+        <Grid item>
+          <Button
+            size="small"
+            type="button"
+            variant="contained"
+            color="default"
+            startIcon={<DeleteIcon />}
+            onClick={removeItem}
+          >
+            DELETE
+          </Button>
+        </Grid>
       </Grid>
     </div>
   );

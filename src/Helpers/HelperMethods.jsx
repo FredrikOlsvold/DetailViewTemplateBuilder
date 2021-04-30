@@ -39,64 +39,66 @@ export function jsonValidator(string) {
 }
 
 export function listToObject(list) {
-  console.log("List:", list);
-  let singleObject = {};
-  list.forEach((obj) => {
-    singleObject[obj.Key] = obj.Value;
-  });
+  try {
+    let singleObject = {};
+    list.forEach((obj) => {
+      singleObject[obj.Key] = obj.Value;
+    });
 
-  return singleObject;
+    return singleObject;
+  } catch (error) {
+    console.log(error.message);
+    return [];
+  }
 }
 
 export function objectToList(object) {
   try {
     let list = [];
-    for (const [ key, value] of Object.entries(object)) {
+    for (const [key, value] of Object.entries(object)) {
       list.push({ Key: key, Value: value });
     }
     return list;
-  }catch(error){
+  } catch (error) {
     console.log(error.message);
     return [];
   }
 }
 
 //return regular list
-export function formatFormatList(list){
-  let newList = [];
+export function formatFormatList(list) {
+  try {
+    let newList = [];
 
-  list.forEach((obj) => {
-    newList.push(`${obj.Key}(${obj.Value})`);
-  })
+    list.forEach((obj) => {
+      newList.push(`${obj.Key}(${obj.Value})`);
+    });
 
-  return newList;
-
+    return newList;
+  } catch (error) {
+    console.log(error.message);
+    return [];
+  }
 }
 
 //return list of objects
-export function unformatFormatList(list){
-  let newList = [];
+export function unformatFormatList(list) {
+  try {
+    let newList = [];
 
-  list.forEach((item) => {
-    let firstParentheses  = item.indexOf("(");
-    let lastParentheses  = item.indexOf(")");
+    list.forEach((item) => {
+      let firstParentheses = item.indexOf("(");
+      let lastParentheses = item.indexOf(")");
 
-    newList.push({
-      Key: item.slice(0, firstParentheses),
-      Value: item.slice(firstParentheses+1, lastParentheses)
-    })
-  })
+      newList.push({
+        Key: item.slice(0, firstParentheses),
+        Value: item.slice(firstParentheses + 1, lastParentheses),
+      });
+    });
 
-  return newList;
+    return newList;
+  } catch (error) {
+    console.log(error.message);
+    return [];
+  }
 }
-
-// try {
-//   let list = [];
-//   for (const [key, value] of Object.entries(object)) {
-//     list.push({ Key: key, Value: value });
-//   }
-//   return list;
-// }catch(error){
-//   console.log(error.message);
-//   return [];
-// }

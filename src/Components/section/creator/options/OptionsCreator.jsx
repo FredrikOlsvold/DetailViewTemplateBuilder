@@ -74,7 +74,7 @@ function OptionsCreator({
     <>
       <div>
         <Grid container spacing={2}>
-          <Grid item>
+          <Grid item xs={6}>
             <TextField
               disabled={disabledValue}
               id={uniqueGuid()}
@@ -87,7 +87,7 @@ function OptionsCreator({
               //   helperText={error}
             />
           </Grid>
-          <Grid item>
+          <Grid item xs={6}>
             <TextField
               disabled={disabledValue}
               id={uniqueGuid()}
