@@ -5,7 +5,6 @@ import { Grid, Typography } from "@material-ui/core";
 import ListAllTemplates from './components/templateMenu/ListAllTemplates';
 import TemplateMapping from "./components/containers/mapping/TemplateMapping";
 import OutputDisplayWrapper from "./components/containers/OutputDisplayWrapper";
-import EngineRunner from "./engine/EngineRunner";
 import "./engine/EngineRenderer";
 
 
