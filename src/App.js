@@ -6,6 +6,7 @@ import ListAllTemplates from './components/templateMenu/ListAllTemplates';
 import TemplateMapping from "./components/containers/mapping/TemplateMapping";
 import OutputDisplayWrapper from "./components/containers/OutputDisplayWrapper";
 import EngineRunner from "./engine/EngineRunner";
+import "./engine/EngineRenderer";
 
 
   //Atom that stores all fields in a list. Global state
@@ -25,7 +26,7 @@ function App() {
       <Grid container spacing={1}>
         
             {/* <ListAllTemplates/> */}
-            {/* <EngineRunner/> */}
+            <detail-view/>
          
 
           <Grid item xs={9}> 

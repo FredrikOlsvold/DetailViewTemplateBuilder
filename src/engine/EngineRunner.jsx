@@ -9,7 +9,10 @@ const EngineRunner = () => {
     const jsonTemplate = useRecoilValue(TestSelector);
     const cssStyling = useRecoilValue(cssAtom);
 
+
+    const newEngine = new window.TemplateEngine(null, <div></div>)
     
+    console.log(newEngine.renderData(mockWorkOrder, jsonTemplate).getHTML());
 
 
     return (
@@ -17,14 +20,12 @@ const EngineRunner = () => {
         <div className="panel">
             <div className="detail-view class">
                 <div className="content">
-                    {}
+                    {/* newEngine.renderData(mockWorkOrder, jsonTemplate) */}
                 </div>
             </div>
         </div>
         </>
     )
 }
-
-
 
 export default EngineRunner;
