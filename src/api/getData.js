@@ -171,7 +171,7 @@ export const dataTypes = {
 }
 
 export const fieldTypes = {
-    "Label with data":[],
+    "LabelWithData":[],
     "Multiline": [],
     "Checkbox":[],
     "Line": [],

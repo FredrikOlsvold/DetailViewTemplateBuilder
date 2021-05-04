@@ -1,8 +1,3 @@
-
-/* eslint-disable no-undef */
-/* eslint-disable no-unused-expressions */
-/* eslint no-use-before-define: 0 */
-
 (() => {
   var directives = new WeakMap(),
     directive = (f) => (...args) => {
@@ -2308,14 +2303,10 @@
         (this.checkboxService = new CheckboxService(dataHelper));
     }
     renderData(data, sections) {
-        console.log("Inside renderData ", sections, data)
-       
-
       return html` ${repeat(
         sections,
         (s) => s.Id,
         (s) => {
-            consol.log("Inside repeat:", s, data)
           try {
             return this.renderTemplateSections(data, s);
           } catch (e) {
@@ -2323,12 +2314,9 @@
           }
         }
       )}`;
-
     }
-
     renderTemplateSections(data, section) {
       try {
-          console.log("Data:", data)
         return html`<div
           id="_${section.Id}"
           class="SectionType_${section.Type}"
@@ -2566,7 +2554,6 @@
         this.toggleSubView();
     }
     renderTemplateFields(data, fields) {
-        debugger;
       return html`${repeat(
         fields,
         (f) => f.Id,
@@ -2711,4 +2698,31 @@
           </div>`;
     }
   };
-window.TemplateEngine =  TemplateEngine})();
+})();
+/**
+ * @license
+ * Copyright (c) 2017 The Polymer Project Authors. All rights reserved.
+ * This code may only be used under the BSD style license found at
+ * http://polymer.github.io/LICENSE.txt
+ * The complete set of authors may be found at
+ * http://polymer.github.io/AUTHORS.txt
+ * The complete set of contributors may be found at
+ * http://polymer.github.io/CONTRIBUTORS.txt
+ * Code distributed by Google as part of the polymer project is also
+ * subject to an additional IP rights grant found at
+ * http://polymer.github.io/PATENTS.txt
+ */
+/**
+ * @license
+ * Copyright (c) 2018 The Polymer Project Authors. All rights reserved.
+ * This code may only be used under the BSD style license found at
+ * http://polymer.github.io/LICENSE.txt
+ * The complete set of authors may be found at
+ * http://polymer.github.io/AUTHORS.txt
+ * The complete set of contributors may be found at
+ * http://polymer.github.io/CONTRIBUTORS.txt
+ * Code distributed by Google as part of the polymer project is also
+ * subject to an additional IP rights grant found at
+ * http://polymer.github.io/PATENTS.txt
+ */
+//# sourceMappingURL=templateengine.js.map
