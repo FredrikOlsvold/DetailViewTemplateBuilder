@@ -4,8 +4,18 @@ import { Grid, Typography } from "@material-ui/core";
 import SectionItemCreator from "../section/creator/SectionItemCreator";
 import SectionItemEditor from "../section/editor/SectionItemEditor";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { useState } from "react";
 
-const Content = ({ contentSectionList }) => {
+const Content = ({ contentSectionList, setContentSectionList }) => {
+
+    const handleOnDragEnd = (res) => {
+        const content = Array.from(contentSectionList)
+        const [reorderedContent] = content.splice(res.source.index, 1)
+        content.splice(res.destination.index, 0, reorderedContent)
+
+        setContentSectionList(content)
+    }
+
   return (
     <div style={{ marginTop: "2em" }}>
       <Grid container spacing={2}>
@@ -24,7 +34,37 @@ const Content = ({ contentSectionList }) => {
           >
             Edit Section
           </Typography>
-          <DragDropContext>
+          <DragDropContext onDragEnd={handleOnDragEnd}>
+            <Droppable droppableId="editSectionsContent">
+              {(provided) => (
+                <ul
+                  className="editSectionsContent"
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  {contentSectionList.map((section, index) => (
+                    <Draggable
+                      key={section.Id}
+                      draggableId={section.Id}
+                      index={index}
+                    >
+                      {(provided) => (
+                        <li {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                          <SectionItemEditor
+                            item={section}
+                            wrapper={"content"}
+                            mode={"edit"}
+                          />
+                        </li>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </ul>
+              )}
+            </Droppable>
+          </DragDropContext>
+          {/* <DragDropContext>
             <Droppable droppableId="editSectionContent">
               {(provided) => (
                 <ul
@@ -32,31 +72,32 @@ const Content = ({ contentSectionList }) => {
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                 >
-                  {contentSectionList.map((section, index) => {return(
-                    <Draggable
-                      key={section.Id}
-                      draggableId={section.Id}
-                      index={index}
-                    >
-                      <li
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
+                  {contentSectionList.map((section, index) => (
+                      <Draggable
+                        key={index}
+                        draggableId={index}
+                        index={index}
                       >
-                        {" "}
-                        <SectionItemEditor
-                          key={section.Id}
-                          item={section}
-                          wrapper={"content"}
-                          mode={"edit"}
-                        />
-                      </li>
-                    </Draggable>
-                  )})}
+                        <li
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          ref={provided.innerRef}
+                        >
+                            hello
+                          <SectionItemEditor
+                            key={section.Id}
+                            item={section}
+                            wrapper={"content"}
+                            mode={"edit"}
+                          />
+                        </li>
+                      </Draggable>
+                    )
+                  )}
                 </ul>
               )}
             </Droppable>
-          </DragDropContext>
+          </DragDropContext> */}
           {/* {contentSectionList.map((section) => (
                 <SectionItemEditor key={section.Id} item={section} wrapper={"content"} mode={"edit"}/>
                 ))} */}

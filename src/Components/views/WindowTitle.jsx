@@ -6,7 +6,7 @@ import { Grid, Typography } from "@material-ui/core";
 import { useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-const WindowTitle = ({ titleSectionList }) => {
+const WindowTitle = ({ titleSectionList, setTitleSectionList }) => {
   return (
     <div style={{ marginTop: "2em" }}>
       <Grid container spacing={2}>
@@ -26,7 +26,16 @@ const WindowTitle = ({ titleSectionList }) => {
           >
             Edit Section
           </Typography>
-          <DragDropContext>
+          {titleSectionList.map((section, index) => (
+            <SectionItemEditor
+              key={section.Id}
+              item={section}
+              wrapper={"title"}
+              mode={"edit"}
+            />
+          ))}
+
+          {/* <DragDropContext>
             <Droppable droppableId="editSectionTitle">
               {(provided) => (
                 <ul
@@ -36,8 +45,8 @@ const WindowTitle = ({ titleSectionList }) => {
                 >
                   {titleSectionList.map((section, index) => (
                     <Draggable
-                      key={section.Id}
-                      draggableId={section.Id}
+                      key={index}
+                      draggableId={index}
                       index={index}
                     >
                       <li
@@ -58,7 +67,7 @@ const WindowTitle = ({ titleSectionList }) => {
                 </ul>
               )}
             </Droppable>
-          </DragDropContext>
+          </DragDropContext> */}
         </Grid>
       </Grid>
     </div>

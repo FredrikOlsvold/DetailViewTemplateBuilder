@@ -24,9 +24,7 @@ const FormatCreator = ({
   const [disabledValue, setDisabledValue] = useState(
     mode === "create" ? false : true
   );
-
-  console.log(item);
-
+  
   const onFormatKeyChange = ({ target: { value } }) => {
     setFormatKey(value);
   };

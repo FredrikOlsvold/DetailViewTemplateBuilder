@@ -28,7 +28,6 @@ function OptionsCreator({
   const [disabledValue, setDisabledValue] = useState(
     mode === "create" ? false : true
   );
-    console.log("Options Item", item);
 
   const onOptionKeyChange = ({ target: { value } }) => {
     setOptionKey(value);
