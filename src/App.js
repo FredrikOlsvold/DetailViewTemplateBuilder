@@ -5,7 +5,7 @@ import { Grid, Typography } from "@material-ui/core";
 import ListAllTemplates from './components/templateMenu/ListAllTemplates';
 import TemplateMapping from "./components/containers/mapping/TemplateMapping";
 import OutputDisplayWrapper from "./components/containers/OutputDisplayWrapper";
-import "./engine/EngineRenderer";
+
 
 
   //Atom that stores all fields in a list. Global state
@@ -17,6 +17,8 @@ import "./engine/EngineRenderer";
 
 function App() {
 
+
+
   return (
     <div className="App">
       <div style={{ marginTop: "2em", textAlign: "center" }}>
@@ -25,7 +27,7 @@ function App() {
       <Grid container spacing={1}>
         
             {/* <ListAllTemplates/> */}
-            <detail-view />
+            <generic-detail-view id="dv"></generic-detail-view>
          
 
           <Grid item xs={9}> 

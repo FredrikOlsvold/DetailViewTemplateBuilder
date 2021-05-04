@@ -16,6 +16,7 @@ import {
 import { copyToClipboard, jsonValidator } from "../../helpers/HelperMethods";
 import { displayWrapperAtom, cssAtom } from "../../store/Store";
 import CssEditor from "../views/CssEditor";
+import getDetailViewAndRender from "../../helpers/renderDetailView";
 
 const OutputDisplayWrapper = () => {
   //const previewJson = useRecoilValue(JsonPreviewSelector);
@@ -85,6 +86,10 @@ const OutputDisplayWrapper = () => {
     setTextAreaValue(JSON.stringify(previewJson, null, 2));
     setTemplateDataTextAreaValue(templateData);
   }, [previewJson, templateData]);
+
+  useEffect(() => {
+      getDetailViewAndRender()
+  }, [previewJson])
 
   return (
     <Paper style={{ padding: "2em", margin: "1em" }}>

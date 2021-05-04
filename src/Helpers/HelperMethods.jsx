@@ -102,3 +102,31 @@ export function unformatFormatList(list) {
     return [];
   }
 }
+
+
+//Renders the detailview on the generic-detail-view tag
+// data: {WorkOrderId:"123hallo"}
+// template: [
+//         {
+//             Id: "9e5217b7-8d6f-467c-b0d0-0359b23d38a4",
+//             Type: "ClickableList",
+//             Options: {},
+//             Fields: [
+//               {
+//                 Id: "d2a0dc51-b744-4046-9482-c23ed555a8a4",
+//                 Type: "LabelWithData",
+//                 Label: "wer",
+//                 Options: {},
+//                 Formatters: [],
+//                 ValueDescriptor: {
+//                   Path: "WorkOrderId",
+//                   Type: "string"
+//                 }
+//               }
+//             ]
+//           }
+//         ]
+export function getDetailViewAndRender(data, template){
+    let dv = document.getElementById("dv");
+    dv.reRender(data, template)
+}
