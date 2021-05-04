@@ -4,9 +4,9 @@ import { useRecoilValue } from "recoil";
 import { windowTitleAtom } from "../../store/Store";
 import { Grid, Typography } from "@material-ui/core";
 import { useEffect } from "react";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-const WindowTitle = ({titleSectionList}) => {
-  
+const WindowTitle = ({ titleSectionList }) => {
   return (
     <div style={{ marginTop: "2em" }}>
       <Grid container spacing={2}>
@@ -26,19 +26,43 @@ const WindowTitle = ({titleSectionList}) => {
           >
             Edit Section
           </Typography>
-          {titleSectionList.map((section) => (
-            <SectionItemEditor
-              key={section.Id}
-              item={section}
-              wrapper={"title"}
-              mode={"edit"}
-            />
-          ))}
+          <DragDropContext>
+            <Droppable droppableId="editSectionTitle">
+              {(provided) => (
+                <ul
+                  className="editSectionsTitle"
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  {titleSectionList.map((section, index) => (
+                    <Draggable
+                      key={section.Id}
+                      draggableId={section.Id}
+                      index={index}
+                    >
+                      <li
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        ref={provided.innerRef}
+                      >
+                        {" "}
+                        <SectionItemEditor
+                          key={section.Id}
+                          item={section}
+                          wrapper={"title"}
+                          mode={"edit"}
+                        />
+                      </li>
+                    </Draggable>
+                  ))}
+                </ul>
+              )}
+            </Droppable>
+          </DragDropContext>
         </Grid>
       </Grid>
     </div>
   );
 };
-
 
 export default WindowTitle;
