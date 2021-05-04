@@ -25,7 +25,7 @@ function App() {
       <Grid container spacing={1}>
         
             {/* <ListAllTemplates/> */}
-            <detail-view/>
+            <detail-view />
          
 
           <Grid item xs={9}> 

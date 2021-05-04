@@ -1,10 +1,10 @@
-import { LitElement } from "lit-element";
-import { html } from "lit-html";
+import {html, LitElement} from 'lit';
+// import { html } from "lit-html";
 import {unsafeHTML} from 'lit-html/directives/unsafe-html'
 import { mockWorkOrder } from "../api/getData";
 import { workOrderTemplate } from "../api/getTemplate";
 
-class DetailView extends LitElement {
+export class DetailView extends LitElement {
   constructor() {
     super();
     this.newEngine = new window.TemplateEngine(null, this);
@@ -42,7 +42,7 @@ class DetailView extends LitElement {
                 <div class="panel">
                     <div class='detail-view content'">
                         <div class='content'>
-                            ${unsafeHTML`${this.newEngine.renderData(mockWorkOrder, temp).getHTML()}`}
+                            ${this.newEngine.renderData(mockWorkOrder, temp)}
                         </div>
                     </div>
                 </div> `;
