@@ -42,10 +42,10 @@ function FieldsCreator({
   const [fieldOptions, setFieldOptions] = useState(mode === "create" ? item.Options : objectToList(item.Options));
   const [formatters, setFormatters] = useState(mode === "create" ? item.Formatters: unformatFormatList(item.Formatters));
   const [valueDescriptorPath, setValueDescriptorPath] = useState(
-    mode === "create" ? "" : item.ValueDescriptors.Path
+    mode === "create" ? "" : item.ValueDescriptor.Path
   );
   const [valueType, setValueType] = useState(
-    mode === "create" ? "" : item.ValueDescriptors.Type
+    mode === "create" ? "" : item.ValueDescriptor.Type
   );
 
 
@@ -103,7 +103,7 @@ function FieldsCreator({
       Label: fieldLabel,
       Options: listToObject(fieldOptions),
       Formatters: formatFormatList(formatters),
-      ValueDescriptors: {
+      ValueDescriptor: {
         Path: valueDescriptorPath,
         Type: valueType,
       },

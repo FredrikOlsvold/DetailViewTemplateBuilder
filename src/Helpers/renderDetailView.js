@@ -3,7 +3,7 @@ export default function getDetailViewAndRender(){
     dv.reRender( {WorkOrderId:"123hallo"}, [
         {
           Id: "8d73ad8c-b7dd-4f87-bb25-e2c26b8b8ec8",
-          Type: "Standard",
+          Type: "ClickableList",
           Options: {},
           Fields: [
             {
@@ -12,7 +12,7 @@ export default function getDetailViewAndRender(){
               Label: "Label",
               Options: {},
               Formatters: [],
-              ValueDescriptors: {
+              ValueDescriptor: {
                 Path: "WorkOrderId",
                 Type: "string",
               },

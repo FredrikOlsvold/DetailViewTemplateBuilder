@@ -1,43 +1,37 @@
-import './App.css';
+import "./App.css";
 import Dashboard from "./components/containers/Dashboard";
-import {atom} from "recoil";
+import { atom } from "recoil";
 import { Grid, Typography } from "@material-ui/core";
-import ListAllTemplates from './components/templateMenu/ListAllTemplates';
+import ListAllTemplates from "./components/templateMenu/ListAllTemplates";
 import TemplateMapping from "./components/containers/mapping/TemplateMapping";
 import OutputDisplayWrapper from "./components/containers/OutputDisplayWrapper";
+import DetailViewPreview from "./components/views/DetailViewPreview";
 
-
-
-  //Atom that stores all fields in a list. Global state
-  export const fieldListAtom = atom({
-    key: "fieldListAtom",
-    default: [],
-  });
-
+//Atom that stores all fields in a list. Global state
+export const fieldListAtom = atom({
+  key: "fieldListAtom",
+  default: [],
+});
 
 function App() {
-
-
-
   return (
     <div className="App">
       <div style={{ marginTop: "2em", textAlign: "center" }}>
         <Typography variant="h4">Detail View Templates</Typography>
       </div>
       <Grid container spacing={1}>
-        
-            {/* <ListAllTemplates/> */}
-            <generic-detail-view id="dv"></generic-detail-view>
-         
+        {/* <ListAllTemplates/> */}
 
-          <Grid item xs={9}> 
-            {/* <TemplateMapping/>      */}
-            <Dashboard/>
-            <OutputDisplayWrapper/>
-          </Grid>
+        <Grid item xs={9}>
+          {/* <TemplateMapping/>      */}
+          <Dashboard />
+          <OutputDisplayWrapper />
+        </Grid>
 
+        <Grid item xs={9}>
+            <DetailViewPreview />
+        </Grid>
       </Grid>
-      
     </div>
   );
 }

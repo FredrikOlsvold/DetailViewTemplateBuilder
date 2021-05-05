@@ -1,5 +1,5 @@
 (function () {
-    'use strict';
+    
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -5533,10 +5533,11 @@
             this.templateEngine = new TemplateEngine(templateRetriever, this);
         }
         firstUpdated() { }
-        reRender(data, template) {
+        reRender(data, template, css) {
             this.data = data;
             this.template = template;
             this.requestUpdate();
+            this.css = css;
         }
         //-------------------------------------------------------------------------
         // 
@@ -5549,9 +5550,11 @@
                 return null;
             }
             return html `
-        <link rel='stylesheet' href='/assets/css/genericdetailview.css'>
+        <link rel='stylesheet' href='../src/assets/css/genericdetailview.css'>
         <link rel='stylesheet' href='${this.stylingPath}'>
         <link rel="stylesheet" href="/api/css/?tag=${this.tagName}&cid=${this.templateId}">
+        <style>${this.css}</style>
+
                 <div class="panel">
                     <div class='detail-view ${this.viewClass}'">
                         <div class='content'>

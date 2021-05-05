@@ -9,9 +9,8 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 // import {fieldListAtom} from "../../App";
 import { useEffect, useState } from "react";
 import {
-  JsonPreviewSelector,
   TemplateDataSelector,
-  TestSelector,
+  TemplateJsonSelector,
 } from "../../selectors/Selectors";
 import { copyToClipboard, jsonValidator } from "../../helpers/HelperMethods";
 import { displayWrapperAtom, cssAtom } from "../../store/Store";
@@ -20,7 +19,7 @@ import getDetailViewAndRender from "../../helpers/renderDetailView";
 
 const OutputDisplayWrapper = () => {
   //const previewJson = useRecoilValue(JsonPreviewSelector);
-  const [previewJson, setPreviewJson] = useRecoilState(TestSelector);
+  const [previewJson, setPreviewJson] = useRecoilState(TemplateJsonSelector);
   const setDisplayWrapperAtom = useSetRecoilState(displayWrapperAtom);
   const [displayJSON, setDisplayJSON] = useState(true);
   const [displayData, setDisplayData] = useState(false);

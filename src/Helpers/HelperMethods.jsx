@@ -128,5 +128,5 @@ export function unformatFormatList(list) {
 //         ]
 export function getDetailViewAndRender(data, template){
     let dv = document.getElementById("dv");
-    dv.reRender(data, template)
+    dv.reRender(data, template.Content)
 }

@@ -69,7 +69,7 @@ const SectionItemCreator = ({ wrapper, mode }) => {
         Label: "",
         Options: [],
         Formatters: [],
-        ValueDescriptors : {},
+        ValueDescriptor : {},
 
 
       },

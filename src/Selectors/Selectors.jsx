@@ -17,8 +17,8 @@ export const JsonPreviewSelector = selector({
   },
 });
 
-export const TestSelector = selector({
-  key: "TestSelector",
+export const TemplateJsonSelector = selector({
+  key: "TemplateJsonSelector",
   get: ({ get }) => {
     const titleWrapper = get(windowTitleAtom);
     const contentWrapper = get(contentAtom);

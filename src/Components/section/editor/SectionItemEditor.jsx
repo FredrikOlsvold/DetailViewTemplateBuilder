@@ -78,7 +78,7 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
         Label: "",
         Options: {},
         Formatters: [],
-        ValueDescriptors: {
+        ValueDescriptor: {
         }
       },
     ]);
