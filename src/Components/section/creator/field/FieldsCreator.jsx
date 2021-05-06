@@ -48,11 +48,6 @@ function FieldsCreator({
     mode === "create" ? "" : item.ValueDescriptor.Type
   );
 
-
-  console.log("Item.Formatters:", formatters);
-  console.log("Item.Options:", fieldOptions);
-
-
   const onFieldTypeChange = ({ target: { value } }) => {
     setFieldType(value);
   };

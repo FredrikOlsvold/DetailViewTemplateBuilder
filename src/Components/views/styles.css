@@ -90,3 +90,8 @@ code {
   background: transparent;
   margin: 0;
 }
+
+.editSectionsContent,
+.editSectionsTitle {
+  list-style: none;
+}

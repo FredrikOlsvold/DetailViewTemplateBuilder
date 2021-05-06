@@ -13,8 +13,8 @@ import {
 
 const Dashboard = () => {
   const [displayWrapper, setDisplayWrapper] = useState("");
-  const titleSectionList = useRecoilValue(windowTitleAtom);
-  const contentSectionList = useRecoilValue(contentAtom);
+  const [titleSectionList, setTitleSectionList] = useRecoilState(windowTitleAtom);
+  const [contentSectionList, setContentSectionList] = useRecoilState(contentAtom);
   const [displayAtom, setDisplayAtom] = useRecoilState(displayWrapperAtom);
 
   return (
@@ -64,10 +64,10 @@ const Dashboard = () => {
         </Grid>
 
         {displayAtom === "title" && (
-          <WindowTitle titleSectionList={titleSectionList} />
+          <WindowTitle titleSectionList={titleSectionList} setTitleSectionList={setTitleSectionList}/>
         )}
         {displayAtom === "content" && (
-          <Content contentSectionList={contentSectionList} />
+          <Content contentSectionList={contentSectionList} setContentSectionList={setContentSectionList} />
         )}
       </Paper>
     </>
