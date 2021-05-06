@@ -1,0 +1,42 @@
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+@import url(color.css);
+:root {
+  --h1-size: 2vmin;
+  --h2-size: 1.8vmin;
+  --h3-size: 1vmin;
+  --h-margin: 0px;
+  --normal-size: 1vmin; }
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: var(--color-font-default);
+  background-color: var(--color-bg-default);
+  font-family: 'Roboto', sans-serif;
+  overflow-x: hidden;
+  overflow-y: hidden; }
+
+#planLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 50vh) minmax(0, 9fr);
+  height: 100vh; }
+
+#planLayout > div {
+  height: 100vh; }
+
+#LeftSide {
+  background-color: var(--color-bg-mainleft);
+  height: 100%;
+}
+
+#RightSide {
+  background-color: var(--color-bg-mainright); }
+
+.top-container {
+  height: 100%; }
+
+/*
+ TODO - last minute fix - demo AkerBP
+*/

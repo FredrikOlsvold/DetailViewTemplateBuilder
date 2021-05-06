@@ -1,0 +1,214 @@
+﻿:root {
+    /**************************************/
+    /******Start of color definitions******/
+    /**************************************/
+    --defaultfont: #C8C8C8; /* Standard font color */
+    --activefont: #FFFFFF; /* Active and selected items */
+    --inactivefont: hsla(0, 0%, 39%); /* Not selected scopes, past dates, etc. */
+    --lightinactivefont: #9b9b9b; /* Between active and inactive, use sparringly */
+    --informationfont: hsla(212, 54%, 40%); /* Information and external links */
+    --filterfont: #000000;
+    --timelinefont: #C8C8C8;
+    --backgroundleft: hsla(233, 9%, 19%, 1); /* Background for left side of Live and windows, might want separate for windows */
+    --backgroundright: hsla(233, 10%, 15%, 1); /* Background for right side of Live */
+    --backgrounddefault: #64646E; /*For calendar and other backgrounds that have different states*/
+    --backgroundlightinactive: #494950;
+    --backgroundinactive: #32323C;
+    --defaultborder: #C8C8C8;
+    --activeborder: hsla(0, 100%, 100%);
+    --inactiveborder: hsla(240, 5%, 50%);
+    --calendarborder: hsla(240, 5%, 36%); /* Calendar borders */
+    --filter: hsla(53, 88%, 50%); /* #A0A000 */ /* Filter and selection highlights */
+    --filtertransparent: #F0D50F44; /* #A0A00044 */
+    --selection: hsla(212, 54%, 50%);
+    --selectiontransparent: #336CAD44;
+    --selectionoutofbounds: #2B4C66; /* Out of bounds dates in calendar */
+    --workpermit: hsla(146, 77%, 17%);
+    --activeworkpermit: hsla(146, 77%, 22%);
+    --workorder1: hsla(157, 100%, 22%); /* Timeline items */
+    --workorderprogress1: hsla(157, 100%, 32%);
+    --workorder2: hsla(239, 28%, 41%);
+    --workorderprogress2: hsla(238, 31%, 51%);
+    --basisplan1: #2B4C66;
+    --operationsbackground: hsla(240, 9%, 25%);
+    --operationsborder: #FFFFFF;
+    --shadow: -4px -5px 46px 0px rgba(0,0,0,0.59);
+    --defaultsymbol: #727171; /* Colors for symbols and icons */
+    --activesymbol: #C8C8C8;
+    --lightactivesymbols: hsla(0, 0%, 58%);
+    --inactivesymbols: #646464;
+    --darksymbols: #000000;
+    --windowframe: hsla(212, 54%, 25%); /* Window colors */
+    --windowbackground: hsla(240, 10%, 26%, 0.97);
+    --windowborder1: #5A5A66;
+    --windowborder2: #434343;
+    --scrollbar: hsla(220, 5%, 40%, 1); /* Scrollbar colors */
+    --scrollbarbg: hsla(233, 9%, 20%, 0.25);
+    --scrollbarhover: hsla(220, 5%, 60%, 1);
+    --weatherwave: #43444C; /*  */
+    --weatherbackground: #666666;
+    --graphdefault: #BBBBBB;
+    --limitmarker1: #CB9154;
+    --limitmarker2: #68BB5A;
+    --state-critical: #A4000B;
+    --state-warning: #FF9600;
+    --state-normal: #19AA55;
+    --state-information: #1D78D1;
+    --reschedulecolor: #FFF400;
+    --activedetailviewborder: #0D6232;
+    /**************************************/
+    /*******End of color definitions*******/
+    /**************************************/
+    /********* Timeline Gradient ********/
+    --color-timeline-gradient-1: hsla(233, 9%, 17%, 1);
+    --color-timeline-gradient-2: hsla(233, 10%, 17%, 1);
+    --color-timeline-gradient-3: hsla(233, 9%, 16%, 1);
+    --color-timeline-gradient-4: hsla(233, 10%, 15%, 1);
+    --color-timelinegroup-gradient-1: hsla(233, 8%, 19%, 1);
+    --color-timelinegroup-gradient-2: hsla(233, 9%, 21%, 1);
+    --color-timelinegroup-gradient-3: hsla(233, 8%, 20%, 1);
+    --color-timelinegroup-gradient-4: hsla(233, 9%, 19%, 1);
+    --color-timeline-gradient-offset-1: 0%;
+    --color-timeline-gradient-offset-2: 3px;
+    --color-timeline-gradient-offset-3: calc(100% - var(--color-timeline-gradient-offset-2));
+    --color-timeline-gradient-offset-4: 100%;
+    /************************************/
+    /************ Area Maps *************/
+    /*These are set directly in the maps*/
+    --areamap-default-top: hsla(0, 0%, 25%);
+    --areamap-default-front: hsla(0, 0%, 20%);
+    --areamap-default-side: hsla(0, 0%, 15%);
+    --areamap-active-top: hsla(0, 0%, 60%);
+    --areamap-active-front: hsla(0, 0%, 50%);
+    --areamap-active-side: hsla(0, 0%, 40%);
+    --areamap-fontdefault: hsla(0, 0%, 56%);
+    --areamap-structure: hsla(0, 0%, 33%);
+    --areamap-filter-top: hsla(53, 88%, 25%);
+    --areamap-filter-front: hsla(53, 88%, 20%); /*Default inactive filter colour*/
+    --areamap-filter-side: hsla(53, 88%, 15%);
+    --areamap-active-filter-top: hsla(53, 88%, 60%);
+    --areamap-active-filter-front: hsla(53, 88%, 50%); /*Default filter colour*/
+    --areamap-active-filter-side: hsla(53, 88%, 40%);
+    --areamap-highlighted-top: hsla(212, 54%, 25%);
+    --areamap-highlighted-front: hsla(212, 54%, 20%); /*Default inactive highlight colour*/
+    --areamap-highlighted-side: hsla(212, 54%, 15%);
+    --areamap-active-highlighted-top: hsla(212, 54%, 60%);
+    --areamap-active-highlighted-front: hsla(212, 54%, 50%); /*Default highlight color*/
+    --areamap-active-highlighted-side: hsla(212, 54%, 40%);
+    --areamap-font-header: hsla(0, 0%, 75%);
+    --areamap-font-areatext: hsla(0, 0%, 45%);
+    --areamap-font-active-areatext: hsla(0, 0%, 75%);
+    --areamap-font-pane: hsla(0, 0%, 43%);
+    --areamap-font-pane-active: hsla(0, 0%, 78%);
+    --areamap-font-3d-filter: hsla(0, 0%, 100%);
+    --areamap-selectionborder: var(--activeborder);
+    --areamap-activated: var(--workpermit);
+    --areamap-font-activated-production-indicator: hsla(0, 0%, 20%);
+    /*Metro and 2D map specific*/
+    --areamap-connector: hsla(0, 0%, 34%);
+    --areamap-district: hsla(0, 0%, 25%);
+    --areamap-pane: hsla(0, 0%, 20%); /*Metro and 2D-maps background*/
+    --areamap-active-pane: hsla(0, 0%, 50%); /*Metro and 2D-maps background*/
+    --areamap-hub: hsla(0, 0%, 25%);
+    --areamap-waterline: hsla(0, 0%, 59%);
+    --areamap-2d-topographic: hsla(0, 0%, 25%);
+    /*WorkPermit for AreaMap*/
+    --areamap-workpermit: hsla(146, 77%, 17%);
+    --areamap-workpermit-top: hsla(146, 77%, 22%);
+    --areamap-workpermit-side: hsla(146, 77%, 12%);
+    --areamap-active-workpermit: hsla(146, 77%, 22%);
+    --areamap-active-workpermit-top: hsla(146, 77%, 27%);
+    --areamap-active-workpermit-side: hsla(146, 77%, 17%);
+    /*ProductionIndicators for AreaMap*/
+    /*Should be removed when the PIs are implemented as symbols*/
+    --areamap-production-indicators: hsla(157, 80%, 48%, 1);
+    --areamap-production-indicators-top: hsla(146, 77%, 53%);
+    --areamap-production-indicators-side: hsla(146, 77%, 43%);
+    --areamap-active-production-indicators: hsla(157, 80%, 53%, 1);
+    --areamap-active-production-indicators-top: hsla(157, 80%, 58%, 1);
+    --areamap-active-production-indicators-side: hsla(157, 80%, 48%, 1);
+    /***************************************/
+    /*These may not be needed in the future*/
+    /***************************************/
+    --color-dimgrey: #32323C; /* fix after facetfilter.css is done */
+    --color-bg100op60: #336CAD27; /* Dette er en defaultfarge for basisplan, trengs kanskje ikke */
+    --color-bg200op60: #A02C3027;
+    --color-bg300op10: #2B4C663C;
+    /**************************************/
+    /*******End of color definitions*******/
+    /**************************************/
+    /* Color variables for use in modules */
+    /* Fonts */
+    --color-font-default: var(--defaultfont);
+    --color-font-active: var(--activefont);
+    --color-font-lightinactive: var(--lightinactivefont);
+    --color-font-inactive: var(--inactivefont);
+    --color-font-selection: var(--activefont);
+    --color-font-highlight: var(--activefont);
+    --color-font-filter: var(--filterfont);
+    --color-font-information: var(--informationfont);
+    --color-font-timelineitems: var(--timelinefont);
+    /* Backgrounds */
+    --color-bg-default: var(--backgrounddefault);
+    --color-bg-lightinactive: var(--backgroundlightinactive);
+    --color-bg-inactive: var(--backgroundinactive);
+    --color-bg-mainleft: var(--backgroundleft);
+    --color-bg-maingroups: var(--backgroundleft);
+    --color-bg-mainright: var(--backgroundright);
+    --color-bg-filter: var(--filter);
+    --color-bg-filter-transparent: var(--filtertransparent);
+    --color-bg-selection: var(--selection);
+    --color-bg-selection-transparent: var(--selectiontransparent);
+    --color-bg-selection-outofbounds: var(--selectionoutofbounds);
+    --color-bg-workpermit: var(--workpermit);
+    --color-bg-frontpage: var(--backgroundleft);
+    --color-bg-state-critical: var(--state-critical);
+    /* Borders */
+    --color-border-default: var(--defaultborder);
+    --color-border-active: var(--activeborder);
+    --color-border-inactive: var(--inactiveborder);
+    --color-border-calendar: var(--calendarborder);
+    --color-border-dv-active: var(--activedetailviewborder);
+    /* Windows */
+    --color-window-framefill: var(--windowframe);
+    --color-window-headerbg: #2D2E38;
+    --color-window-frameborder1: var(--windowborder1);
+    --color-window-frameborder2: var(--windowborder2);
+    --color-window-background: var(--windowbackground);
+    --color-window-border: var(--windowborder1);
+    --color-window-shadow: var(--shadow);
+    --color-window-scrollbar: var(--scrollbar);
+    --color-window-scrollbarbg: var(--scrollbarbg);
+    --color-windows-scrollbarhover: var(--scrollbarhover);
+    /* Symbols */
+    --color-symbols-default: var(--defaultsymbol);
+    --color-symbols-active: var(--activesymbol);
+    --color-symbols-lightactive: var(--lightactivesymbols);
+    --color-symbols-inactive: var(--inactivesymbols);
+    --color-symbols-dark: var(--darksymbols);
+    --color-symbols-hover: #5DDBC0;
+    /* Timeline items */
+    --color-tlitem-wo1planned: var(--workorder1);
+    --color-tlitem-wo1progress: var(--workorderprogress1);
+    --color-tlitem-wo2planned: var(--workorder2);
+    --color-tlitem-wo2progress: var(--workorderprogress2);
+    --color-bg-operations: var(--operationsbackground);
+    --color-border-operations: var(--operationsborder);
+    --color-tlitem-basisplan: var(--basisplan1);
+    --color-tlitem-rescheduled: var(--reschedulecolor);
+    --color-tlitem-condensed1: var(--color-bg100op60);
+    --color-tlitem-condensed2: var(--color-bg300op10);
+    --color-tlitem-condensed3: var(--color-bg200op60);
+    /* Weather */
+    --color-weather-wave: var(--weatherwave);
+    --color-weather-background: var(--weatherbackground);
+    --color-weather-alertgraph: var(--state-warning);
+    --color-weather-defaultgraph: var(--graphdefault);
+    --color-weather-limitmarker1: var(--limitmarker1);
+    --color-weather-limitmarker2: var(--limitmarker2);
+    /* Reschedule */
+    --color-reschedule-startbutton: green;
+    --color-reschedule-stopbutton: var(--state-critical);
+    --color-reschedule-buttonshadow: hsla(0, 0%, 0%, 0.75);
+    --color-reschedule-windowborder: hsla(0, 100%, 50%, 0.5); /*Frame around the window that indicates reschedule mode*/
+}

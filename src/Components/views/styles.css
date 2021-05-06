@@ -91,7 +91,6 @@ code {
   margin: 0;
 }
 
-.editSectionsContent,
-.editSectionsTitle {
+.dndList {
   list-style: none;
 }

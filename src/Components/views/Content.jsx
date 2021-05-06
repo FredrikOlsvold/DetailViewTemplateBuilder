@@ -38,7 +38,7 @@ const Content = ({ contentSectionList, setContentSectionList }) => {
             <Droppable droppableId="editSectionsContent">
               {(provided) => (
                 <ul
-                  className="editSectionsContent"
+                  className="dndList"
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                 >

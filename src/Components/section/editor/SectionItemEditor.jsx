@@ -12,7 +12,11 @@ import {
 } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
 import React, { useEffect, useState } from "react";
-import { windowTitleAtom, contentAtom, displayWrapperAtom } from "../../../store/Store";
+import {
+  windowTitleAtom,
+  contentAtom,
+  displayWrapperAtom,
+} from "../../../store/Store";
 import {
   replaceItemAtIndex,
   removeItemAtIndex,
@@ -25,6 +29,7 @@ import FieldsCreator from "../creator/field/FieldsCreator";
 import { ExpandMore } from "@material-ui/icons";
 import { sectionTypes } from "../../../api/getData";
 import AddIcon from "@material-ui/icons/Add";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const SectionItemEditor = ({ item, wrapper, mode }) => {
   const chosenAtom = wrapper === "title" ? windowTitleAtom : contentAtom;
@@ -38,12 +43,30 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
 
   const [error, setError] = useState("");
 
-
+  const [expandedOption, setExpandedOption] = useState(false);
+  const [expandedField, setExpandedField] = useState(false);
+  
   // useEffect(() => {
   //   console.log("Item is updated");
   //   setOptionList(objectToList(item.Options));
   //   setFieldList(item.Fields);
   // }, [item]);
+
+  const handleOnDragEndFields = (res) => {
+    const fields = Array.from(fieldList);
+    const [reorderedField] = fields.splice(res.source.index, 1);
+    fields.splice(res.destination.index, 0, reorderedField);
+
+    setFieldList(fields);
+  };
+
+  const handleOptionsAccordionChange = () => {
+    setExpandedOption((open) => !open);
+  };
+
+  const handleFieldsAccordionChange = () => {
+      setExpandedField((open) => !open)
+  }
 
   const deleteSection = () => {
     const newSectionList = removeItemAtIndex(sectionList, index);
@@ -59,6 +82,7 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
   };
 
   const addOptionClicked = () => {
+      setExpandedOption(true)
     setOptionList((oldOptionList) => [
       ...oldOptionList,
       {
@@ -70,6 +94,7 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
   };
 
   const addFieldClicked = () => {
+    setExpandedField(true)
     setFieldList((oldFieldList) => [
       ...oldFieldList,
       {
@@ -78,8 +103,7 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
         Label: "",
         Options: {},
         Formatters: [],
-        ValueDescriptor: {
-        }
+        ValueDescriptor: {},
       },
     ]);
   };
@@ -171,43 +195,117 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
           </Button>
         </AccordionActions>
 
-        <Grid item>
-          {/* <AccordionDetails> */}
-          {/* Mappa ut options */}
-          {optionList.length > 0 && <Typography>Options:</Typography>}
-          {optionList.map((option) => (
-            <OptionsCreator
-              key={option.Key+option.Value}
-              item={option}
-              mode={mode}
-              setSectionUpdated={setSectionUpdated}
-              sectionUpdated={sectionUpdated}
-              optionList={optionList}
-              setOptionList={setOptionList}
-              deleteOption={deleteOption}
-              optionOrigin={"sectionOptionOrigin"}
-            />
-          ))}
-          {/* </AccordionDetails> */}
-        </Grid>
-
-        <Grid item>
-          {/* <AccordionDetails> */}
-          {/* Mappa ut fields */}
-          {fieldList.length > 0 && <Typography>Fields:</Typography>}
-          {fieldList.map((field) => (
-            <FieldsCreator
-              key={field.Id}
-              item={field}
-              mode={mode}
-              fieldList={fieldList}
-              setFieldList={setFieldList}
-              deleteField={deleteField}
-              setSectionUpdated={setSectionUpdated}
-              sectionUpdated={sectionUpdated}
-            />
-          ))}
-          {/* </AccordionDetails> */}
+        <Grid container direction={"column"} spacing={4}>
+          <Grid item>
+            {" "}
+            {/* Option Accordion */}
+            {optionList.length > 0 && (
+              <Accordion
+                expanded={expandedOption} onChange={handleOptionsAccordionChange}
+              >
+                <AccordionSummary expandIcon={<ExpandMore />}>
+                  <Typography>Options:</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Grid container direction={"row"} spacing={4}>
+                    {optionList.map((option, index) => (
+                      <Grid item>
+                        <Accordion>
+                          <AccordionSummary expandIcon={<ExpandMore />}>
+                            <Typography>
+                              {option.Key} : {option.Id}
+                            </Typography>
+                          </AccordionSummary>
+                          <AccordionDetails>
+                            <OptionsCreator
+                              key={option.Key + option.Value}
+                              item={option}
+                              mode={mode}
+                              setSectionUpdated={setSectionUpdated}
+                              sectionUpdated={sectionUpdated}
+                              optionList={optionList}
+                              setOptionList={setOptionList}
+                              deleteOption={deleteOption}
+                              optionOrigin={"sectionOptionOrigin"}
+                            />
+                          </AccordionDetails>
+                        </Accordion>
+                      </Grid>
+                    ))}
+                  </Grid>
+                </AccordionDetails>
+              </Accordion>
+            )}
+          </Grid>
+          <Grid item>
+            {" "}
+            {/* Field Accordion */}
+            {fieldList.length > 0 && (
+              <Accordion expanded={expandedField} onChange={handleFieldsAccordionChange}>
+                <AccordionSummary expandIcon={<ExpandMore />}>
+                  <Typography>Fields:</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Grid container direction={"row"} spacing={4}>
+                    <DragDropContext onDragEnd={handleOnDragEndFields}>
+                      <Droppable droppableId={"fieldsDragAndDrop"}>
+                        {(provided) => (
+                          <ul
+                            className="dndList"
+                            {...provided.droppableProps}
+                            ref={provided.innerRef}
+                          >
+                            {fieldList.map((field, index) => (
+                              <Draggable
+                                key={field.Id}
+                                draggableId={field.Id}
+                                index={index}
+                              >
+                                {(provided) => (
+                                  <li
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                    ref={provided.innerRef}
+                                  >
+                                    <Grid item xs={12} style={{marginBottom: "1em"}}>
+                                      <Accordion>
+                                        <AccordionSummary
+                                          expandIcon={<ExpandMore />}
+                                        >
+                                          <Typography>
+                                            {field.Type} : {field.Id}
+                                          </Typography>
+                                        </AccordionSummary>
+                                        <AccordionDetails>
+                                          <FieldsCreator
+                                            key={field.Id}
+                                            item={field}
+                                            mode={mode}
+                                            fieldList={fieldList}
+                                            setFieldList={setFieldList}
+                                            deleteField={deleteField}
+                                            setSectionUpdated={
+                                              setSectionUpdated
+                                            }
+                                            sectionUpdated={sectionUpdated}
+                                          />
+                                        </AccordionDetails>
+                                      </Accordion>
+                                    </Grid>
+                                  </li>
+                                )}
+                              </Draggable>
+                            ))}
+                            {provided.placeholder}
+                          </ul>
+                        )}
+                      </Droppable>
+                    </DragDropContext>
+                  </Grid>
+                </AccordionDetails>
+              </Accordion>
+            )}
+          </Grid>
         </Grid>
         <AccordionActions>
           {sectionUpdated && (

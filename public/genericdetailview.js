@@ -5551,6 +5551,8 @@
             }
             return html `
         <link rel='stylesheet' href='../src/assets/css/genericdetailview.css'>
+        <link rel='stylesheet' href='../src/assets/css/color.css'>
+        <link rel='stylesheet' href='../src/assets/css/site.css'>
         <link rel='stylesheet' href='${this.stylingPath}'>
         <link rel="stylesheet" href="/api/css/?tag=${this.tagName}&cid=${this.templateId}">
         <style>${this.css}</style>
