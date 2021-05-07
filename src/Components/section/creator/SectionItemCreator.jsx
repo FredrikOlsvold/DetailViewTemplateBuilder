@@ -18,6 +18,7 @@ import {
   listToObject,
 } from "../../../helpers/HelperMethods";
 import { sectionTypes } from "../../../api/getData";
+import ValueDescriptor from "./valueDescriptor/ValueDescriptor";
 
 const SectionItemCreator = ({ wrapper, mode }) => {
   const chosenAtom = wrapper === "title" ? windowTitleAtom : contentAtom;
@@ -25,6 +26,7 @@ const SectionItemCreator = ({ wrapper, mode }) => {
   const [sectionType, setSectionType] = useState("");
   const [optionList, setOptionList] = useState([]);
   const [fieldList, setFieldList] = useState([]);
+  const [sectionValueDescriptor, setSectionValueDescriptor] = useState({});
 
   const [error, setError] = useState("");
 
@@ -37,12 +39,14 @@ const SectionItemCreator = ({ wrapper, mode }) => {
           Type: sectionType,
           Options: listToObject(optionList),
           Fields: fieldList,
+          ValueDescriptor: sectionValueDescriptor,
         },
       ]);
       setSectionType("");
       setOptionList([]);
       setFieldList([]);
       setError("");
+      setSectionValueDescriptor({})
       return;
     }
 
@@ -106,6 +110,9 @@ const SectionItemCreator = ({ wrapper, mode }) => {
             </TextField>
           </Grid>
         </Grid>
+      </div>
+      <div>
+      <ValueDescriptor setSectionValueDescriptor={setSectionValueDescriptor}/>
       </div>
 
       <div style={{ padding: "2em" }}>
