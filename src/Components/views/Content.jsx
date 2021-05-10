@@ -64,43 +64,6 @@ const Content = ({ contentSectionList, setContentSectionList }) => {
               )}
             </Droppable>
           </DragDropContext>
-          {/* <DragDropContext>
-            <Droppable droppableId="editSectionContent">
-              {(provided) => (
-                <ul
-                  className="editSectionsContent"
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                >
-                  {contentSectionList.map((section, index) => (
-                      <Draggable
-                        key={index}
-                        draggableId={index}
-                        index={index}
-                      >
-                        <li
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          ref={provided.innerRef}
-                        >
-                            hello
-                          <SectionItemEditor
-                            key={section.Id}
-                            item={section}
-                            wrapper={"content"}
-                            mode={"edit"}
-                          />
-                        </li>
-                      </Draggable>
-                    )
-                  )}
-                </ul>
-              )}
-            </Droppable>
-          </DragDropContext> */}
-          {/* {contentSectionList.map((section) => (
-                <SectionItemEditor key={section.Id} item={section} wrapper={"content"} mode={"edit"}/>
-                ))} */}
         </Grid>
       </Grid>
     </div>

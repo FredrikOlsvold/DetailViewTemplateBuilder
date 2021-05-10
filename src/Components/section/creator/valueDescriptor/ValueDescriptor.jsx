@@ -4,32 +4,29 @@ import { dataTypes } from "../../../../api/getData";
 import { uniqueGuid } from "../../../../helpers/HelperMethods";
 import SaveIcon from "@material-ui/icons/Save";
 
-
-function ValueDescriptor({ setSectionValueDescriptor }) {
-  const [valueDescriptorPath, setValueDescriptorPath] = useState("");
-  const [valueDescriptorType, setValueDescriptorType] = useState("");
-
+function ValueDescriptor({
+  setSectionValueDescriptor,
+  sectionValueDescriptorPath,
+  setSectionValueDescriptorPath,
+  sectionValueDescriptorType,
+  setSectionValueDescriptorType,
+  updateValueDescriptor
+}) {
   const onValueDescriptorPathChange = (e) => {
-    setValueDescriptorPath(e.target.value);
+    setSectionValueDescriptorPath(e.target.value);
   };
 
   const onValueDescriptorTypeChange = (e) => {
-    setValueDescriptorType(e.target.value);
+    setSectionValueDescriptorType(e.target.value);
   };
 
-  const updateValueDescriptor = () => {
-    setSectionValueDescriptor({
-          Path: valueDescriptorPath,
-          Type: valueDescriptorType,
-      })
-  }
-    return (
+  return (
     <Grid container spacing={2}>
       <Grid item xs={6}>
         <TextField
           id={uniqueGuid()}
           label="Path"
-          value={valueDescriptorPath}
+          value={sectionValueDescriptorPath}
           variant="outlined"
           fullWidth
           onChange={onValueDescriptorPathChange}
@@ -40,7 +37,7 @@ function ValueDescriptor({ setSectionValueDescriptor }) {
           select
           id={uniqueGuid()}
           label="Value Type"
-          value={valueDescriptorType}
+          value={sectionValueDescriptorType}
           variant="outlined"
           fullWidth
           onChange={onValueDescriptorTypeChange}

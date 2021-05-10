@@ -13,12 +13,10 @@ import SaveIcon from "@material-ui/icons/Save";
 import AddIcon from "@material-ui/icons/Add";
 import OptionsCreator from "./options/OptionsCreator";
 import FieldsCreator from "./field/FieldsCreator";
-import {
-  uniqueGuid,
-  listToObject,
-} from "../../../helpers/HelperMethods";
+import { uniqueGuid, listToObject, formatFormatList } from "../../../helpers/HelperMethods";
 import { sectionTypes } from "../../../api/getData";
 import ValueDescriptor from "./valueDescriptor/ValueDescriptor";
+import FormatCreator from "./format/FormatCreator";
 
 const SectionItemCreator = ({ wrapper, mode }) => {
   const chosenAtom = wrapper === "title" ? windowTitleAtom : contentAtom;
@@ -27,6 +25,20 @@ const SectionItemCreator = ({ wrapper, mode }) => {
   const [optionList, setOptionList] = useState([]);
   const [fieldList, setFieldList] = useState([]);
   const [sectionValueDescriptor, setSectionValueDescriptor] = useState({});
+  const [sectionFormatters, setSectionFormatters] = useState([]);
+  const [sectionValueDescriptorPath, setSectionValueDescriptorPath] = useState(
+    ""
+  );
+  const [sectionValueDescriptorType, setSectionValueDescriptorType] = useState(
+    ""
+  );
+
+  const updateValueDescriptor = () => {
+    setSectionValueDescriptor({
+          Path: sectionValueDescriptorPath,
+          Type: sectionValueDescriptorType,
+      })
+  }
 
   const [error, setError] = useState("");
 
@@ -40,13 +52,15 @@ const SectionItemCreator = ({ wrapper, mode }) => {
           Options: listToObject(optionList),
           Fields: fieldList,
           ValueDescriptor: sectionValueDescriptor,
+          Formatters: formatFormatList(sectionFormatters),
         },
       ]);
       setSectionType("");
       setOptionList([]);
       setFieldList([]);
       setError("");
-      setSectionValueDescriptor({})
+      setSectionValueDescriptor({});
+      setSectionFormatters([]);
       return;
     }
 
@@ -73,9 +87,18 @@ const SectionItemCreator = ({ wrapper, mode }) => {
         Label: "",
         Options: [],
         Formatters: [],
-        ValueDescriptor : {},
+        ValueDescriptor: {},
+      },
+    ]);
+  };
 
-
+  const addFormattersClicked = () => {
+    setSectionFormatters((oldSectionFormattersList) => [
+      ...oldSectionFormattersList,
+      {
+        Id: uniqueGuid(),
+        Key: "",
+        Value: "",
       },
     ]);
   };
@@ -112,7 +135,14 @@ const SectionItemCreator = ({ wrapper, mode }) => {
         </Grid>
       </div>
       <div>
-      <ValueDescriptor setSectionValueDescriptor={setSectionValueDescriptor}/>
+        <ValueDescriptor
+          setSectionValueDescriptor={setSectionValueDescriptor}
+          sectionValueDescriptorPath={sectionValueDescriptorPath}
+          setSectionValueDescriptorPath={setSectionValueDescriptorPath}
+          sectionValueDescriptorType={sectionValueDescriptorType}
+          setSectionValueDescriptorType={setSectionValueDescriptorType}
+          updateValueDescriptor={updateValueDescriptor}
+        />
       </div>
 
       <div style={{ padding: "2em" }}>
@@ -130,6 +160,13 @@ const SectionItemCreator = ({ wrapper, mode }) => {
           onClick={addOptionClicked}
         >
           ADD OPTION
+        </Button>
+        <Button
+          startIcon={<AddIcon />}
+          variant="outlined"
+          onClick={addFormattersClicked}
+        >
+          ADD FORMATTERS
         </Button>
       </div>
 
@@ -161,6 +198,24 @@ const SectionItemCreator = ({ wrapper, mode }) => {
                 item={field}
                 setFieldList={setFieldList}
                 fieldList={fieldList}
+                mode={mode}
+              />
+            ))}
+          </Paper>
+        )}
+      </div>
+
+      <div>
+        {sectionFormatters.length > 0 && (
+          <Paper style={{ padding: "2em", margin: "1em" }}>
+            <Typography>Format:</Typography>
+            {sectionFormatters.map((format) => (
+              <FormatCreator
+                key={format.Id}
+                item={format}
+                setFormatters={setSectionFormatters}
+                formatters={sectionFormatters}
+                valueType={sectionValueDescriptorType}
                 mode={mode}
               />
             ))}
