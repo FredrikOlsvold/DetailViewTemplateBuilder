@@ -5,7 +5,6 @@ import { uniqueGuid } from "../../../../helpers/HelperMethods";
 import SaveIcon from "@material-ui/icons/Save";
 
 function ValueDescriptor({
-  setSectionValueDescriptor,
   sectionValueDescriptorPath,
   setSectionValueDescriptorPath,
   sectionValueDescriptorType,

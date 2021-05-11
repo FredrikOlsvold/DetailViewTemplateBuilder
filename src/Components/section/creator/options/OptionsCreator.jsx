@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Grid, Button } from "@material-ui/core";
+import { TextField, Grid, Button, MenuItem } from "@material-ui/core";
 import SaveIcon from "@material-ui/icons/Save";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
@@ -8,6 +8,7 @@ import {
   removeItemAtIndex,
   uniqueGuid,
 } from "../../../../helpers/HelperMethods";
+import { optionTypes } from "../../../../api/getData";
 
 function OptionsCreator({
   setOptionList,
@@ -70,6 +71,8 @@ function OptionsCreator({
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <TextField
+            select
+            placeholder=""
             disabled={disabledValue}
             id={uniqueGuid()}
             label="Key"
@@ -79,7 +82,14 @@ function OptionsCreator({
             onChange={onOptionKeyChange}
             //   error={error}
             //   helperText={error}
-          />
+          >
+              {optionTypes && optionTypes.map((option, i) => (
+                  <MenuItem key={i} value={option}>
+                      {option}
+                  </MenuItem>
+              ))}
+
+          </TextField>
         </Grid>
         <Grid item xs={6}>
           <TextField

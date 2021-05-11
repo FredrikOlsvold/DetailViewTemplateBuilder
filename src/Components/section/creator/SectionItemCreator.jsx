@@ -136,7 +136,6 @@ const SectionItemCreator = ({ wrapper, mode }) => {
       </div>
       <div>
         <ValueDescriptor
-          setSectionValueDescriptor={setSectionValueDescriptor}
           sectionValueDescriptorPath={sectionValueDescriptorPath}
           setSectionValueDescriptorPath={setSectionValueDescriptorPath}
           sectionValueDescriptorType={sectionValueDescriptorType}

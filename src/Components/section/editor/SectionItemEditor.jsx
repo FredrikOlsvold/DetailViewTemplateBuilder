@@ -140,7 +140,7 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
         defaultExpanded={false}
       >
         <AccordionSummary expandIcon={<ExpandMore />}>
-          <Typography>Type: {sectionType}</Typography>
+          <Typography>Type: {sectionType}. ID: _{item.Id}</Typography>
         </AccordionSummary>
 
         <AccordionDetails>

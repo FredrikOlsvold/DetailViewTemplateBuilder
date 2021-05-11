@@ -19,18 +19,18 @@ function App() {
       <div style={{ marginTop: "2em", textAlign: "center" }}>
         <Typography variant="h4">Detail View Templates</Typography>
       </div>
-      <Grid container spacing={1}>
-        {/* <ListAllTemplates/> */}
-
-        <Grid item xs={9}>
-          {/* <TemplateMapping/>      */}
+      <Grid
+        container
+        alignItems="center"
+        justify="center"
+        style={{ minWidth: "50vw" }}
+        spacing={1}
+      >
+        <Grid item xs={6}>
           <Dashboard />
           <OutputDisplayWrapper />
         </Grid>
-
-        <Grid item xs={9}>
-            <DetailViewPreview />
-        </Grid>
+        
       </Grid>
     </div>
   );

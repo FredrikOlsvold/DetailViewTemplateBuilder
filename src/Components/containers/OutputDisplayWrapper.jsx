@@ -16,6 +16,7 @@ import { copyToClipboard, jsonValidator } from "../../helpers/HelperMethods";
 import { displayWrapperAtom, cssAtom } from "../../store/Store";
 import CssEditor from "../views/CssEditor";
 import getDetailViewAndRender from "../../helpers/renderDetailView";
+import DetailViewPreview from "../views/DetailViewPreview";
 
 const OutputDisplayWrapper = () => {
   //const previewJson = useRecoilValue(JsonPreviewSelector);
@@ -28,7 +29,7 @@ const OutputDisplayWrapper = () => {
   const [textAreaValue, setTextAreaValue] = useState("");
   const [newValue, setNewValue] = useState("default");
   const [templateData, setTemplateData] = useRecoilState(TemplateDataSelector);
-  const [stylingAtom, setStylingAtom] = useRecoilState(cssAtom)
+  const [stylingAtom, setStylingAtom] = useRecoilState(cssAtom);
 
   const [templateDataTextAreaValue, setTemplateDataTextAreaValue] = useState(
     ""
@@ -36,20 +37,20 @@ const OutputDisplayWrapper = () => {
 
   const showJSON = () => {
     setDisplayJSON(!displayJSON);
-    setDisplayData(false);
-    setDisplayStyle(false);
+    // setDisplayData(false);
+    // setDisplayStyle(false);
   };
 
   const showData = () => {
     setDisplayData(!displayData);
-    setDisplayJSON(false);
-    setDisplayStyle(false);
+    // setDisplayJSON(false);
+    // setDisplayStyle(false);
   };
 
   const showStyle = () => {
     setDisplayStyle(!displayStyle);
-    setDisplayData(false);
-    setDisplayJSON(false);
+    // setDisplayData(false);
+    // setDisplayJSON(false);
   };
 
   const handleCopyClick = () => {
@@ -69,6 +70,7 @@ const OutputDisplayWrapper = () => {
 
   const handleTemplateDataTextAreaChange = (e) => {
     setTemplateData(e.target.value);
+    setTemplateDataTextAreaValue(e.target.value);
   };
 
   const handleUseJsonClick = () => {
@@ -87,8 +89,8 @@ const OutputDisplayWrapper = () => {
   }, [previewJson, templateData]);
 
   useEffect(() => {
-      getDetailViewAndRender()
-  }, [previewJson])
+    getDetailViewAndRender();
+  }, [previewJson]);
 
   return (
     <Paper style={{ padding: "2em", margin: "1em" }}>
@@ -118,46 +120,54 @@ const OutputDisplayWrapper = () => {
             <Typography variant="h6"> Styling</Typography>
           </Button>
         </Grid>
+        <Grid container spacing={2}>
+          {displayJSON && (
+            <Grid item xs={3}>
+              {/* <pre>{JSON.stringify(previewJson, null, 2)}</pre> */}
+              <TextareaAutosize
+                value={textAreaValue}
+                onChange={handleTextAreaChange}
+              />
+
+              <Button
+                size="small"
+                type="button"
+                variant="contained"
+                color={newValue}
+                onClick={handleUseJsonClick}
+              >
+                Use Json
+              </Button>
+
+              <Button
+                size="small"
+                type="button"
+                variant="contained"
+                color="default"
+                onClick={handleCopyClick}
+              >
+                {copied ? "Json copied" : "Copy to clipboard"}
+              </Button>
+            </Grid>
+          )}
+          {displayData && (
+            <Grid item xs={3}>
+              <TextareaAutosize
+                value={templateDataTextAreaValue}
+                onChange={handleTemplateDataTextAreaChange}
+              ></TextareaAutosize>
+            </Grid>
+          )}
+          {displayStyle && (
+            <Grid item xs={3}>
+              <CssEditor />
+            </Grid>
+          )}
+          <Grid item xs={3}>
+            <DetailViewPreview />
+          </Grid>
+        </Grid>
       </Grid>
-
-      {displayJSON && (
-        <>
-          {/* <pre>{JSON.stringify(previewJson, null, 2)}</pre> */}
-          <TextareaAutosize
-            value={textAreaValue}
-            onChange={handleTextAreaChange}
-          />
-
-          <Button
-            size="small"
-            type="button"
-            variant="contained"
-            color={newValue}
-            onClick={handleUseJsonClick}
-          >
-            Use Json
-          </Button>
-
-          <Button
-            size="small"
-            type="button"
-            variant="contained"
-            color="default"
-            onClick={handleCopyClick}
-          >
-            {copied ? "Json copied" : "Copy to clipboard"}
-          </Button>
-        </>
-      )}
-
-      {displayData && (
-        <TextareaAutosize
-          value={templateDataTextAreaValue}
-          onChange={handleTemplateDataTextAreaChange}
-        ></TextareaAutosize>
-      )}
-
-      {displayStyle && <CssEditor />}
     </Paper>
   );
 };

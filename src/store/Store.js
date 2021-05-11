@@ -34,3 +34,9 @@ export const templateDataAtom = atom({
     key: "templateDataAtom",
     default: "",
 })
+
+//Css editor values
+export const cssEditorValueAtom = atom({
+    key: "cssEditorValueAtom",
+    default: "",
+})

@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import Prism from "prismjs";
 import "./styles.css";
+import { cssEditorValueAtom } from "../../store/Store";
+import { useRecoilState } from "recoil";
 
 const CssEditor = () => {
   const [content, setContent] = useState();
+  const [cssEditorAtom, setCssEditorAtom] = useRecoilState(cssEditorValueAtom);
 
   const handleKeyDown = (e) => {
     let value = content,

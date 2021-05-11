@@ -1,0 +1,90 @@
+:host {
+    touch-action: none;
+}
+
+.popup-window-frame {
+    position: fixed;
+    box-shadow: var(--color-window-shadow);
+}
+
+    .popup-window-frame .popup-title-bar {
+        height: 30px;
+        padding-left: 1em;
+        padding-right: 1em;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: var(--color-window-headerbg); /*TODO USE COLOR PROPERTY*/
+        border-left: 1px solid var(--color-window-frameborder1);
+        border-right: 1px solid var(--color-window-frameborder1);
+        border-top: 1px solid var(--color-window-frameborder1);
+        border-radius: .25rem .25rem 0 0;
+        user-select: none;
+    }
+
+        .popup-window-frame .popup-title-bar:hover {
+            cursor: move;
+        }
+
+        .popup-window-frame .popup-title-bar:active {
+            cursor: grabbing;
+        }
+
+.popup-buttons .close-button svg {
+    height: 0.875em; /*Set in svg to provide load flickering*/
+}
+
+    .popup-buttons .close-button svg path {
+        fill: var(--color-font-default);
+    }
+
+.popup-buttons .close-button:hover {
+    cursor: pointer;
+}
+
+    .popup-buttons .close-button:hover svg path {
+        fill: var(--color-symbols-hover); /*TODO USE COLOR PROPERTY*/
+    }
+
+.popup-window-frame .popup-content {
+    flex-grow: 1;
+    background: var(--color-window-background);
+    border-radius: 0 0 .25rem .25rem;
+    border-left: 1px solid var(--color-window-frameborder1);
+    border-right: 1px solid var(--color-window-frameborder1);
+    border-bottom: 1px solid var(--color-window-frameborder1);
+    min-height: 160px;
+}
+
+.popup-window-frame .caption-view .caption {
+    background-color: transparent;
+    display: flex;
+    font-weight: 700;
+}
+
+.workorder-detail-view-width {
+    width: 460px;
+}
+
+.detail-view-width {
+    width: 460px;
+}
+
+.popup-window-frame.active {
+    /*border: 1px solid var(--color-border-dv-active);*/
+    border: 1px solid var(--color-border-default);
+    border-radius: 5px;
+}
+
+    .popup-window-frame.active .popup-title-bar{
+        /*background-color: var(--color-border-dv-active);*/
+        border: hidden;
+    }
+
+    .popup-window-frame.active .popup-content{
+        border: hidden;
+    }
+
+    #windowTitle {
+        pointer-events: none;
+    }
