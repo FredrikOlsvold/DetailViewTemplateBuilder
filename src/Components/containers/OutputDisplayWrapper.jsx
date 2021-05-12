@@ -31,9 +31,8 @@ const OutputDisplayWrapper = () => {
   const [templateData, setTemplateData] = useRecoilState(TemplateDataSelector);
   const [stylingAtom, setStylingAtom] = useRecoilState(cssAtom);
 
-  const [templateDataTextAreaValue, setTemplateDataTextAreaValue] = useState(
-    ""
-  );
+  const [templateDataTextAreaValue, setTemplateDataTextAreaValue] =
+    useState("");
 
   const showJSON = () => {
     setDisplayJSON(!displayJSON);
@@ -93,8 +92,8 @@ const OutputDisplayWrapper = () => {
   }, [previewJson]);
 
   return (
-    <Paper style={{ padding: "2em", margin: "1em" }}>
-      <Grid container spacing={2}>
+    <Grid container spacing={2}>
+      <Paper style={{ padding: "2em", margin: "1em" }}>
         <Grid item xs={3}>
           <Button
             onClick={showJSON}
@@ -122,7 +121,7 @@ const OutputDisplayWrapper = () => {
         </Grid>
         <Grid container spacing={2}>
           {displayJSON && (
-            <Grid item xs={3}>
+            <Grid item xs={4}>
               {/* <pre>{JSON.stringify(previewJson, null, 2)}</pre> */}
               <TextareaAutosize
                 value={textAreaValue}
@@ -163,12 +162,15 @@ const OutputDisplayWrapper = () => {
               <CssEditor />
             </Grid>
           )}
-          <Grid item xs={3}>
+          {/* <Grid item xs={3}>
             <DetailViewPreview />
-          </Grid>
+          </Grid> */}
         </Grid>
-      </Grid>
-    </Paper>
+        <Grid item={3}>
+          <DetailViewPreview />
+        </Grid>
+      </Paper>
+    </Grid>
   );
 };
 

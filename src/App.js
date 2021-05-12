@@ -1,7 +1,7 @@
 import "./App.css";
 import Dashboard from "./components/containers/Dashboard";
 import { atom } from "recoil";
-import { Grid, Typography } from "@material-ui/core";
+import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
 import ListAllTemplates from "./components/templateMenu/ListAllTemplates";
 import TemplateMapping from "./components/containers/mapping/TemplateMapping";
 import OutputDisplayWrapper from "./components/containers/OutputDisplayWrapper";
@@ -15,24 +15,33 @@ export const fieldListAtom = atom({
 
 function App() {
   return (
-    <div className="App">
-      <div style={{ marginTop: "2em", textAlign: "center" }}>
+    <Grid container direction="column" alignItems="center" spacing={2}>
+      <Grid item xs={1}>
         <Typography variant="h4">Detail View Templates</Typography>
-      </div>
-      <Grid
-        container
-        alignItems="center"
-        justify="center"
-        style={{ minWidth: "50vw" }}
-        spacing={1}
-      >
-        <Grid item xs={6}>
-          <Dashboard />
-          <OutputDisplayWrapper />
-        </Grid>
+      </Grid>
+      <Grid item xs={6}>
+        <Dashboard />
+      </Grid>
+      <Grid item xs={4}>
+      <OutputDisplayWrapper />
         
       </Grid>
-    </div>
+    </Grid>
+    // <div className="App">
+    // <div>
+
+    // </div>
+    //   {/* <Grid
+    //     container
+    //     alignItems="center"
+    //     justify="center"
+    //     spacing={1}
+    //     width="50%"
+    //   >
+    //     <Grid item>
+    //     </Grid>
+    //   </Grid> */}
+    // </div>
   );
 }
 

@@ -18,7 +18,6 @@ const Dashboard = () => {
   const [displayAtom, setDisplayAtom] = useRecoilState(displayWrapperAtom);
 
   return (
-    <>
       <Paper style={{ padding: "2em", margin: "1em" }}>
         <Grid container spacing={2}>
           <Grid item xs={3}>
@@ -70,7 +69,6 @@ const Dashboard = () => {
           <Content contentSectionList={contentSectionList} setContentSectionList={setContentSectionList} />
         )}
       </Paper>
-    </>
   );
 };
 
