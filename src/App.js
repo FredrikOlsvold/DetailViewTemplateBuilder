@@ -1,7 +1,7 @@
 import "./App.css";
 import Dashboard from "./components/containers/Dashboard";
 import { atom } from "recoil";
-import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
+import { Box, Grid, makeStyles, Paper, Typography } from "@material-ui/core";
 import ListAllTemplates from "./components/templateMenu/ListAllTemplates";
 import TemplateMapping from "./components/containers/mapping/TemplateMapping";
 import OutputDisplayWrapper from "./components/containers/OutputDisplayWrapper";
@@ -15,18 +15,25 @@ export const fieldListAtom = atom({
 
 function App() {
   return (
-    <Grid container direction="column" alignItems="center" spacing={2}>
-      <Grid item xs={1}>
-        <Typography variant="h4">Detail View Templates</Typography>
+    <>
+      <Typography variant="h4">Detail View Template</Typography>
+
+      <Grid container alignItems="center" justify="center" spacing={2}>
+        <Grid item xs={9}>
+          <Dashboard />
+        </Grid>
+
+        <Grid item xs={6}>
+          <OutputDisplayWrapper />
+        </Grid>
+        <Grid item xs={3}>
+          <Paper style={{ padding: "2em", margin: "1em" }}>
+            <Typography variant="h6">Preview detailview</Typography>
+            <DetailViewPreview />
+          </Paper>
+        </Grid>
       </Grid>
-      <Grid item xs={6}>
-        <Dashboard />
-      </Grid>
-      <Grid item xs={4}>
-      <OutputDisplayWrapper />
-        
-      </Grid>
-    </Grid>
+    </>
     // <div className="App">
     // <div>
 

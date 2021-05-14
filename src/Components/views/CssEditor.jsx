@@ -3,10 +3,15 @@ import Prism from "prismjs";
 import "./styles.css";
 import { cssEditorValueAtom } from "../../store/Store";
 import { useRecoilState } from "recoil";
+import { Button } from "@material-ui/core";
 
 const CssEditor = () => {
   const [content, setContent] = useState();
   const [cssEditorAtom, setCssEditorAtom] = useRecoilState(cssEditorValueAtom);
+
+  const handleUseCssButton = () => {
+    setCssEditorAtom(content);
+  };
 
   const handleKeyDown = (e) => {
     let value = content,
@@ -43,6 +48,14 @@ const CssEditor = () => {
           <code className="language-css">{content}</code>
         </pre>
       </div>
+      <Button
+        size="small"
+        type="button"
+        variant="contained"
+        onClick={handleUseCssButton}
+      >
+        Use Css
+      </Button>
     </>
   );
 };

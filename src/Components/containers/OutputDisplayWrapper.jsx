@@ -25,6 +25,7 @@ const OutputDisplayWrapper = () => {
   const [displayJSON, setDisplayJSON] = useState(true);
   const [displayData, setDisplayData] = useState(false);
   const [displayStyle, setDisplayStyle] = useState(false);
+  const [displayPreview, setDisplayPreview] = useState(false);
   const [copied, setCopied] = useState(false);
   const [textAreaValue, setTextAreaValue] = useState("");
   const [newValue, setNewValue] = useState("default");
@@ -50,6 +51,10 @@ const OutputDisplayWrapper = () => {
     setDisplayStyle(!displayStyle);
     // setDisplayData(false);
     // setDisplayJSON(false);
+  };
+
+  const showPreview = () => {
+    setDisplayPreview(!displayPreview);
   };
 
   const handleCopyClick = () => {
@@ -92,85 +97,80 @@ const OutputDisplayWrapper = () => {
   }, [previewJson]);
 
   return (
-    <Grid container spacing={2}>
-      <Paper style={{ padding: "2em", margin: "1em" }}>
-        <Grid item xs={3}>
-          <Button
-            onClick={showJSON}
-            style={displayJSON ? { color: "#6200ee" } : { color: "#ccc" }}
-          >
-            <Typography variant="h6">Template JSON</Typography>
-          </Button>
-        </Grid>
-
-        <Grid item xs={3}>
-          <Button
-            onClick={showData}
-            style={displayData ? { color: "#6200ee" } : { color: "#ccc" }}
-          >
-            <Typography variant="h6">Display Data</Typography>
-          </Button>
-        </Grid>
-        <Grid item xs={3}>
-          <Button
-            style={displayStyle ? { color: "#6200ee" } : { color: "#ccc" }}
-            onClick={showStyle}
-          >
-            <Typography variant="h6"> Styling</Typography>
-          </Button>
-        </Grid>
+    <Paper style={{ padding: "2em", margin: "1em" }}>
+      <Grid container spacing={2}>
         <Grid container spacing={2}>
-          {displayJSON && (
-            <Grid item xs={4}>
-              {/* <pre>{JSON.stringify(previewJson, null, 2)}</pre> */}
-              <TextareaAutosize
-                value={textAreaValue}
-                onChange={handleTextAreaChange}
-              />
+          <Grid item xs={6}>
+            <Button
+              onClick={showJSON}
+              style={displayJSON ? { color: "#6200ee" } : { color: "#ccc" }}
+            >
+              <Typography variant="h6">Template JSON</Typography>
+            </Button>
+            {displayJSON && (
+              <Grid item>
+                {/* <pre>{JSON.stringify(previewJson, null, 2)}</pre> */}
+                <TextareaAutosize
+                rowsMax={35}
+                  value={textAreaValue}
+                  onChange={handleTextAreaChange}
+                />
 
-              <Button
-                size="small"
-                type="button"
-                variant="contained"
-                color={newValue}
-                onClick={handleUseJsonClick}
-              >
-                Use Json
-              </Button>
+                <Button
+                  size="small"
+                  type="button"
+                  variant="contained"
+                  color={newValue}
+                  onClick={handleUseJsonClick}
+                >
+                  Use Json
+                </Button>
 
-              <Button
-                size="small"
-                type="button"
-                variant="contained"
-                color="default"
-                onClick={handleCopyClick}
-              >
-                {copied ? "Json copied" : "Copy to clipboard"}
-              </Button>
-            </Grid>
-          )}
-          {displayData && (
-            <Grid item xs={3}>
-              <TextareaAutosize
-                value={templateDataTextAreaValue}
-                onChange={handleTemplateDataTextAreaChange}
-              ></TextareaAutosize>
-            </Grid>
-          )}
-          {displayStyle && (
-            <Grid item xs={3}>
-              <CssEditor />
-            </Grid>
-          )}
-          {/* <Grid item xs={3}>
-            <DetailViewPreview />
-          </Grid> */}
+                <Button
+                  size="small"
+                  type="button"
+                  variant="contained"
+                  color="default"
+                  onClick={handleCopyClick}
+                >
+                  {copied ? "Json copied" : "Copy to clipboard"}
+                </Button>
+              </Grid>
+            )}
+          </Grid>
+
+          <Grid item xs={6}>
+            <Button
+              onClick={showData}
+              style={displayData ? { color: "#6200ee" } : { color: "#ccc" }}
+            >
+              <Typography variant="h6">Display Data</Typography>
+            </Button>
+            {displayData && (
+              <Grid item>
+                <TextareaAutosize
+                  value={templateDataTextAreaValue}
+                  onChange={handleTemplateDataTextAreaChange}
+                ></TextareaAutosize>
+              </Grid>
+            )}
+          </Grid>
+          <Grid item xs={6}>
+            <Button
+              style={displayStyle ? { color: "#6200ee" } : { color: "#ccc" }}
+              onClick={showStyle}
+            >
+              <Typography variant="h6"> Styling</Typography>
+            </Button>
+            {displayStyle && (
+              <Grid item>
+                <CssEditor />
+              </Grid>
+            )}
+          </Grid>
         </Grid>
-        <Grid item={3}>
-          <DetailViewPreview />
-        </Grid>
-      </Paper>
-    </Grid>
+      </Grid>
+    </Paper>
   );
 };
 

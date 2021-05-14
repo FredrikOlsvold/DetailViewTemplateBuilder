@@ -5,7 +5,7 @@ import {
   TemplateDataSelector,
   TemplateJsonSelector,
 } from "../../selectors/Selectors";
-import { mockWorkOrder as defaultData } from "../../api/getData";
+import { mockWorkOrder as defaultData } from "../../api/getData"; //Some api call in later version?
 
 function DetailViewPreview() {
   const templateJson = useRecoilValue(TemplateJsonSelector);

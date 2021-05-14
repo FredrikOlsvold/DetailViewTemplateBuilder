@@ -20,7 +20,7 @@ const Dashboard = () => {
   return (
       <Paper style={{ padding: "2em", margin: "1em" }}>
         <Grid container spacing={2}>
-          <Grid item xs={3}>
+          <Grid item>
             <Button
               style={
                 displayAtom === "title"
@@ -33,7 +33,7 @@ const Dashboard = () => {
             </Button>
           </Grid>
 
-          <Grid item xs={3}>
+          <Grid item>
             <Button
               style={
                 displayAtom === "content"
@@ -47,7 +47,7 @@ const Dashboard = () => {
           </Grid>
 
           {/* Close Menu Button */}
-          <Grid item xs={3}>
+          <Grid item>
             <Button
               style={{ float: "right" }}
               startIcon={

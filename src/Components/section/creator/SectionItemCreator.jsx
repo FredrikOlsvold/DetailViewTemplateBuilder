@@ -13,7 +13,11 @@ import SaveIcon from "@material-ui/icons/Save";
 import AddIcon from "@material-ui/icons/Add";
 import OptionsCreator from "./options/OptionsCreator";
 import FieldsCreator from "./field/FieldsCreator";
-import { uniqueGuid, listToObject, formatFormatList } from "../../../helpers/HelperMethods";
+import {
+  uniqueGuid,
+  listToObject,
+  formatFormatList,
+} from "../../../helpers/HelperMethods";
 import { sectionTypes } from "../../../api/getData";
 import ValueDescriptor from "./valueDescriptor/ValueDescriptor";
 import FormatCreator from "./format/FormatCreator";
@@ -26,19 +30,17 @@ const SectionItemCreator = ({ wrapper, mode }) => {
   const [fieldList, setFieldList] = useState([]);
   const [sectionValueDescriptor, setSectionValueDescriptor] = useState({});
   const [sectionFormatters, setSectionFormatters] = useState([]);
-  const [sectionValueDescriptorPath, setSectionValueDescriptorPath] = useState(
-    ""
-  );
-  const [sectionValueDescriptorType, setSectionValueDescriptorType] = useState(
-    ""
-  );
+  const [sectionValueDescriptorPath, setSectionValueDescriptorPath] =
+    useState("");
+  const [sectionValueDescriptorType, setSectionValueDescriptorType] =
+    useState("");
 
   const updateValueDescriptor = () => {
     setSectionValueDescriptor({
-          Path: sectionValueDescriptorPath,
-          Type: sectionValueDescriptorType,
-      })
-  }
+      Path: sectionValueDescriptorPath,
+      Type: sectionValueDescriptorType,
+    });
+  };
 
   const [error, setError] = useState("");
 
@@ -143,31 +145,35 @@ const SectionItemCreator = ({ wrapper, mode }) => {
           updateValueDescriptor={updateValueDescriptor}
         />
       </div>
-
-      <div style={{ padding: "2em" }}>
-        <Button
-          style={{ marginRight: "1em" }}
-          startIcon={<AddIcon />}
-          variant="outlined"
-          onClick={addFieldClicked}
-        >
-          ADD FIELD
-        </Button>
-        <Button
-          startIcon={<AddIcon />}
-          variant="outlined"
-          onClick={addOptionClicked}
-        >
-          ADD OPTION
-        </Button>
-        <Button
-          startIcon={<AddIcon />}
-          variant="outlined"
-          onClick={addFormattersClicked}
-        >
-          ADD FORMATTERS
-        </Button>
-      </div>
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <Button
+            startIcon={<AddIcon />}
+            variant="outlined"
+            onClick={addFieldClicked}
+          >
+            ADD FIELD
+          </Button>
+        </Grid>
+        <Grid item xs={6}>
+          <Button
+            startIcon={<AddIcon />}
+            variant="outlined"
+            onClick={addOptionClicked}
+          >
+            ADD OPTION
+          </Button>
+        </Grid>
+        <Grid item xs={12}>
+          <Button
+            startIcon={<AddIcon />}
+            variant="outlined"
+            onClick={addFormattersClicked}
+          >
+            ADD FORMATTERS
+          </Button>
+        </Grid>
+      </Grid>
 
       <div>
         {optionList.length > 0 && (
