@@ -17,8 +17,7 @@ function App() {
   return (
     <>
       <Typography variant="h4">Detail View Template</Typography>
-
-      <Grid container alignItems="center" justify="center" spacing={2}>
+      <Grid container justify="center" spacing={2}>
         <Grid item xs={9}>
           <Dashboard />
         </Grid>
@@ -28,7 +27,7 @@ function App() {
         </Grid>
         <Grid item xs={3}>
           <Paper style={{ padding: "2em", margin: "1em" }}>
-            <Typography variant="h6">Preview detailview</Typography>
+            <Typography variant="h6">Preview of detailview</Typography>
             <DetailViewPreview />
           </Paper>
         </Grid>

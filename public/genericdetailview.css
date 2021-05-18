@@ -2,168 +2,164 @@
  *  Detail View Resources 
  */
 :host {
-    user-select: none;
-    box-sizing: border-box;
+  user-select: none;
+  box-sizing: border-box;
 }
 
-
 .exception {
-    color: red;
+  color: red;
 }
 
 .panel {
-    display: flex;
-    transition: 0.5s;
-    color: var(--color-font-default);
-    font-family: Roboto,sans-serif;
-    overflow: hidden;
+  display: flex;
+  transition: 0.5s;
+  color: #c8c8c8;
+  font-family: Roboto, sans-serif;
+  overflow: hidden;
 }
 
 .label {
-    color: var(--color-font-lightinactive);
-    display: inline-block;
+  color: #9b9b9b;
+  display: inline-block;
 }
 
 .titlebar {
-    font-size: 1.1em;
+  font-size: 1.1em;
 }
 
 .header {
-    display: block;
-    font-size: 1.2em;
-    margin-bottom: 1em;
+  display: block;
+  font-size: 1.2em;
+  margin-bottom: 1em;
 }
 
 /*
  *  Main panel
  */
 .detail-view {
-    box-sizing: border-box;
-    overflow: hidden;
-    position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
 }
 
-    .detail-view.content {
-        padding: 1em;
-        background: var(--color-window-background);
-        width: 100%;
-        height: 100%;
-        min-height: 160px;
-    }
-
-
-[class^=FieldType_] {
-    display: block;
-    margin-bottom: 0.5em;
+.detail-view.content {
+  padding: 1em;
+  background: hsla(240, 10%, 26%, 0.97);
+  width: 100%;
+  height: 100%;
+  min-height: 160px;
 }
 
+[class^="FieldType_"] {
+  display: block;
+  margin-bottom: 0.5em;
+}
 
 .content {
-    display: block;
+  display: block;
 }
 
 .arrayContainer {
-    display: inline-block;
+  display: inline-block;
 }
 
-[class^=SectionType] {
-    font-size: 11px;
+[class^="SectionType"] {
+  font-size: 11px;
 }
 
 .FieldType_2 .label {
-    display: block;
+  display: block;
 }
 /*
 * Non Clickable List
 */
-.SectionType_6 [class^=FieldType_] .label {
-    margin-bottom: 0.3em;
+.SectionType_6 [class^="FieldType_"] .label {
+  margin-bottom: 0.3em;
 }
 
 /*
 * External data sectopm
 */
 .popupexternaldata :hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 /*
 * Two Column Resources
 */
 .SectionType_3 {
-    display: flex;
-    justify-content: right;
-    flex-wrap: wrap;
-    width: 100%;
+  display: flex;
+  justify-content: right;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
-    .SectionType_3 [class^=FieldType_] {
-        width: calc(100% / 2);
-        text-align: left;
-    }
+.SectionType_3 [class^="FieldType_"] {
+  width: calc(100% / 2);
+  text-align: left;
+}
 
-        .SectionType_3 [class^=FieldType_] .label {
-            display: inline-block;
-        }
-
+.SectionType_3 [class^="FieldType_"] .label {
+  display: inline-block;
+}
 
 /*
  *  Detail view Slider
  */
 
 #slider {
-    position: absolute;
-    box-sizing: border-box;
-    top: 0px;
-    overflow: hidden;
-    left: 0px;
-    background: var(--color-window-background);
-    transform: translateX(100%);
-    -webkit-transform: translateX(100%);
-    height: 100%;
-    width: 100%
+  position: absolute;
+  box-sizing: border-box;
+  top: 0px;
+  overflow: hidden;
+  left: 0px;
+  background: var(--color-window-background);
+  transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+  height: 100%;
+  width: 100%;
 }
 
 .slide-in {
-    animation: slide-in 0.5s forwards;
-    -webkit-animation: slide-in 0.5s forwards;
+  animation: slide-in 0.5s forwards;
+  -webkit-animation: slide-in 0.5s forwards;
 }
 
 .slide-out {
-    animation: slide-out 0.5s forwards;
-    -webkit-animation: slide-out 0.5s forwards;
+  animation: slide-out 0.5s forwards;
+  -webkit-animation: slide-out 0.5s forwards;
 }
 
 @keyframes slide-in {
-    100% {
-        transform: translateX(0%);
-    }
+  100% {
+    transform: translateX(0%);
+  }
 }
 
 @-webkit-keyframes slide-in {
-    100% {
-        -webkit-transform: translateX(0%);
-    }
+  100% {
+    -webkit-transform: translateX(0%);
+  }
 }
 
 @keyframes slide-out {
-    0% {
-        transform: translateX(0%);
-    }
+  0% {
+    transform: translateX(0%);
+  }
 
-    100% {
-        transform: translateX(100%);
-    }
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 @-webkit-keyframes slide-out {
-    0% {
-        -webkit-transform: translateX(0%);
-    }
+  0% {
+    -webkit-transform: translateX(0%);
+  }
 
-    100% {
-        -webkit-transform: translateX(100%);
-    }
+  100% {
+    -webkit-transform: translateX(100%);
+  }
 }
 
 /*
@@ -171,290 +167,292 @@
 */
 
 .container-list-items {
-    float: left;
-    margin-bottom: 5px;
-    margin-left: 2px;
-    margin-top: 4px;
-    width: 100%;
-    max-height: calc(8em + 4px);
-    overflow-y: auto;
+  float: left;
+  margin-bottom: 5px;
+  margin-left: 2px;
+  margin-top: 4px;
+  width: 100%;
+  max-height: calc(8em + 4px);
+  overflow-y: auto;
 }
 
-    .container-list-items ul {
-        list-style-type: none;
-        padding: 0px;
-        margin: 2px 0px;
-    }
+.container-list-items ul {
+  list-style-type: none;
+  padding: 0px;
+  margin: 2px 0px;
+}
 
-    .container-list-items li {
-        padding: 2px;
-        font-size: 0.7em;
-    }
+.container-list-items li {
+  padding: 2px;
+  font-size: 0.7em;
+}
 
 .list-item {
-    display: flex;
-    justify-content: space-between;
-    font-size: 1.4em;
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.4em;
 }
 
-    .list-item .label {
-        color: var(--color-font-default);
-    }
+.list-item .label {
+  color: var(--color-font-default);
+}
 
-        .list-item .label:hover {
-            color: var(--color-font-lightinactive);
-        }
+.list-item .label:hover {
+  color: var(--color-font-lightinactive);
+}
 
-    .list-item:hover {
-        cursor: pointer;
-    }
+.list-item:hover {
+  cursor: pointer;
+}
 
 #container-list-items::-webkit-scrollbar {
-    width: 6px;
+  width: 6px;
 }
 
 #container-list-items::-webkit-scrollbar-thumb {
-    background-color: var(--color-window-scrollbar);
-    border-radius: 10px;
+  background-color: var(--color-window-scrollbar);
+  border-radius: 10px;
 }
 
-    #container-list-items::-webkit-scrollbar-thumb:hover {
-        background: var(--color-windows-scrollbarhover);
-        border-radius: 10px;
-    }
+#container-list-items::-webkit-scrollbar-thumb:hover {
+  background: var(--color-windows-scrollbarhover);
+  border-radius: 10px;
+}
 
 /*
 * Button resources
 */
 .container-button {
-    padding-bottom: 1em;
+  padding-bottom: 1em;
 }
 
 .back-button {
-    border: 1px solid var(--color-symbols-default);
-    border-radius: 20px;
-    padding: .3em .65em;
-    overflow: hidden;
-    letter-spacing: .045em;
-    font-size: 0.6375em;
-    text-transform: uppercase;
-    display: inline-block;
-    FONT-WEIGHT: 500;
+  border: 1px solid var(--color-symbols-default);
+  border-radius: 20px;
+  padding: 0.3em 0.65em;
+  overflow: hidden;
+  letter-spacing: 0.045em;
+  font-size: 0.6375em;
+  text-transform: uppercase;
+  display: inline-block;
+  font-weight: 500;
 }
 
-    .back-button div {
-        display: flex;
-        align-items: center;
-    }
+.back-button div {
+  display: flex;
+  align-items: center;
+}
 
-        .back-button div svg {
-            margin-right: 0.3em;
-            width: 1.25em;
-        }
+.back-button div svg {
+  margin-right: 0.3em;
+  width: 1.25em;
+}
 
-            .back-button div svg path {
-                fill: var(--color-font-default);
-            }
+.back-button div svg path {
+  fill: var(--color-font-default);
+}
 
-    .back-button:hover {
-        color: var(--color-symbols-hover);
-        cursor: pointer;
-    }
+.back-button:hover {
+  color: var(--color-symbols-hover);
+  cursor: pointer;
+}
 
-        .back-button:hover svg path {
-            fill: var(--color-symbols-hover);
-        }
+.back-button:hover svg path {
+  fill: var(--color-symbols-hover);
+}
 
 .container-arrow {
-    flex: 0 1;
+  flex: 0 1;
 }
 
 .arrow {
-    fill: var(--color-font-default);
-    margin-right: 4px;
+  fill: var(--color-font-default);
+  margin-right: 4px;
 }
 
-.SectionType_1 [class^=FieldType_8] {
-    margin-bottom: 0em;
-    font-size: medium;
+.SectionType_1 [class^="FieldType_8"] {
+  margin-bottom: 0em;
+  font-size: medium;
 }
 
 .FieldType_17 {
-    opacity: 0;
-    margin-bottom: 0em;
+  opacity: 0;
+  margin-bottom: 0em;
 }
 /*
  * Text formatting
  */
 
 .inherit {
-    text-transform: inherit;
+  text-transform: inherit;
 }
 
 .uppercase {
-    text-transform: uppercase
+  text-transform: uppercase;
 }
 
 .lowercase {
-    text-transform: lowercase
+  text-transform: lowercase;
 }
 
 .capitalize {
-    text-transform: capitalize
+  text-transform: capitalize;
 }
 
 .small {
-    font-size: small;
+  font-size: small;
 }
 
 .smaller {
-    font-size: smaller;
+  font-size: smaller;
 }
 
 .medium {
-    font-size: medium;
+  font-size: medium;
 }
 
 .large {
-    font-size: large;
+  font-size: large;
 }
 
 .larger {
-    font-size: larger;
+  font-size: larger;
 }
 
 .x-large {
-    font-size: x-large;
+  font-size: x-large;
 }
 
 .xx-large {
-    font-size: xx-large;
+  font-size: xx-large;
 }
 
 .x-small {
-    font-size: x-small;
+  font-size: x-small;
 }
 
 .xx-small {
-    font-size: xx-small;
+  font-size: xx-small;
 }
 
 /*
  * Styling multiline text box with scrollbar scrollbar
  */
 .multiline {
-    background: var(--color-window-background);
-    padding: 0.5em;
-    min-height: 3em;
-    max-height: 5em;
-    overflow: auto;
+  background: var(--color-window-background);
+  padding: 0.5em;
+  min-height: 3em;
+  max-height: 5em;
+  overflow: auto;
 }
 
 #multiline::-webkit-scrollbar {
-    width: 6px;
+  width: 6px;
 }
 
 #multiline::-webkit-scrollbar-thumb {
-    background-color: var(--color-window-scrollbar);
-    border-radius: 10px;
+  background-color: var(--color-window-scrollbar);
+  border-radius: 10px;
 }
 
-    #multiline::-webkit-scrollbar-thumb:hover {
-        background: var(--color-windows-scrollbarhover);
-        border-radius: 10px;
-    }
+#multiline::-webkit-scrollbar-thumb:hover {
+  background: var(--color-windows-scrollbarhover);
+  border-radius: 10px;
+}
 
 /*
  * Link formatting
  */
 
 /* unvisited link, selected link,visited link */
-a:link, a:active, a:visited {
-    color: var(--color-font-default);
+a:link,
+a:active,
+a:visited {
+  color: var(--color-font-default);
 }
 /* mouse over link */
 a:hover {
-    color: var(--color-symbols-hover);
+  color: var(--color-symbols-hover);
 }
-
-
 
 /*
  * Table formatting
  */
 table {
-    width: 100%;
+  width: 100%;
 }
 
 th {
-    height: 2em;
-    color: var(--color-font-lightinactive);
-    font-weight: normal;
+  height: 2em;
+  color: var(--color-font-lightinactive);
+  font-weight: normal;
 }
 
-th, td {
-    padding: 0.2em;
-    text-align: left;
+th,
+td {
+  padding: 0.2em;
+  text-align: left;
 }
 
 tr {
-    width: 100%;
+  width: 100%;
 }
 
-
-thead, tbody, tr, tfoot {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
+thead,
+tbody,
+tr,
+tfoot {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
 }
 
 tfoot {
-    border-top: solid 0.1em var(--color-border-inactive);
+  border-top: solid 0.1em var(--color-border-inactive);
 }
 
-    tfoot tr {
-        color: var(--color-font-lightinactive);
-    }
+tfoot tr {
+  color: var(--color-font-lightinactive);
+}
 
 tbody {
-    max-height: 6em;
-    overflow-y: auto;
-    display: block;
+  max-height: 6em;
+  overflow-y: auto;
+  display: block;
 }
 
 #table-items::-webkit-scrollbar {
-    width: 6px;
+  width: 6px;
 }
 
 #table-items::-webkit-scrollbar-thumb {
-    background-color: var(--color-window-scrollbar);
-    border-radius: 10px;
+  background-color: var(--color-window-scrollbar);
+  border-radius: 10px;
 }
 
-    #table-items::-webkit-scrollbar-thumb:hover {
-        background: var(--color-windows-scrollbarhover);
-        border-radius: 10px;
-    }
+#table-items::-webkit-scrollbar-thumb:hover {
+  background: var(--color-windows-scrollbarhover);
+  border-radius: 10px;
+}
 
 /*
  * Creating straight line
  */
 
 .border {
-    height: 1px;
-    background: var(--color-border-inactive);
-    margin: 0.5em 0;
+  height: 1px;
+  background: var(--color-border-inactive);
+  margin: 0.5em 0;
 }
-
 
 /*
  * Icon formatting
  */
 img {
-    width: 1.5vh;
-    height: 1.5vh;
-    margin-right: 0.5vw;
-    vertical-align: middle;
+  width: 1.5vh;
+  height: 1.5vh;
+  margin-right: 0.5vw;
+  vertical-align: middle;
 }
 
 /*
@@ -464,157 +462,155 @@ img {
 }
 
 .tab-button-container {
-    display: inline-block;
-    padding: 0.2em;
+  display: inline-block;
+  padding: 0.2em;
 }
 
 .tab-button {
-    background-color: var(--color-window-background);
-    color: var(--color-font-default);
-    cursor: pointer;
-    padding: 0.4em;
+  background-color: var(--color-window-background);
+  color: var(--color-font-default);
+  cursor: pointer;
+  padding: 0.4em;
 }
 
 .tab-border {
-    height: 0.1em;
-    background: var(--color-border-inactive);
-    width: 100%;
-    position: absolute;
-    left: 0px;
-    margin-top: -0.1em;
+  height: 0.1em;
+  background: var(--color-border-inactive);
+  width: 100%;
+  position: absolute;
+  left: 0px;
+  margin-top: -0.1em;
 }
 
 #active-tab {
-    position: absolute;
-    left: 0px;
-    background: var(--color-window-background);
-    width: 100%;
+  position: absolute;
+  left: 0px;
+  background: var(--color-window-background);
+  width: 100%;
 }
 
 .active-tab-button {
-    border: solid 0.1em var(--color-border-inactive);
-    border-bottom: none;
-    z-index: 100;
-    position: relative;
+  border: solid 0.1em var(--color-border-inactive);
+  border-bottom: none;
+  z-index: 100;
+  position: relative;
 }
 
 .inactive-tab-button {
-    border: none;
-    position: relative;
+  border: none;
+  position: relative;
 }
 
-    .inactive-tab-button .tab-button {
-        color: var(--color-font-lightinactive);
-    }
+.inactive-tab-button .tab-button {
+  color: var(--color-font-lightinactive);
+}
 
 .SectionType_7 {
-    display: inline-block;
+  display: inline-block;
 }
 
 /* Create a custom checkbox */
 .checkboxContainer {
-    pointer-events: none;
-    display: block;
-    position: relative;
-    padding-left: 3em;
-    margin-bottom: 1.2em;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    height: 100%;
+  pointer-events: none;
+  display: block;
+  position: relative;
+  padding-left: 3em;
+  margin-bottom: 1.2em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  height: 100%;
 }
 
 .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 0.9em;
-    width: 0.9em;
-    background-color: var(--color-window-background);
-    border: 0.15em solid var(--color-window-frameborder1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 0.9em;
+  width: 0.9em;
+  background-color: var(--color-window-background);
+  border: 0.15em solid var(--color-window-frameborder1);
 }
 
 /* Hide the browser's default checkbox */
 .checkboxContainer input {
-    position: absolute;
-    opacity: 0;
-    height: 0;
-    width: 0;
+  position: absolute;
+  opacity: 0;
+  height: 0;
+  width: 0;
 }
 
-    /* When the checkbox is checked, add a blue background */
-    .checkboxContainer input:checked ~ .checkmark {
-        background-color: var(--color-window-background);
-    }
+/* When the checkbox is checked, add a blue background */
+.checkboxContainer input:checked ~ .checkmark {
+  background-color: var(--color-window-background);
+}
 
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
+  content: "";
+  position: absolute;
+  display: none;
 }
 
 /* Show the checkmark when checked */
 .checkboxContainer input:checked ~ .checkmark:after {
-    display: block;
+  display: block;
 }
 
 /* Style the checkmark/indicator */
 .checkboxContainer .checkmark:after {
-    left: 4px;
-    top: 0px;
-    width: 2px;
-    height: 7px;
-    border: solid var(--color-border-active);
-    border-width: 0 2px 2px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
+  left: 4px;
+  top: 0px;
+  width: 2px;
+  height: 7px;
+  border: solid var(--color-border-active);
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
-
-
 
 /*
  * Tab formatting (New)
  */
 .tabheader {
-    width: 100%;
-    display: flex;
+  width: 100%;
+  display: flex;
 }
 
 .tabstrip ul {
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    list-style-type: none;
-    border-bottom: 1px solid var(--color-font-lightinactive);
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  list-style-type: none;
+  border-bottom: 1px solid var(--color-font-lightinactive);
 }
 
 .tabstrip li {
-    display: inline;
-    color: var(--color-font-lightinactive);
-    margin-bottom: -0.1em;
-    border-bottom: 1px solid var(--color-font-lightinactive);
+  display: inline;
+  color: var(--color-font-lightinactive);
+  margin-bottom: -0.1em;
+  border-bottom: 1px solid var(--color-font-lightinactive);
 }
 
-    .tabstrip li.selectedTab {
-        border: 1px solid var(--color-font-lightinactive);
-        border-bottom: none;
-        z-index: 100;
-        color: var(--color-font-default);
-    }
+.tabstrip li.selectedTab {
+  border: 1px solid var(--color-font-lightinactive);
+  border-bottom: none;
+  z-index: 100;
+  color: var(--color-font-default);
+}
 
 .tabstrip .tab-button {
-    background-color: var(--color-window-background);
-    cursor: pointer;
-    padding: 0.4em;
+  background-color: var(--color-window-background);
+  cursor: pointer;
+  padding: 0.4em;
 }
 
 .tabcontent {
-    display: none;
+  display: none;
 }
 
 .selectedContent {
-    display: block;
+  display: block;
 }

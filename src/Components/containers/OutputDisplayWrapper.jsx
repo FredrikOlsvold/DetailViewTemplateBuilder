@@ -73,8 +73,9 @@ const OutputDisplayWrapper = () => {
   };
 
   const handleTemplateDataTextAreaChange = (e) => {
-    setTemplateData(e.target.value);
-    setTemplateDataTextAreaValue(e.target.value);
+      setTemplateDataTextAreaValue(e.target.value);
+      setTemplateData(JSON.parse(e.target.value));
+      console.log(templateData);
   };
 
   const handleUseJsonClick = () => {
@@ -89,8 +90,8 @@ const OutputDisplayWrapper = () => {
 
   useEffect(() => {
     setTextAreaValue(JSON.stringify(previewJson, null, 2));
-    setTemplateDataTextAreaValue(templateData);
-  }, [previewJson, templateData]);
+    //setTemplateDataTextAreaValue(templateData);
+  }, [previewJson]);
 
   useEffect(() => {
     getDetailViewAndRender();

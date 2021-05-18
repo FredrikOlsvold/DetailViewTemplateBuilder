@@ -6,24 +6,27 @@ import {
   TemplateJsonSelector,
 } from "../../selectors/Selectors";
 import { mockWorkOrder as defaultData } from "../../api/getData"; //Some api call in later version?
+import {cssEditorValueAtom} from "../../store/Store";
 
 function DetailViewPreview() {
   const templateJson = useRecoilValue(TemplateJsonSelector);
   const templateData = useRecoilValue(TemplateDataSelector);
+  const cssValue = useRecoilValue(cssEditorValueAtom);
 
   useEffect(() => {
     let dv = document.getElementById("dv");
+    console.log(JSON.stringify(defaultData));
     templateData === ""
       ? dv.reRender(
           defaultData,
           templateJson.Content,
-          "table{background-color: yellow}"
+          cssValue
         )
-      : dv.reRender(templateData, templateJson.Content);
-  }, [templateJson, templateData]);
+      : dv.reRender(templateData, templateJson.Content, cssValue);
+  }, [templateJson, templateData, cssValue]);
   return (
-    <div id="temp" style={{ width: "460px;" }}>
-      <generic-detail-view id="dv"></generic-detail-view>
+    <div id="temp" style={{ width: "460px" }}>
+      <generic-detail-view viewClass="content" id="dv"></generic-detail-view>
     </div>
   );
 }

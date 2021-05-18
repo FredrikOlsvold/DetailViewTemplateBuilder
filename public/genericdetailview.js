@@ -6078,7 +6078,7 @@
         <style>${this.css}</style>
 
                 <div class="panel">
-                    <div class='detail-view ${this.viewClass}'">
+                    <div class='detail-view ${this.viewClass}'>
                         <div class='content'>
                             ${this.templateEngine.renderData(
                               this.data,
