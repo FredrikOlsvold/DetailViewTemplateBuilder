@@ -5635,12 +5635,13 @@
     //
     //-------------------------------------------------------------------------
     renderData(data, sections) {
+        let d = JSON.parse(JSON.stringify(data)); //Somehow fixes __viewState problem
       return html` ${repeat(
         sections,
         (s) => s.Id,
         (s) => {
           try {
-            return this.renderTemplateSections(data, s);
+            return this.renderTemplateSections(d, s);
           } catch (e) {
             return html`<div class="exception">${e}</div>`;
           }

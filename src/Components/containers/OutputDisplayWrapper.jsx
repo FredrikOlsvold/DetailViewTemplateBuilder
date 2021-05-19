@@ -75,7 +75,7 @@ const OutputDisplayWrapper = () => {
   const handleTemplateDataTextAreaChange = (e) => {
       setTemplateDataTextAreaValue(e.target.value);
       setTemplateData(JSON.parse(e.target.value));
-      console.log(templateData);
+      console.log(JSON.parse(e.target.value));
   };
 
   const handleUseJsonClick = () => {
