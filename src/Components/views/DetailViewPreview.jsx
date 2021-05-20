@@ -25,7 +25,7 @@ function DetailViewPreview() {
       : dv.reRender(templateData, templateJson.Content, cssValue);
   }, [templateJson, templateData, cssValue]);
   return (
-    <div id="temp" style={{ width: "460px" }}>
+    <div id="temp">
       <generic-detail-view viewClass="content" id="dv"></generic-detail-view>
     </div>
   );

@@ -5,13 +5,12 @@ import { cssEditorValueAtom } from "../../store/Store";
 import { useRecoilState } from "recoil";
 import { Button } from "@material-ui/core";
 import Editor from "react-simple-code-editor";
-import "../../assets/css/prism.css";
-import "prismjs/components/prism-css"; //Syntax highlighting for css
-import { highlight, languages } from "prismjs/components/prism-core";
-import 'prismjs/components/prism-css'
+import { highlight } from "prismjs/components/prism-core";
+import "prismjs/themes/prism-tomorrow.css";
+import "prismjs/components/prism-css";
 
 const CssEditor = () => {
-  const [content, setContent] = useState();
+  const [content, setContent] = useState("");
   const [cssEditorAtom, setCssEditorAtom] = useRecoilState(cssEditorValueAtom);
 
   const handleUseCssButton = () => {
@@ -36,14 +35,14 @@ const CssEditor = () => {
     }
   };
 
-//   useEffect(() => {
-//     Prism.highlightAll();
-//   }, [content]);
+  //   useEffect(() => {
+  //     Prism.highlightAll();
+  //   }, [content]);
 
   return (
     <>
-      <div className="code-edit-container">
-        {/* <textarea
+      {/* <div className="code-edit-container"> */}
+      {/* <textarea
           className="code-input"
           value={content}
           onChange={(e) => setContent(e.target.value)}
@@ -52,14 +51,15 @@ const CssEditor = () => {
         <pre className="code-output">
           <code className="language-css">{content}</code>
         </pre> */}
-        <Editor
-          className="code-input"
-          value={content}
-          onValueChange={(content) => setContent(content)}
-          highlight={(content) => highlight(content, Prism.languages.css, 'css')}
-          padding={10}
-        />
-      </div>
+      <Editor
+        className="editor"
+        style={{ minHeight: "500px" }}
+        value={content}
+        onValueChange={(content) => setContent(content)}
+        highlight={(content) => highlight(content, Prism.languages.css, "css")}
+        padding={10}
+      />
+      {/* </div> */}
       <Button
         size="small"
         type="button"
