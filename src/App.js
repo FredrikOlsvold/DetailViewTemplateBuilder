@@ -15,48 +15,31 @@ export const fieldListAtom = atom({
 
 function App() {
   return (
-    <>
-      <Grid container justify="center" spacing={2}>
-        <Grid item xs={9}>
-          <Typography variant="h4">Detail View Template</Typography>
-        </Grid>
-        <Grid item xs={9}>
-          <Dashboard />
-        </Grid>
-
-        <Grid item xs={6}>
-          <OutputDisplayWrapper />
-        </Grid>
-        <Grid item xs={3}>
-          <Paper
-            style={{
-              padding: "2em",
-              margin: "1em",
-              position: "sticky",
-              top: "0",
-            }}
-          >
-            <Typography variant="h6">Preview of detailview</Typography>
-            <DetailViewPreview />
-          </Paper>
-        </Grid>
+    <Grid container justify="center" spacing={2}>
+      <Grid item xs={9}>
+        <Typography variant="h4">Detail View Template</Typography>
       </Grid>
-    </>
-    // <div className="App">
-    // <div>
+      <Grid item xs={9}>
+        <Dashboard />
+      </Grid>
 
-    // </div>
-    //   {/* <Grid
-    //     container
-    //     alignItems="center"
-    //     justify="center"
-    //     spacing={1}
-    //     width="50%"
-    //   >
-    //     <Grid item>
-    //     </Grid>
-    //   </Grid> */}
-    // </div>
+      <Grid item xs={6}>
+        <OutputDisplayWrapper />
+      </Grid>
+      <Grid item xs={3}>
+        <Paper
+          style={{
+            padding: "2em",
+            margin: "1em",
+            position: "sticky",
+            top: "0",
+          }}
+        >
+          <Typography variant="h6">Preview of detailview</Typography>
+          <DetailViewPreview />
+        </Paper>
+      </Grid>
+    </Grid>
   );
 }
 

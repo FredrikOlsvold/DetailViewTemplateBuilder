@@ -45,7 +45,7 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
 
   const [expandedOption, setExpandedOption] = useState(false);
   const [expandedField, setExpandedField] = useState(false);
-  
+
   // useEffect(() => {
   //   console.log("Item is updated");
   //   setOptionList(objectToList(item.Options));
@@ -65,8 +65,8 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
   };
 
   const handleFieldsAccordionChange = () => {
-      setExpandedField((open) => !open)
-  }
+    setExpandedField((open) => !open);
+  };
 
   const deleteSection = () => {
     const newSectionList = removeItemAtIndex(sectionList, index);
@@ -82,7 +82,7 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
   };
 
   const addOptionClicked = () => {
-      setExpandedOption(true)
+    setExpandedOption(true);
     setOptionList((oldOptionList) => [
       ...oldOptionList,
       {
@@ -94,7 +94,7 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
   };
 
   const addFieldClicked = () => {
-    setExpandedField(true)
+    setExpandedField(true);
     setFieldList((oldFieldList) => [
       ...oldFieldList,
       {
@@ -140,7 +140,9 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
         defaultExpanded={false}
       >
         <AccordionSummary expandIcon={<ExpandMore />}>
-          <Typography>Type: {sectionType}. ID: {item.Id}</Typography>
+          <Typography>
+            Type: {sectionType}. ID: {item.Id}
+          </Typography>
         </AccordionSummary>
 
         <AccordionDetails>
@@ -162,15 +164,6 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
               </MenuItem>
             ))}
           </TextField>
-          {/* <MenuTypes
-            id="select"
-            select
-            value={type}
-            label="Type"
-            variant="outlined"
-            style={{ width: "100%" }}
-            onChange={onTypeChange}
-          /> */}
         </AccordionDetails>
 
         <AccordionActions>
@@ -201,7 +194,8 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
             {/* Option Accordion */}
             {optionList.length > 0 && (
               <Accordion
-                expanded={expandedOption} onChange={handleOptionsAccordionChange}
+                expanded={expandedOption}
+                onChange={handleOptionsAccordionChange}
               >
                 <AccordionSummary expandIcon={<ExpandMore />}>
                   <Typography>Options:</Typography>
@@ -241,66 +235,38 @@ const SectionItemEditor = ({ item, wrapper, mode }) => {
             {" "}
             {/* Field Accordion */}
             {fieldList.length > 0 && (
-              <Accordion expanded={expandedField} onChange={handleFieldsAccordionChange}>
+              <Accordion
+                expanded={expandedField}
+                onChange={handleFieldsAccordionChange}
+              >
                 <AccordionSummary expandIcon={<ExpandMore />}>
                   <Typography>Fields:</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Grid container direction={"row"} spacing={4}>
-                    <DragDropContext onDragEnd={handleOnDragEndFields}>
-                      <Droppable droppableId={"fieldsDragAndDrop"}>
-                        {(provided) => (
-                          <ul
-                            className="dndList"
-                            {...provided.droppableProps}
-                            ref={provided.innerRef}
-                          >
-                            {fieldList.map((field, index) => (
-                              <Draggable
-                                key={field.Id}
-                                draggableId={field.Id}
-                                index={index}
-                              >
-                                {(provided) => (
-                                  <li
-                                    {...provided.draggableProps}
-                                    {...provided.dragHandleProps}
-                                    ref={provided.innerRef}
-                                  >
-                                    <Grid item xs={12} style={{marginBottom: "1em"}}>
-                                      <Accordion>
-                                        <AccordionSummary
-                                          expandIcon={<ExpandMore />}
-                                        >
-                                          <Typography>
-                                            {field.Type} : {field.Id}
-                                          </Typography>
-                                        </AccordionSummary>
-                                        <AccordionDetails>
-                                          <FieldsCreator
-                                            key={field.Id}
-                                            item={field}
-                                            mode={mode}
-                                            fieldList={fieldList}
-                                            setFieldList={setFieldList}
-                                            deleteField={deleteField}
-                                            setSectionUpdated={
-                                              setSectionUpdated
-                                            }
-                                            sectionUpdated={sectionUpdated}
-                                          />
-                                        </AccordionDetails>
-                                      </Accordion>
-                                    </Grid>
-                                  </li>
-                                )}
-                              </Draggable>
-                            ))}
-                            {provided.placeholder}
-                          </ul>
-                        )}
-                      </Droppable>
-                    </DragDropContext>
+                    {fieldList.map((field) => (
+                      <Grid item xs={12} style={{ marginBottom: "1em" }}>
+                        <Accordion>
+                          <AccordionSummary expandIcon={<ExpandMore />}>
+                            <Typography>
+                              {field.Type} : {field.Id}
+                            </Typography>
+                          </AccordionSummary>
+                          <AccordionDetails>
+                            <FieldsCreator
+                              key={field.Id}
+                              item={field}
+                              mode={mode}
+                              fieldList={fieldList}
+                              setFieldList={setFieldList}
+                              deleteField={deleteField}
+                              setSectionUpdated={setSectionUpdated}
+                              sectionUpdated={sectionUpdated}
+                            />
+                          </AccordionDetails>
+                        </Accordion>
+                      </Grid>
+                    ))}
                   </Grid>
                 </AccordionDetails>
               </Accordion>

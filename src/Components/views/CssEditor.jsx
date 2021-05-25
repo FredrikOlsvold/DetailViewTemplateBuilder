@@ -41,16 +41,7 @@ const CssEditor = () => {
 
   return (
     <>
-      {/* <div className="code-edit-container"> */}
-      {/* <textarea
-          className="code-input"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          onKeyDown={handleKeyDown}
-          />
-        <pre className="code-output">
-          <code className="language-css">{content}</code>
-        </pre> */}
+     
       <Editor
         className="editor"
         style={{ minHeight: "500px" }}
@@ -59,7 +50,6 @@ const CssEditor = () => {
         highlight={(content) => highlight(content, Prism.languages.css, "css")}
         padding={10}
       />
-      {/* </div> */}
       <Button
         size="small"
         type="button"

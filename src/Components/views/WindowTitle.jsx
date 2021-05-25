@@ -35,39 +35,6 @@ const WindowTitle = ({ titleSectionList, setTitleSectionList }) => {
             />
           ))}
 
-          {/* <DragDropContext>
-            <Droppable droppableId="editSectionTitle">
-              {(provided) => (
-                <ul
-                  className="editSectionsTitle"
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                >
-                  {titleSectionList.map((section, index) => (
-                    <Draggable
-                      key={index}
-                      draggableId={index}
-                      index={index}
-                    >
-                      <li
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        ref={provided.innerRef}
-                      >
-                        {" "}
-                        <SectionItemEditor
-                          key={section.Id}
-                          item={section}
-                          wrapper={"title"}
-                          mode={"edit"}
-                        />
-                      </li>
-                    </Draggable>
-                  ))}
-                </ul>
-              )}
-            </Droppable>
-          </DragDropContext> */}
         </Grid>
       </Grid>
     </div>

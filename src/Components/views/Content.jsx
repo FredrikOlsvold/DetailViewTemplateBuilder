@@ -7,14 +7,13 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useState } from "react";
 
 const Content = ({ contentSectionList, setContentSectionList }) => {
+  const handleOnDragEnd = (res) => {
+    const content = Array.from(contentSectionList);
+    const [reorderedContent] = content.splice(res.source.index, 1);
+    content.splice(res.destination.index, 0, reorderedContent);
 
-    const handleOnDragEnd = (res) => {
-        const content = Array.from(contentSectionList)
-        const [reorderedContent] = content.splice(res.source.index, 1)
-        content.splice(res.destination.index, 0, reorderedContent)
-
-        setContentSectionList(content)
-    }
+    setContentSectionList(content);
+  };
 
   return (
     <div style={{ marginTop: "2em" }}>
@@ -34,36 +33,13 @@ const Content = ({ contentSectionList, setContentSectionList }) => {
           >
             Edit Section
           </Typography>
-          <DragDropContext onDragEnd={handleOnDragEnd}>
-            <Droppable droppableId="editSectionsContent">
-              {(provided) => (
-                <ul
-                  className="dndList"
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                >
-                  {contentSectionList.map((section, index) => (
-                    <Draggable
-                      key={section.Id}
-                      draggableId={section.Id}
-                      index={index}
-                    >
-                      {(provided) => (
-                        <li {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
-                          <SectionItemEditor
-                            item={section}
-                            wrapper={"content"}
-                            mode={"edit"}
-                          />
-                        </li>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </ul>
-              )}
-            </Droppable>
-          </DragDropContext>
+          {contentSectionList.map((section) => (
+              <SectionItemEditor
+              item={section}
+              wrapper={"content"}
+              mode={"edit"}
+            />
+          ))}
         </Grid>
       </Grid>
     </div>
