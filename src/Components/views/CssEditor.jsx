@@ -9,45 +9,24 @@ import { highlight } from "prismjs/components/prism-core";
 import "prismjs/themes/prism-tomorrow.css";
 import "prismjs/components/prism-css";
 
-const CssEditor = () => {
-  const [content, setContent] = useState("");
+const CssEditor = ({ cssEditorContent, handleCssEditorChange }) => {
   const [cssEditorAtom, setCssEditorAtom] = useRecoilState(cssEditorValueAtom);
 
   const handleUseCssButton = () => {
-    setCssEditorAtom(content);
+    setCssEditorAtom(cssEditorContent);
   };
 
-  const handleKeyDown = (e) => {
-    let value = content,
-      selStartPos = e.currentTarget.selectionStart;
-
-    // handle 4-space indent on
-    if (e.key === "Tab") {
-      value =
-        value.substring(0, selStartPos) +
-        "    " +
-        value.substring(selStartPos, value.length);
-      e.currentTarget.selectionStart = selStartPos + 3;
-      e.currentTarget.selectionEnd = selStartPos + 4;
-      e.preventDefault();
-
-      setContent(value);
-    }
-  };
-
-  //   useEffect(() => {
-  //     Prism.highlightAll();
-  //   }, [content]);
+  useEffect(() => {
+    console.log(cssEditorContent);
+  }, [cssEditorContent]);
 
   return (
     <>
-     
       <Editor
-        className="editor"
-        style={{ minHeight: "500px" }}
-        value={content}
-        onValueChange={(content) => setContent(content)}
-        highlight={(content) => highlight(content, Prism.languages.css, "css")}
+        style={{ minHeight: "500px", backgroundColor: '#2d2d2d', color: 'white' }}
+        value={cssEditorContent}
+        onValueChange={(content) => handleCssEditorChange(content)}
+        highlight={(content) => highlight(content, Prism.languages.css, 'css')}
         padding={10}
       />
       <Button

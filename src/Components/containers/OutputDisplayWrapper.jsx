@@ -28,10 +28,14 @@ const OutputDisplayWrapper = () => {
   const [textAreaValue, setTextAreaValue] = useState("");
   const [newValue, setNewValue] = useState("default");
   const [templateData, setTemplateData] = useRecoilState(TemplateDataSelector);
+  const [cssEditorContent, setCssEditorContent] = useState("");
 
   const [templateDataTextAreaValue, setTemplateDataTextAreaValue] =
     useState("");
 
+    const handleCssEditorChange = (content) => {
+        setCssEditorContent(content)
+    }
   const showJSON = () => {
     setDisplayJSON(!displayJSON);
   };
@@ -157,7 +161,7 @@ const OutputDisplayWrapper = () => {
           </Button>
           {displayStyle && (
             <Grid item>
-              <CssEditor />
+              <CssEditor cssEditorContent={cssEditorContent} handleCssEditorChange={handleCssEditorChange} />
             </Grid>
           )}
         </Grid>
